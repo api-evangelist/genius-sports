@@ -1,0 +1,80 @@
+{
+    "name": "Genius Sports",
+    "description": "We are a global leader in sports data technology, distribution, and commercialisation services. Our innovative data-driven solutions power over 250 leagues and federations.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28259-betting-geniussports-com.jpg",
+    "tags": [
+        "api provider",
+        "have api"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/genius-sports\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Genius Sports",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28259-betting-geniussports-com.jpg",
+            "humanURL": "http:\/\/betting.geniussports.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/genius-sports-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/genius-sports-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/genius-sports"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/developer.geniussports.com\/"
+        },
+        {
+            "type": "Email",
+            "url": "careers@geniussports.com"
+        },
+        {
+            "type": "Email",
+            "url": "contactus@geniussport.com"
+        },
+        {
+            "type": "Email",
+            "url": "careers@geniussport.com"
+        },
+        {
+            "type": "Email",
+            "url": "investors@geniussports.com"
+        },
+        {
+            "type": "Email",
+            "url": "press@geniussport.com"
+        },
+        {
+            "type": "Email",
+            "url": "contactus@geniussports.com"
+        },
+        {
+            "type": "Email",
+            "url": "press@geniussports.com"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/GeniusSports"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/betting.geniussports.com"
+        }
+    ]
+}
