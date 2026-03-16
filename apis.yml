@@ -2,15 +2,16 @@ aid: genius-sports
 name: Genius Sports
 description: >-
   API to query information regarding matches, players, statistics etc. both past
-  and future. 
+  and future.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Sports
+  - Statistics
 created: '2025-03-01'
-modified: '2025-03-01'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -19,13 +20,19 @@ apis:
     name: Genius Sports
     description: >-
       API to query information regarding matches, players, statistics etc. both
-      past and future. 
-    humanURL: ' https://developer.geniussports.com/'
+      past and future.
+    humanURL: https://developer.geniussports.com/
     tags:
-      - API
+      - Sports
+      - Statistics
     properties:
       - type: Documentation
-        url: ' https://developer.geniussports.com/'
+        url: https://developer.geniussports.com/
+common:
+  - type: Website
+    url: https://geniussports.com/
+  - type: Documentation
+    url: https://developer.geniussports.com/
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
