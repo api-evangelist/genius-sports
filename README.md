@@ -1,38 +1,46 @@
-# Genius Sports (genius-sports)
-API to query information regarding matches, players, statistics etc. both past and future.
+# Genius Sports
+
+Genius Sports provides APIs to query information regarding matches, players, statistics etc. both past and future across multiple sports including basketball, football (soccer), volleyball, American football, and ice hockey.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Sports, Statistics
+- Sports, Statistics, Live Data, Fixtures
 
 ## Timestamps
 
-- **Created:** 2025-03-01 
-- **Modified:** 2026-03-16 
+- **Created:** 2025-03-01
+- **Modified:** 2026-04-28
 
 ## APIs
 
-### Genius Sports
-API to query information regarding matches, players, statistics etc. both past and future.
+### Genius Sports REST API
+Query information regarding matches, players, and statistics across basketball, 3x3, football (soccer), volleyball, American football, and ice hockey.
 
-**Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
+### Genius Sports Streaming API
+Event-by-event data and aggregated statistics for matches in progress.
 
+### Genius Sports Publish API
+Publish real-time event data from sporting events into the warehouse and statistics engine.
 
-#### Tags:
+### Genius Sports LiveStats In-Arena Feed
+Live venue data for TV production and consumers covering basketball, football, and volleyball.
 
- - Sports, Statistics
+### Genius Sports Licensing API
+Retrieve matches and options from the licensing server.
 
-#### Properties
+### Genius Sports Fixtures API v2
+Authoritative pre-match fixtures data with Swagger specs for CI, UAT, and Production environments.
 
-- [Documentation](https://developer.geniussports.com/)
+### Genius Sports Matching API v2
+Match client internal data with Genius Sports platform data. Swagger specs for CI, UAT, and Production environments.
 
 ## Common Properties
 
