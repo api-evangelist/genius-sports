@@ -106,6 +106,10 @@ apis:
       - type: Documentation
         url: https://developer.geniussports.com/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/geniussportsgroup
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/geniussports
   - type: Website
     url: https://geniussports.com/
   - type: Documentation
