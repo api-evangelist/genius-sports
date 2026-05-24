@@ -1,0 +1,342 @@
+openapi: 3.1.0
+info:
+  title: Genius Sports Data Warehouse REST API
+  description: |
+    Genius Sports REST API for querying past and future information regarding
+    matches, players, statistics, venues, and organizations across basketball,
+    3x3, football (soccer), volleyball, American football, and ice hockey.
+    Authenticated with an x-api-key header issued to partners.
+  version: "1.0.0"
+  contact:
+    name: Genius Sports Developer Centre
+    url: https://developer.geniussports.com/
+servers:
+  - url: https://api.wh.geniussports.com
+    description: Data Warehouse
+security:
+  - apiKey: []
+tags:
+  - name: Organization
+    description: Leagues, competitions, clubs, teams
+  - name: People
+    description: Players, officials, staff
+  - name: Matches
+    description: Match data and broadcasts
+  - name: Statistics
+    description: Team and player statistics
+  - name: Standings
+    description: Competition standings
+  - name: Venues
+    description: Venues and locations
+paths:
+  /v1/leagues:
+    get:
+      tags: [Organization]
+      summary: List leagues
+      operationId: listLeagues
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Leagues envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/leagues/{leagueId}:
+    parameters:
+      - $ref: '#/components/parameters/LeagueId'
+    get:
+      tags: [Organization]
+      summary: Get a league
+      operationId: getLeague
+      responses:
+        '200':
+          description: League envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/competitions:
+    get:
+      tags: [Organization]
+      summary: List competitions
+      operationId: listCompetitions
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          description: Competitions envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/competitions/{competitionId}:
+    parameters:
+      - $ref: '#/components/parameters/CompetitionId'
+    get:
+      tags: [Organization]
+      summary: Get a competition
+      operationId: getCompetition
+      responses:
+        '200':
+          description: Competition envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/teams:
+    get:
+      tags: [Organization]
+      summary: List teams
+      operationId: listTeams
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          description: Teams envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/teams/{teamId}:
+    parameters:
+      - $ref: '#/components/parameters/TeamId'
+    get:
+      tags: [Organization]
+      summary: Get a team
+      operationId: getTeam
+      responses:
+        '200':
+          description: Team envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/persons:
+    get:
+      tags: [People]
+      summary: List persons (players, officials, staff)
+      operationId: listPersons
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          description: Persons envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/persons/{personId}:
+    parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [People]
+      summary: Get a person
+      operationId: getPerson
+      responses:
+        '200':
+          description: Person envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/matches:
+    get:
+      tags: [Matches]
+      summary: List matches
+      operationId: listMatches
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+        - name: competitionId
+          in: query
+          schema:
+            type: string
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Matches envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/matches/{matchId}:
+    parameters:
+      - name: matchId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Matches]
+      summary: Get a match
+      operationId: getMatch
+      responses:
+        '200':
+          description: Match envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/matches/{matchId}/statistics:
+    parameters:
+      - name: matchId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Statistics]
+      summary: Get match statistics
+      operationId: getMatchStatistics
+      responses:
+        '200':
+          description: Statistics envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/standings:
+    get:
+      tags: [Standings]
+      summary: List standings
+      operationId: listStandings
+      parameters:
+        - name: competitionId
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          description: Standings envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+  /v1/venues:
+    get:
+      tags: [Venues]
+      summary: List venues
+      operationId: listVenues
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Fields'
+      responses:
+        '200':
+          description: Venues envelope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEnvelope'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key identifying the caller (deprecated ak query parameter also supported)
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Record limit (default 10, maximum 500)
+      schema:
+        type: integer
+        default: 10
+        maximum: 500
+    Offset:
+      name: offset
+      in: query
+      description: Skip the first N records
+      schema:
+        type: integer
+        default: 0
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to return
+      schema:
+        type: string
+    Format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum: [json, xml]
+        default: json
+    LeagueId:
+      name: leagueId
+      in: path
+      required: true
+      schema:
+        type: string
+    CompetitionId:
+      name: competitionId
+      in: path
+      required: true
+      schema:
+        type: string
+    TeamId:
+      name: teamId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    ResponseMeta:
+      type: object
+      properties:
+        version:
+          type: string
+        code:
+          type: integer
+        status:
+          type: string
+          enum: [success, failure]
+        request:
+          type: string
+        time:
+          type: integer
+        count:
+          type: integer
+        limit:
+          type: integer
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
