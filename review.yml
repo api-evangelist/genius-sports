@@ -1,0 +1,120 @@
+aid: genius-sports
+name: Genius Sports
+review_date: '2026-05-30'
+reviewer: Kin Lane
+focus: Public streaming and webhook surface assessment
+sources:
+  - https://developer.geniussports.com/
+  - https://swaggerui.api.geniussports.com/
+  - https://explorer.api.geniussports.com/
+summary: >-
+  The Genius Sports Developer Centre (developer.geniussports.com) advertises a
+  multi-product API portfolio but only a small portion of the documentation is
+  publicly retrievable. The landing index lists products and links to two
+  public Swagger 2.0 specifications (Fixtures v2 and Matching v2). All deeper
+  product pages return HTTP 403 to unauthenticated requests, confirming
+  contract-gated access for the Warehouse REST, Streaming, Publish, LiveStats
+  In-Arena Feed, and Licensing products.
+public_surfaces:
+  - name: Fixtures API v2 (Production)
+    type: REST
+    spec_format: Swagger 2.0
+    spec_url: >-
+      https://explorer.api.geniussports.com/Fixtures/v2/Production/swagger-latest.json
+    swagger_ui: >-
+      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    host: fixtures.api.geniussports.com
+    base_path: /v2
+    version: 2.0.280
+    path_count: 71
+    auth:
+      - Auth0 OAuth2
+      - x-api-key header
+    local_copy: openapi/genius-sports-fixtures-v2-openapi.yml
+  - name: Fixtures API v2 (UAT)
+    type: REST
+    spec_format: Swagger 2.0
+    spec_url: >-
+      https://explorer.api.geniussports.com/Fixtures/v2/UAT/swagger-latest.json
+    swagger_ui: >-
+      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FUAT%2Fswagger-latest.json
+  - name: Matching API v2 (Production)
+    type: REST
+    spec_format: Swagger 2.0
+    spec_url: >-
+      https://explorer.api.geniussports.com/fixtures-matching/v2/Production/swagger-latest.json
+    swagger_ui: >-
+      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    host: matching.api.geniussports.com
+    base_path: /v2
+    version: 2.0.106
+    path_count: 25
+    auth:
+      - Auth0 OAuth2
+      - x-api-key header
+    local_copy: openapi/genius-sports-matching-v2-openapi.yml
+  - name: Matching API v2 (UAT)
+    type: REST
+    spec_format: Swagger 2.0
+    spec_url: >-
+      https://explorer.api.geniussports.com/fixtures-matching/v2/UAT/swagger-latest.json
+    swagger_ui: >-
+      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FUAT%2Fswagger-latest.json
+gated_or_undocumented:
+  - name: Warehouse REST API
+    public_surface: Marketing description only; deeper pages return 403.
+    notes: >-
+      Endpoints, request/response shapes, and authentication details are not
+      published on the public portal. A hand-rolled placeholder spec exists at
+      openapi/genius-sports-openapi.yml but is not authoritative.
+  - name: Warehouse Streaming API (read)
+    public_surface: Named on landing page only.
+    notes: >-
+      Described as a "streaming near/real-time API that provides event by event
+      data as well as aggregated statistics for matches in progress." No
+      protocol (WebSocket, SSE, gRPC), no message schema, and no endpoint URL
+      are publicly documented. Access is contract-gated.
+  - name: Warehouse Publish API (write/streaming)
+    public_surface: Named on landing page only.
+    notes: >-
+      Described as a streaming interface for publishing real-time event data
+      into the warehouse. Protocol, endpoint, and payload schema are not
+      publicly documented.
+  - name: LiveStats In-Arena Feed
+    public_surface: Named on landing page; deeper pages 403.
+    notes: Contract-gated; no public spec.
+  - name: Licensing API
+    public_surface: Named on landing page; deeper pages 403.
+    notes: Contract-gated; no public spec.
+webhook_surface:
+  documented: false
+  notes: >-
+    No webhook, callback, push-notification, or event-subscription mechanism is
+    documented anywhere on the public portal. The "streaming" terminology used
+    by Genius Sports refers to server-initiated read/write streams accessed via
+    contract-issued credentials, not HTTP webhooks delivered to a customer URL.
+findings:
+  - >-
+    Genius Sports does NOT expose a public, documented webhook surface.
+  - >-
+    Genius Sports DOES expose a public streaming-style description for two
+    products (Streaming API, Publish API), but the technical contract for those
+    streams is not published; only naming and high-level positioning are public.
+  - >-
+    The only fully public, machine-readable API surfaces are the Fixtures v2
+    and Matching v2 Swagger specs (Production and UAT), both of which require
+    Auth0 or x-api-key credentials to actually call.
+  - >-
+    Access to all other products (Warehouse REST/Streaming/Publish, LiveStats,
+    Licensing) requires a commercial contract; portal pages for those products
+    return 403 to unauthenticated browsers.
+recommendations:
+  - >-
+    Treat the two Swagger 2.0 specs (Fixtures v2, Matching v2) as the
+    authoritative public surfaces. Cached locally under openapi/.
+  - >-
+    Keep the existing genius-sports-openapi.yml flagged as illustrative only,
+    or remove it on the next pass if a sourced replacement is unavailable.
+  - >-
+    Do not model a webhook product line for Genius Sports without
+    contract-sourced documentation.

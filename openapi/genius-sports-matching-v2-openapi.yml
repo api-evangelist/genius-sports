@@ -1,0 +1,4787 @@
+swagger: '2.0'
+info:
+  description: '<br><p><h3>Motivation</h3><br> The purpose of this API is to request matching betweenexternal sources data
+    and the best genius sports representation. <br>Using the POST client can cache the matchingresult for specific time range,
+    by making a mapping from client entity id togenius sports Id.<br></p><h3>Glossary</h3><br><p><b>Match</b>- the probabilistic
+    result of the comparison of the clients input    to Genius Sports data</p><p><b>Map</b>- the link between an already matched
+    result represented by the    clients entity Id and the Genius Sports Id, in the context of a specific    data provider.
+    e.g for data Provider ''NFL'' we the client Id XYZ mapped to    123 </p><p><b>Competitor</b> - a team, player, double
+    partnership or any other entity    that can participate in a fixture as top level competitore e.g Barcelena -    RealMadrid,
+    Nadal - Federer etc. What is not a competitor is for example:    Leo Messi - he cannot participate in a fixture as a top
+    level competitor,    but only as a part of a team.</p><h3>How does the security work?</h3><p>To access the API each request
+    must provide two headers:</p><ul>    <li><code>Authorization</code> header with an OAuth2<br> JSON web token        (Bearer)
+    issued by Auth0.</li>    <li> <code>x-api-key</code><br> with an API key secret of a key, registered        with the API
+    gateway in AWS. <br> </li></ul><h3>How do I get a valid JW token for the <code>Authorization</code> header?</h3><p> As
+    an API client, I must be provided with Auth0 Client credentials    (<code>client_ID</code> and <code>Client_secret</code>)
+    by Genius    Sports (FA team) and obtain a valid token from the Auth0 token<br> endpoint    using the Machine-to-Machine
+    (client credentials) flow. I must obtain a    new token whenever needed (based on the token expiration).</p><p> <br> Make
+    a <code>POST</code> request to the token endpoint: <span        https://{env or nothing for prod}.auth.geniussports.com/oauth/token        </span>
+    with the following        payload:</p><br><pre><br>    {<br>    <span>''client_id'': ''<code>YOUR_AUTH0_CLIENT_ID</code>''</span>,  <br>    <span>''client_secret'':
+    ''<code>YOUR_AUTH0_CLIENT_SECRET</code>''</span>,     <br>    <span>''audience'': ''https://api.geniussports.com''</span>,        <br>    <span>''grant_type''
+    : ''client_credentials''</span>    <br>    }<br></pre><br><p>You will receive a new token in the response <code> access_token
+    </code>    field.</p><br><p>Curl example:</p><br><code> curl -X ''POST'' https://{env or nothing for prod}.auth.geniussports.com/oauth/token
+    <br>-H ''Content-Type: application / json''<br>-d ''{''client_id'':''YOUR_AUTH0_CLIENT_ID'', ''client_secret'':''YOUR_AUTH0_CLIENT_SECRET'',
+    ''audience'':''https://api.geniussports.com'',<br>        ''grant_type'':''client_credentials''}''</code><br>'
+  version: 2.0.106
+  title: fixtures-matching-v2
+host: matching.api.geniussports.com
+basePath: /v2
+tags:
+- name: Probabilistic matching
+  description: The results from the this kind of matching are always probabilistic. However we consider matches that have
+    above 90% match score as viable results.
+schemes:
+- https
+paths:
+  /competition-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve competition matches by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: organization
+        in: query
+        description: The name or Genius Sports Id of a organization.
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: ageCategory
+        in: query
+        description: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22,
+          U23, U24, U25, U26, U27.'
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/competitionMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve competition matches by the provided parameters, and create a map uppon successful matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: competitionMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/competitionMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competition-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/doubles-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve double partnerships matches by the provided parameters.
+      description: 'Full list of sports using double partnerships for fixture level competitors: Badminton,Beach Volleyball,Bobsleigh,Canoeing/Kayaking,Darts,Diving,Figure
+        Skating,Golf,Luge,Olympics,Pickleball,Pickleball,Pool,Rowing,Sailing,Snooker,Squash,Table Tennis,Tennis,Ten Pin Bowling,Winter
+        Olympics'
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: competition
+        in: query
+        description: The name or Genius Sports Id of a competition, that this double partnership participated in.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: organization
+        in: query
+        description: The name or Genius Sports Id of a organization.
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: person
+        in: query
+        description: The name or Genius Sports Id of a person, that participates in this double partnership.
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/doublesMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve fixture level players matches by the provided parameters, and create a map uppon successful matching.
+      description: 'Full list of sports using double partnerships for fixture level competitors: Badminton,Beach Volleyball,Bobsleigh,Canoeing/Kayaking,Darts,Diving,Figure
+        Skating,Golf,Luge,Olympics,Pickleball,Pickleball,Pool,Rowing,Sailing,Snooker,Squash,Table Tennis,Tennis,Ten Pin Bowling,Winter
+        Olympics'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: doublesMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/doublesMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/doubles-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/player-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve fixture level player matches by the provided parameters.
+      description: 'Full list of sports using players for fixture level competitors: Alpine Skiing,Archery,Athletics,Badminton,Biathlon,Bobsleigh,Bowls,Boxing,Canoeing/Kayaking,Chess,Competitive
+        Eating,Cross Country,Cycling,Darts,Diving,Fencing,Figure Skating,Fishing,Freestyle Skiing,Golf,Gymnastics,Judo,Luge,Martial
+        Arts/UFC,Modern Pentathlon,Motor Sport,Nordic Combined Skiing,Olympics,Pickleball,Poker,Politics,Pool,Rowing,Sailing,Shooting,Short
+        Track Speed Skating,Skeleton,Ski Jumping,Snooker,Snowboarding,Speed Skating,Squash,Surfing,Swimming,Table Tennis,Taekwondo,Ten
+        Pin Bowling,Tennis,Triathlon,Virtual Archery,Virtual Badminton,Virtual Basketball,Virtual Chariot Racing,Virtual Cricket,Virtual
+        Cycling,Virtual Football,Virtual Golf,Virtual Greyhound Racing,Virtual Horse Racing,Virtual Ice Hockey,Virtual Motor
+        Racing,Virtual Speed Skating,Virtual Table Tennis,Virtual Tennis,Weightlifting,Winter Olympics,Winter Sports,Wrestling,Yachting,eSports'
+      produces:
+      - application/json
+      parameters:
+      - name: shirtNumber
+        in: query
+        description: Shirt number of the player if the player is part of a team.
+        required: false
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: competition
+        in: query
+        description: The name or Genius Sports Id of a competition, that this player participated in.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: organization
+        in: query
+        description: The name or Genius Sports Id of a organization.
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: team
+        in: query
+        description: Name of any team the player was part of.
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: position
+        in: query
+        description: Position of the player if the player is part of a team.
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: birthDate
+        in: query
+        description: The birth date of the searched player in format - full-date notation as defined by RFC 3339, section
+          5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/playerMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve fixture level players matches by the provided parameters, and create a map uppon successful matching.
+      description: 'Full list of sports using players for fixture level competitors: Alpine Skiing,Archery,Athletics,Badminton,Biathlon,Bobsleigh,Bowls,Boxing,Canoeing/Kayaking,Chess,Competitive
+        Eating,Cross Country,Cycling,Darts,Diving,Fencing,Figure Skating,Fishing,Freestyle Skiing,Golf,Gymnastics,Judo,Luge,Martial
+        Arts/UFC,Modern Pentathlon,Motor Sport,Nordic Combined Skiing,Olympics,Pickleball,Poker,Politics,Pool,Rowing,Sailing,Shooting,Short
+        Track Speed Skating,Skeleton,Ski Jumping,Snooker,Snowboarding,Speed Skating,Squash,Surfing,Swimming,Table Tennis,Taekwondo,Ten
+        Pin Bowling,Tennis,Triathlon,Virtual Archery,Virtual Badminton,Virtual Basketball,Virtual Chariot Racing,Virtual Cricket,Virtual
+        Cycling,Virtual Football,Virtual Golf,Virtual Greyhound Racing,Virtual Horse Racing,Virtual Ice Hockey,Virtual Motor
+        Racing,Virtual Speed Skating,Virtual Table Tennis,Virtual Tennis,Weightlifting,Winter Olympics,Winter Sports,Wrestling,Yachting,eSports'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: playerMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/playerMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/player-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/team-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve teams matches by the provided parameters.
+      description: 'Full list of sports using teams for fixture level competitors: 3x3 Basketball,American Football,Australian
+        Rules,Bandy,Baseball,Basketball,Beach Soccer,Cricket,Curling,Financial,Floorball,Football,Futsal,Gaelic Football,Greyhounds,Handball,Harness
+        Racing,Hockey,Horse Racing,Hurling,Ice Hockey,Lacrosse,Multi Sport,Netball,Pesäpallo,Rugby League,Rugby Union,Softball,Specials,Volleyball,Water
+        Polo'
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: competition
+        in: query
+        description: The name or Genius Sports Id of a competition, that this team participated in.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: ageCategory
+        in: query
+        description: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22,
+          U23, U24, U25, U26, U27.'
+        required: false
+        type: string
+      - name: isNationalTeam
+        in: query
+        description: '''true'' for national teams, ''false'' for club teams'
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: organization
+        in: query
+        description: The name or Genius Sports Id of a organization.
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      - name: homeVenue
+        in: query
+        description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match
+          score.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/teamMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve team matches by the provided parameters, and create a map uppon successful matching.
+      description: 'Full list of sports using teams for fixture level competitors: 3x3 Basketball,American Football,Australian
+        Rules,Bandy,Baseball,Basketball,Beach Soccer,Cricket,Curling,Financial,Floorball,Football,Futsal,Gaelic Football,Greyhounds,Handball,Harness
+        Racing,Hockey,Horse Racing,Hurling,Ice Hockey,Lacrosse,Multi Sport,Netball,Pesäpallo,Rugby League,Rugby Union,Softball,Specials,Volleyball,Water
+        Polo'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: teamMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/teamMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /competitors/team-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /fixture-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a fixture, within a configurable sport or competition day range
+      produces:
+      - application/json
+      parameters:
+      - name: season
+        in: query
+        description: The name or Genius Sports Id of the season, that this fixture is in. e.g 2022/2023 Champions league
+        required: false
+        type: string
+      - name: fixtureCompetitors
+        in: query
+        description: The names of the fixture competitors separated with ~ . e.g Barcelona~Real Madrid. This can also accept
+          the Genius Sport Id of the competitor. e.g. Barcelona~10106
+        required: false
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: competition
+        in: query
+        description: The name or Genius Sports Id of the competition, that this fixture is in. e.g Champions League
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: startDate
+        in: query
+        description: The start date of the fixture in UTC ISO-8601 format. yyyy-MM-ddTHH:mm:ssZ - 2023-10-01T13:30:00Z
+        required: true
+        type: string
+      - name: round
+        in: query
+        description: The name or Genius Sports Id of the Round, that this fixture is in. e.g Quarter final
+        required: false
+        type: string
+      - name: organization
+        in: query
+        description: The name or Genius Sports Id of a organization.
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: venue
+        in: query
+        description: The name or Genius Sports Id of the Venue, that this fixture is played at. e.g Nou Camp
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: The sport that this fixture is part of
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/fixtureMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a fixture, best matching to your fixture.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: fixtureMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/fixtureMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /fixture-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /locality-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve locality matches by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/localityMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve locality matches by the provided parameters, and create a map uppon successful matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: localityMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/localityMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /locality-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /matchrequests/status/{id}:
+    get:
+      tags:
+      - Pending requests
+      summary: Retrieve match requests by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: id
+        in: path
+        description: Contains the id of the pending match request that want to be retrieved. GUID
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/pendingMatchRequestStatusResponseModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /organization-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a organization
+      produces:
+      - application/json
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: code
+        in: query
+        description: The code of the organization
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/organizationMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a organization, best matching to your organization.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: organizationMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/organizationMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /organization-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /person-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a person, that can be used in a team squad, as a refferee, coach, etc. The person itself cannot be
+        used in a fixture as a top level competitor. For that use a Player
+      produces:
+      - application/json
+      parameters:
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: team
+        in: query
+        description: The name or Genius Sports Id of a team, that this person played for.
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: birthDate
+        in: query
+        description: The birth date of the searched player in format - full-date notation as defined by RFC 3339, section
+          5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/personMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a person, that can be used in a team squad, as a refferee, coach, etc., and create a map uppon successful
+        matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: personMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/personMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /person-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /round-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve round matches by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: season
+        in: query
+        description: Allows either Genius Sports Id or the name of the season. If the season is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: endDate
+        in: query
+        description: The end date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: ageCategory
+        in: query
+        description: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22,
+          U23, U24, U25, U26, U27.'
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: startDate
+        in: query
+        description: The start date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/roundMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve round matches by the provided parameters, and create a map uppon successful matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: roundMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/roundMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /round-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /season-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve season matches by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: competition
+        in: query
+        description: Allows either Genius Sports Id or the name of the competition. If the competition is sent as string name
+          a FUZZY match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: endDate
+        in: query
+        description: The end date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: ageCategory
+        in: query
+        description: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22,
+          U23, U24, U25, U26, U27.'
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: startDate
+        in: query
+        description: The start date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+        required: false
+        type: string
+      - name: gender
+        in: query
+        description: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY
+          match is made on the value and the similarity score is contributing to the end match score.
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/seasonMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve season matches by the provided parameters, and create a map uppon successful matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: seasonMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/seasonMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /season-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /sport-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve sport matches by the provided parameters
+      produces:
+      - application/json
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/sportMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve sport matches by the provided parameters, and create a map uppon successful matching.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: sportMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/sportMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /sport-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /venue-matches:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a venue
+      produces:
+      - application/json
+      parameters:
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        type: string
+      - name: parentVenue
+        in: query
+        description: The name or Genius Sports Id of the Parent Venue
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        required: true
+        type: string
+      - name: minCertainty
+        in: query
+        description: The client can set the minimal % of the match certainty. Default is 70%.
+        required: false
+        type: string
+      - name: dataSourceEntityId
+        in: query
+        description: The ID of the team on the data source' side.
+        required: false
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: pageNumber
+        in: query
+        description: The default is the first page. However next pages can be requested if available.
+        required: false
+        type: string
+      - name: city
+        in: query
+        description: The name of the city
+        required: false
+        type: string
+      - name: locality
+        in: query
+        description: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of
+          Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching
+          entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG,
+          ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR,
+          CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA,
+          DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA,
+          GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR,
+          KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL,
+          MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER,
+          PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB,
+          SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU,
+          USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+        required: false
+        type: string
+      - name: sport
+        in: query
+        description: The sport that this venue is suitable for
+        required: false
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/venueMatchHATEOASResultModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve a venue, best matching to your venue.
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: venueMatchRequest
+        description: Contains all the fields the client can match by, as well as configurations about the match.
+        required: true
+        schema:
+          $ref: '#/definitions/venueMatchRequest'
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/matchResultSubsribableModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: 202 response
+          schema:
+            $ref: '#/definitions/failedMatchResponse'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /venue-matches/maps:
+    get:
+      tags:
+      - Probabilistic matching
+      summary: Retrieve entity maps by source name and source entity id
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: source
+        in: query
+        required: true
+        type: string
+      - name: sourceEntityId
+        in: query
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ArrayOfentityMapResponse'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit
+            Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+securityDefinitions:
+  Auth0:
+    type: apiKey
+    name: Authorization
+    in: header
+    x-amazon-apigateway-authtype: oauth2
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+definitions:
+  fixtureMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          gender:
+            type: string
+          locality:
+            type: string
+          startDate:
+            type: string
+            format: date-time
+          competition:
+            type: string
+          season:
+            type: string
+          round:
+            type: string
+          venue:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+          teams:
+            type: array
+            description: If the fixture is played by team sports, the teams will be linked here.
+            items:
+              $ref: '#/definitions/entityRelation'
+          players:
+            type: array
+            description: If the fixture is played by single players sports, they will be linked here.
+            items:
+              $ref: '#/definitions/entityRelation'
+          doubles:
+            type: array
+            description: If the fixture is played in double partnership sports, they will be linked here.
+            items:
+              $ref: '#/definitions/entityRelation'
+  baseMatchModel:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official
+          Genius Sports name. If this does not return result exact match is attempted on the aliases.
+      sport:
+        type: string
+        description: If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+          to the end match score.
+        title: Allows either Genius Sports Id or the name of the sport.
+      locality:
+        $ref: '#/definitions/locality'
+      matchConfig:
+        type: object
+        description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match,
+          either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+        properties:
+          minCertainty:
+            type: number
+            format: double
+            description: The client can set the minimal % of the match certainty. Default is 70%.
+            minimum: 30.0
+            maximum: 100.0
+          dataSourceEntityId:
+            type: string
+            description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match
+              this Id will be mapped to the Genius Sports Id
+          matchUntil:
+            type: string
+            format: date-time
+            description: The date and time by which the client needs his request matched manually.
+        required:
+        - dataSourceEntityId
+        - matchUntil
+  competition:
+    type: string
+    title: Allows either Genius Sports Id or the name of the competition.
+    description: If the competition is sent as string name a FUZZY match is made on the value and the similarity score is
+      contributing to the end match score.
+  ageCategory:
+    type: string
+    title: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24,
+      U25, U26, U27.'
+    description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
+  venueMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          locality:
+            type: string
+          city:
+            type: string
+          parentVenue:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  roundMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          gender:
+            type: string
+          sport:
+            type: string
+          season:
+            type: string
+          startDate:
+            type: string
+          endDate:
+            type: string
+          locality:
+            type: string
+          ageCategory:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  competitionMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        ageCategory:
+          $ref: '#/definitions/ageCategory'
+        locality:
+          $ref: '#/definitions/locality'
+        organization:
+          $ref: '#/definitions/organization'
+  season:
+    type: string
+    title: Allows either Genius Sports Id or the name of the season.
+    description: If the season is sent as string name a FUZZY match is made on the value and the similarity score is contributing
+      to the end match score.
+  BadRequestModel:
+    type: object
+    properties:
+      messages:
+        type: array
+        items:
+          type: string
+  seasonMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          gender:
+            type: string
+          sport:
+            type: string
+          competition:
+            type: string
+          startDate:
+            type: string
+          endDate:
+            type: string
+          locality:
+            type: string
+          ageCategory:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  venueMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        city:
+          type: string
+          description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match
+            score.
+          title: The city name where this venue is physically located.
+  teamMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/teamMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  sourceHALEmbededResponse:
+    type: object
+    properties:
+      name:
+        type: string
+      id:
+        type: integer
+        format: int64
+  sportMatchRequest:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: The name of the entity to be matched to Genius Sports name or the GsId if available. Fuzzy matching is
+          executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
+      matchConfig:
+        type: object
+        description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match,
+          either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+        properties:
+          minCertainty:
+            type: number
+            format: double
+            description: The client can set the minimal % of the match certainty. Default is 70%.
+            minimum: 30.0
+            maximum: 100.0
+          dataSourceEntityId:
+            type: string
+            description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match
+              this Id will be mapped to the Genius Sports Id
+          matchUntil:
+            type: string
+            format: date-time
+            description: The date and time by which the client needs his request matched manually.
+        required:
+        - dataSourceEntityId
+        - matchUntil
+  localityMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  locality:
+    type: string
+    title: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets,
+      Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities.
+      If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to
+      the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU,
+      ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN,
+      CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI,
+      ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG,
+      HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT,
+      LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI,
+      MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT,
+      ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR,
+      TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+    description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+  competitionMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/competitionMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  playerMatchRequest:
+    allOf:
+    - $ref: '#/definitions/personRequest'
+    - properties:
+        competition:
+          type: string
+          description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score
+            is contributing to the end match score.
+          title: A competition that this player participated in. Accepts either competition name or Genius Sports competition
+            Id.
+        organization:
+          $ref: '#/definitions/organization'
+        team:
+          type: string
+          description: Name of any team the player was part of.
+        position:
+          type: string
+          description: Position of the player in a team if it is part of one.
+        shirtNumber:
+          type: string
+          description: Shirt number of the player in a team if it is part of one.
+  roundMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/roundMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  doublesMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/doublesMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  venueMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/venueMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  competitionMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          gender:
+            type: string
+          sport:
+            type: string
+          locality:
+            type: string
+          organization:
+            type: string
+          ageCategory:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  seasonMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/seasonMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  fixtureMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        ageCategory:
+          $ref: '#/definitions/ageCategory'
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
+          title: The start date of the fixture.
+        venue:
+          type: string
+          description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match
+            score.
+          title: If the client has the venue of the fixture it can be sent as parameter to narrow down results.
+        competition:
+          type: string
+          description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is
+            contributing to the end match score.
+          title: The name or Genius Sports Id of a competition, of this fixture.
+        organization:
+          $ref: '#/definitions/organization'
+        season:
+          type: string
+          description: If season is sent as string name а FUZZY match is made on the value and the similarity score is contributing
+            to the end match score.
+          title: The name or Genius Sports Id of a season, of this fixture.
+        round:
+          type: string
+          description: If round is sent as string name а FUZZY match is made on the value and the similarity score is contributing
+            to the end match score.
+          title: The name or Genius Sports Id of a round, of this fixture.
+        fixtureCompetitors:
+          type: array
+          description: 'If participating competitors names. e.g Barcelona, RealMadrid etc. This can also accept the Genius
+            Sport Id of the competitor. e.g. Barcelona, 10106 '
+          items:
+            type: string
+  localityMatchRequest:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: The name of the entity to be matched to Genius Sports name, the ISO-3166-1 alpha-3 codes country code
+          or the GsId if available. Fuzzy matching is executed upon the official Genius Sports name. If this does not return
+          result exact match is attempted on the aliases.
+      matchConfig:
+        type: object
+        description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match,
+          either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+        properties:
+          minCertainty:
+            type: number
+            format: double
+            description: The client can set the minimal % of the match certainty. Default is 70%.
+            minimum: 30.0
+            maximum: 100.0
+          dataSourceEntityId:
+            type: string
+            description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match
+              this Id will be mapped to the Genius Sports Id
+          matchUntil:
+            type: string
+            format: date-time
+            description: The date and time by which the client needs his request matched manually.
+        required:
+        - dataSourceEntityId
+        - matchUntil
+  fixtureMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/fixtureMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  seasonMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        competition:
+          $ref: '#/definitions/competition'
+        startDate:
+          type: string
+          format: date
+          description: If sent a season will be searched with similar start date.
+          title: The date on which the season starts in format - full-date notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21
+        endDate:
+          type: string
+          format: date
+          description: If sent a season will be searched with similar end date.
+          title: The date on which the season ends in format - full-date notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21
+        ageCategory:
+          $ref: '#/definitions/ageCategory'
+        locality:
+          $ref: '#/definitions/locality'
+  gender:
+    type: string
+    title: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+    description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
+  roundMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        season:
+          $ref: '#/definitions/season'
+        startDate:
+          type: string
+          format: date
+          description: If sent a round will be searched with similar start date.
+          title: The date on which the round starts in format - full-date notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21
+        endDate:
+          type: string
+          format: date
+          description: If sent a round will be searched with similar end date.
+          title: The date on which the round ends in format - full-date notation as defined by RFC 3339, section 5.6, for
+            example, 2017-07-21
+        ageCategory:
+          $ref: '#/definitions/ageCategory'
+        locality:
+          $ref: '#/definitions/locality'
+  sportMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  sportMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/sportMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  personRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        birthDate:
+          type: string
+          format: date
+          description: If sent an EXACT match is made on the birthdate, excluding all non-matching entities.
+          title: The birth date of the searched player in format - full-date notation as defined by RFC 3339, section 5.6,
+            for example, 2017-07-21
+  playerMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          sport:
+            type: string
+          gender:
+            type: string
+          locality:
+            type: string
+          ageCategory:
+            type: string
+          birthDate:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  pendingMatchRequestStatusResponseModel:
+    type: object
+    properties:
+      createdOn:
+        type: string
+        format: date-time
+      matchUntilUtc:
+        type: string
+        format: date-time
+        description: Shows the time until when the request should be curated.
+      matchRequestId:
+        type: string
+        description: The id of the request
+      entityType:
+        type: string
+        description: The type of the requested entity.
+      status:
+        type: string
+        description: Shows the status of the pending request.
+      id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      sourceToNotify:
+        $ref: '#/definitions/sourceHALEmbededResponse'
+      reason:
+        type: string
+        description: The reason for NotMatched status. Free text. Should not be used to build logical flows on top of it!
+          Only available when status is NotMatched!
+  ArrayOfentityMapResponse:
+    type: array
+    items:
+      $ref: '#/definitions/entityMapResponse'
+  entityMapResponse:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      createdOn:
+        type: string
+        format: date-time
+      modifiedOn:
+        type: string
+        format: date-time
+      dataSource:
+        $ref: '#/definitions/dataSourceReference'
+      dataSourceEntityId:
+        type: string
+      matchUntil:
+        type: string
+        format: date-time
+      requestId:
+        type: string
+        format: uuid
+      match:
+        $ref: '#/definitions/entityMatchReference'
+      certainty:
+        type: number
+        format: double
+      isManualMatch:
+        type: boolean
+  teamMatchRequest:
+    title: Contains all the fields the client can match by, as well as configurations about the match.
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        ageCategory:
+          $ref: '#/definitions/ageCategory'
+        homeVenue:
+          type: string
+          description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match
+            score.
+          title: If the client has the home venue of the team it can be sent as parameter to narrow down results.
+        isNationalTeam:
+          type: boolean
+          description: True for national teams, False for club teams
+        competition:
+          type: string
+          description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is
+            contributing to the end match score.
+          title: The name or Genius Sports Id of a competition, that this team participated in.
+        organization:
+          $ref: '#/definitions/organization'
+  personMatchRequest:
+    allOf:
+    - $ref: '#/definitions/personRequest'
+    - properties:
+        team:
+          type: string
+          description: If the team is sent as string name а FUZZY match is made on the value and the similarity score is contributing
+            to the end match score.
+          title: A team that this person played for. Accepts either team name or Genius Sports team Id.
+  failedMatchResponse:
+    type: object
+    required:
+    - description
+    - matchTrackingRequestId
+    properties:
+      description:
+        type: string
+        description: 'MappedMatch, SingleMatch, NoMatch, MultipleMatchings, Description: MappedMatch - the first of the matches
+          is the official match based on sourceId, SingleMatch - you have found the best non-matched representation of your
+          entity into the genius sports system. You can cache it by making sending a MatchRequest on the same endpoint, NoMatch
+          (You should adjust matching params or make a proposal to Fixtures Platform),  MultipleMatchings - we have found
+          more that one matches based on your params, you should send more context in order to get to a single match or interpred
+          the multiple results on your end'
+      matchTrackingRequestId:
+        type: string
+        description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId`
+          which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
+      AsyncMatchTrackingUntilUTC:
+        type: string
+        format: date-time
+        description: Time until request should be matched and time until the match will be saved
+  entityMatchReference:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      geniusSportsId:
+        type: integer
+        format: int64
+  doublesMatchRequest:
+    title: Contains all the fields the client can match by, as well as configurations about the match.
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        gender:
+          $ref: '#/definitions/gender'
+        competition:
+          type: string
+          description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score
+            is contributing to the end match score.
+          title: A competition that this double partnership participated in. Accepts either competition name or Genius Sports
+            competition Id.
+        organization:
+          $ref: '#/definitions/organization'
+        person:
+          type: string
+          description: If the person is sent as string name а FUZZY match is made on the value and the similarity score is
+            contributing to the end match score.
+          title: A person that participates in this double partnership. Accepts either person name or Genius Sports person
+            Id.
+  localityMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/localityMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  organizationMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/organizationMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  organizationMatchRequest:
+    allOf:
+    - $ref: '#/definitions/baseMatchModel'
+    - properties:
+        code:
+          type: string
+          description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match
+            score.
+          title: The code of organization.
+  teamMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          sport:
+            type: string
+          gender:
+            type: string
+          locality:
+            type: string
+          ageCategory:
+            type: string
+          isNationalTeam:
+            type: boolean
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+          homeVenue:
+            type: string
+  Error:
+    type: object
+    required:
+    - domain
+    - message
+    - reason
+    properties:
+      reason:
+        type: string
+      domain:
+        type: string
+      location:
+        type: string
+      message:
+        type: string
+  organizationMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          code:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  personMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          gender:
+            type: string
+          locality:
+            type: string
+          birthDate:
+            type: string
+          name:
+            type: string
+          aliases:
+            type: array
+            items:
+              type: string
+  doublesMatch:
+    type: object
+    required:
+    - certainty
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      relatedData:
+        type: object
+        description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+        properties:
+          sport:
+            type: string
+          gender:
+            type: string
+          locality:
+            type: string
+          name:
+            type: string
+          persons:
+            type: array
+            description: Reference for the genius sports person inside this double partnership.
+            items:
+              $ref: '#/definitions/entityRelation'
+          aliases:
+            type: array
+            items:
+              type: string
+  dataSourceReference:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      ref:
+        type: string
+  personMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/personMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  matchResultSubsribableModel:
+    type: object
+    properties:
+      certainty:
+        type: number
+        format: double
+        description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+      Id:
+        type: string
+        description: The Id of the entity on Genius sports side
+      dataSourceEntityId:
+        type: string
+        description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+      matchTrackingRequestId:
+        type: string
+        format: uuid
+        description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId`
+          which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
+  organization:
+    type: string
+    title: If the client has the organization of the fixture it can be sent as parameter to narrow down results.
+    description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+  entityRelation:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+  ErrorModel:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      error:
+        $ref: '#/definitions/Error'
+  playerMatchHATEOASResultModel:
+    type: object
+    required:
+    - items
+    - page
+    - pageSize
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/playerMatch'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string

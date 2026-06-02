@@ -14,7 +14,7 @@ tags:
   - Live Data
   - Fixtures
 created: '2025-03-01'
-modified: '2026-04-28'
+modified: '2026-05-30'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml
 specificationVersion: '0.19'
@@ -86,12 +86,21 @@ apis:
       The authoritative data source for pre-match fixtures data. Swagger
       specifications are available for CI, UAT, and Production environments.
     humanURL: https://developer.geniussports.com/
+    baseURL: https://fixtures.api.geniussports.com/v2
     tags:
       - Sports
       - Fixtures
     properties:
       - type: Documentation
         url: https://developer.geniussports.com/
+      - type: OpenAPI
+        url: >-
+          https://explorer.api.geniussports.com/Fixtures/v2/Production/swagger-latest.json
+      - type: OpenAPI
+        url: openapi/genius-sports-fixtures-v2-openapi.yml
+      - type: SwaggerUI
+        url: >-
+          https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - aid: genius-sports:matching-api-v2
     name: Genius Sports Matching API v2
     description: >-
@@ -99,12 +108,21 @@ apis:
       Genius Sports platform. Swagger specifications are available for CI, UAT,
       and Production environments.
     humanURL: https://developer.geniussports.com/
+    baseURL: https://matching.api.geniussports.com/v2
     tags:
       - Sports
       - Data Matching
     properties:
       - type: Documentation
         url: https://developer.geniussports.com/
+      - type: OpenAPI
+        url: >-
+          https://explorer.api.geniussports.com/fixtures-matching/v2/Production/swagger-latest.json
+      - type: OpenAPI
+        url: openapi/genius-sports-matching-v2-openapi.yml
+      - type: SwaggerUI
+        url: >-
+          https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 common:
   - type: GitHubOrganization
     url: https://github.com/geniussportsgroup
