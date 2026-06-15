@@ -1,0 +1,405 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Genius Sports Data Warehouse REST API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List leagues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/leagues",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "List leagues"
+        },
+        {
+          "info": {
+            "name": "Get a league",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/leagues/:leagueId",
+            "params": [
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a league"
+        },
+        {
+          "info": {
+            "name": "List competitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/competitions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List competitions"
+        },
+        {
+          "info": {
+            "name": "Get a competition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/competitions/:competitionId",
+            "params": [
+              {
+                "name": "competitionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a competition"
+        },
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/teams",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List teams"
+        },
+        {
+          "info": {
+            "name": "Get a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/teams/:teamId",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a team"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List persons (players, officials, staff)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/persons",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List persons (players, officials, staff)"
+        },
+        {
+          "info": {
+            "name": "Get a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/persons/:personId",
+            "params": [
+              {
+                "name": "personId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a person"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Matches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List matches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/matches",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              },
+              {
+                "name": "competitionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List matches"
+        },
+        {
+          "info": {
+            "name": "Get a match",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/matches/:matchId",
+            "params": [
+              {
+                "name": "matchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a match"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get match statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/matches/:matchId/statistics",
+            "params": [
+              {
+                "name": "matchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get match statistics"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/standings",
+            "params": [
+              {
+                "name": "competitionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List standings"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Venues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List venues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.wh.geniussports.com/v1/venues",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List venues"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

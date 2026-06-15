@@ -1,0 +1,1711 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "fixtures-matching-v2",
+    "version": "2.0.106"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Probabilistic matching",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve competition matches by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competition-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a organization."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "ageCategory",
+                "value": "",
+                "type": "query",
+                "description": "One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Retrieve competition matches by the provided parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieve competition matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/competition-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve competition matches by the provided parameters, and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competition-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve double partnerships matches by the provided parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "competition",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a competition, that this double partnership participated in."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a organization."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "person",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a person, that participates in this double partnership."
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Full list of sports using double partnerships for fixture level competitors: Badminton,Beach Volleyball,Bobsleigh,Canoeing/Kayaking,Darts,Diving,Figure Skating,Golf,Luge,Olympics,Pickleball,Pickleball,Pool,Rowing,Sailing,Snooker,Squash,Table Tennis,Tennis,Ten Pin Bowling,Winter Olympics"
+        },
+        {
+          "info": {
+            "name": "Retrieve fixture level players matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/competitors/doubles-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Full list of sports using double partnerships for fixture level competitors: Badminton,Beach Volleyball,Bobsleigh,Canoeing/Kayaking,Darts,Diving,Figure Skating,Golf,Luge,Olympics,Pickleball,Pickleball,Pool,Rowing,Sailing,Snooker,Squash,Table Tennis,Tennis,Ten Pin Bowling,Winter Olympics"
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve fixture level player matches by the provided parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/player-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "shirtNumber",
+                "value": "",
+                "type": "query",
+                "description": "Shirt number of the player if the player is part of a team."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "competition",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a competition, that this player participated in."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a organization."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "team",
+                "value": "",
+                "type": "query",
+                "description": "Name of any team the player was part of."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "Position of the player if the player is part of a team."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "birthDate",
+                "value": "",
+                "type": "query",
+                "description": "The birth date of the searched player in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Full list of sports using players for fixture level competitors: Alpine Skiing,Archery,Athletics,Badminton,Biathlon,Bobsleigh,Bowls,Boxing,Canoeing/Kayaking,Chess,Competitive Eating,Cross Country,Cycling,Darts,Diving,Fencing,Figure Skating,Fishing,Freestyle Skiing,Golf,Gymnastics,Judo,Luge,Martial Arts/UFC,Modern Pentathlon,Motor Sport,Nordic Combined Skiing,Olympics,Pickleball,Poker,Politics,Pool,Rowing,Sailing,Shooting,Short Track Speed Skating,Skeleton,Ski Jumping,Snooker,Snowboarding,Speed S"
+        },
+        {
+          "info": {
+            "name": "Retrieve fixture level players matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/competitors/player-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Full list of sports using players for fixture level competitors: Alpine Skiing,Archery,Athletics,Badminton,Biathlon,Bobsleigh,Bowls,Boxing,Canoeing/Kayaking,Chess,Competitive Eating,Cross Country,Cycling,Darts,Diving,Fencing,Figure Skating,Fishing,Freestyle Skiing,Golf,Gymnastics,Judo,Luge,Martial Arts/UFC,Modern Pentathlon,Motor Sport,Nordic Combined Skiing,Olympics,Pickleball,Poker,Politics,Pool,Rowing,Sailing,Shooting,Short Track Speed Skating,Skeleton,Ski Jumping,Snooker,Snowboarding,Speed S"
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/player-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve teams matches by the provided parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/team-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "competition",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a competition, that this team participated in."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "ageCategory",
+                "value": "",
+                "type": "query",
+                "description": "One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27."
+              },
+              {
+                "name": "isNationalTeam",
+                "value": "",
+                "type": "query",
+                "description": "'true' for national teams, 'false' for club teams"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a organization."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              },
+              {
+                "name": "homeVenue",
+                "value": "",
+                "type": "query",
+                "description": "If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              }
+            ]
+          },
+          "docs": "Full list of sports using teams for fixture level competitors: 3x3 Basketball,American Football,Australian Rules,Bandy,Baseball,Basketball,Beach Soccer,Cricket,Curling,Financial,Floorball,Football,Futsal,Gaelic Football,Greyhounds,Handball,Harness Racing,Hockey,Horse Racing,Hurling,Ice Hockey,Lacrosse,Multi Sport,Netball,Pesäpallo,Rugby League,Rugby Union,Softball,Specials,Volleyball,Water Polo"
+        },
+        {
+          "info": {
+            "name": "Retrieve team matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/competitors/team-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Full list of sports using teams for fixture level competitors: 3x3 Basketball,American Football,Australian Rules,Bandy,Baseball,Basketball,Beach Soccer,Cricket,Curling,Financial,Floorball,Football,Futsal,Gaelic Football,Greyhounds,Handball,Harness Racing,Hockey,Horse Racing,Hurling,Ice Hockey,Lacrosse,Multi Sport,Netball,Pesäpallo,Rugby League,Rugby Union,Softball,Specials,Volleyball,Water Polo"
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/team-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve a fixture, within a configurable sport or competition day range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixture-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "season",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of the season, that this fixture is in. e.g 2022/2023 Champions league"
+              },
+              {
+                "name": "fixtureCompetitors",
+                "value": "",
+                "type": "query",
+                "description": "The names of the fixture competitors separated with ~ . e.g Barcelona~Real Madrid. This can also accept the Genius Sport Id of the competitor. e.g. Barcelona~10106"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "competition",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of the competition, that this fixture is in. e.g Champions League"
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the fixture in UTC ISO-8601 format. yyyy-MM-ddTHH:mm:ssZ - 2023-10-01T13:30:00Z"
+              },
+              {
+                "name": "round",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of the Round, that this fixture is in. e.g Quarter final"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a organization."
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "venue",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of the Venue, that this fixture is played at. e.g Nou Camp"
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "The sport that this fixture is part of"
+              }
+            ]
+          },
+          "docs": "Retrieve a fixture, within a configurable sport or competition day range"
+        },
+        {
+          "info": {
+            "name": "Retrieve a fixture, best matching to your fixture.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fixture-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a fixture, best matching to your fixture."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixture-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve locality matches by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locality-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              }
+            ]
+          },
+          "docs": "Retrieve locality matches by the provided parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieve locality matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/locality-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve locality matches by the provided parameters, and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locality-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve a organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/organization-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "The code of the organization"
+              }
+            ]
+          },
+          "docs": "Retrieve a organization"
+        },
+        {
+          "info": {
+            "name": "Retrieve a organization, best matching to your organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/organization-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a organization, best matching to your organization."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/organization-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve a person, that can be used in a team squad, as a refferee, coach, etc. The person itself cannot be used in a fixture as a top level competitor. For that use a Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/person-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "team",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of a team, that this person played for."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "birthDate",
+                "value": "",
+                "type": "query",
+                "description": "The birth date of the searched player in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Retrieve a person, that can be used in a team squad, as a refferee, coach, etc. The person itself cannot be used in a fixture as a top level competitor. For that use a Player"
+        },
+        {
+          "info": {
+            "name": "Retrieve a person, that can be used in a team squad, as a refferee, coach, etc., and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/person-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a person, that can be used in a team squad, as a refferee, coach, etc., and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/person-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve round matches by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/round-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "season",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the season. If the season is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "ageCategory",
+                "value": "",
+                "type": "query",
+                "description": "One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Retrieve round matches by the provided parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieve round matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/round-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve round matches by the provided parameters, and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/round-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve season matches by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/season-matches",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "competition",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the competition. If the competition is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "ageCategory",
+                "value": "",
+                "type": "query",
+                "description": "One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query",
+                "description": "One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "Allows either Genius Sports Id or the name of the sport. If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score."
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              }
+            ]
+          },
+          "docs": "Retrieve season matches by the provided parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieve season matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/season-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve season matches by the provided parameters, and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/season-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve sport matches by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sport-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              }
+            ]
+          },
+          "docs": "Retrieve sport matches by the provided parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieve sport matches by the provided parameters, and create a map uppon successful matching.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/sport-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve sport matches by the provided parameters, and create a map uppon successful matching."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sport-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        },
+        {
+          "info": {
+            "name": "Retrieve a venue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/venue-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "parentVenue",
+                "value": "",
+                "type": "query",
+                "description": "The name or Genius Sports Id of the Parent Venue"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases."
+              },
+              {
+                "name": "minCertainty",
+                "value": "",
+                "type": "query",
+                "description": "The client can set the minimal % of the match certainty. Default is 70%."
+              },
+              {
+                "name": "dataSourceEntityId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the team on the data source' side."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "The default is the first page. However next pages can be requested if available."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "The name of the city"
+              },
+              {
+                "name": "locality",
+                "value": "",
+                "type": "query",
+                "description": "Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM"
+              },
+              {
+                "name": "sport",
+                "value": "",
+                "type": "query",
+                "description": "The sport that this venue is suitable for"
+              }
+            ]
+          },
+          "docs": "Retrieve a venue"
+        },
+        {
+          "info": {
+            "name": "Retrieve a venue, best matching to your venue.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/venue-matches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieve a venue, best matching to your venue."
+        },
+        {
+          "info": {
+            "name": "Retrieve entity maps by source name and source entity id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/venue-matches/maps",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceEntityId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve entity maps by source name and source entity id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pending requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve match requests by the provided parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/matchrequests/status/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Contains the id of the pending match request that want to be retrieved. GUID"
+              }
+            ]
+          },
+          "docs": "Retrieve match requests by the provided parameters"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
