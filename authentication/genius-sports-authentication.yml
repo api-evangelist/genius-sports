@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/genius-sports-fixtures-v2-openapi.yml, openapi/genius-sports-matching-v2-openapi.yml,
+  openapi/genius-sports-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: Auth0
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/genius-sports-fixtures-v2-openapi.yml
+  - openapi/genius-sports-matching-v2-openapi.yml
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/genius-sports-fixtures-v2-openapi.yml
+  - openapi/genius-sports-matching-v2-openapi.yml
+  - openapi/genius-sports-openapi.yml

@@ -124,6 +124,10 @@ apis:
         url: >-
           https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 common:
+  - type: DomainSecurity
+    url: security/genius-sports-domain-security.yml
+  - type: Authentication
+    url: authentication/genius-sports-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/geniussportsgroup
   - type: LinkedIn
