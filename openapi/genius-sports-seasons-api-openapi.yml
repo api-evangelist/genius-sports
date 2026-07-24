@@ -1,0 +1,1070 @@
+swagger: '2.0'
+info:
+  description: 'This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header ''content-type: application/json''             --data ''{''client_id'':''4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7'',''client_secret'':''client-secret'',''audience'':''https://api.geniussports.com'',''grant_type'':''client_credentials''}''        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        ''access_token'' property. At this point you are ready to get started!    </li>    <li>        <ul style=''line-height:150%''>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ACCESS_TOKEN''</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href=''https://en.wikipedia.org/wiki/HATEOAS''            target=''_blank''>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>''sortBy'' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>''filter'' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this ''range'' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style=''line-height:130%''>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style=''line-height:130%''>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for ''England Premier League''</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style=''line-height:130%''>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li></ul>'
+  version: 2.0.280
+  title: Fixtures-v2 Competitions Seasons API
+  contact:
+    email: sbonboarding@geniussports.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: fixtures.api.geniussports.com
+basePath: /v2
+schemes:
+- https
+tags:
+- name: Seasons
+paths:
+  /seasons:
+    options:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/Empty'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+      tags:
+      - Seasons
+    get:
+      tags:
+      - Seasons
+      summary: Retrieve seasons by ID/s. MAX 200 per page.
+      description: Returns seasons wrapped inside a HATEOAS model
+      produces:
+      - application/json
+      parameters:
+      - name: page
+        in: query
+        description: The number of page to be returned. The default value is 1.
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: The size of the page to be returned. The default value is 10.
+        required: false
+        type: string
+      - name: sortBy
+        in: query
+        description: 'The field to ''order by'' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, competitionId, sportId, genderType, localityId)'
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: filter
+        in: query
+        description: 'The field to ''filter'' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, competitionId, sportId, genderType, localityId)'
+        required: false
+        type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SeasonResponseModelHATEOASReponseModel'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Seasons
+      summary: Create new season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: CreateSeason
+        required: true
+        schema:
+          $ref: '#/definitions/CreateSeason'
+      responses:
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/SeasonResponseModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '409':
+          description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
+          schema:
+            $ref: '#/definitions/ErrorDuplicateModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    put:
+      tags:
+      - Seasons
+      summary: Update existing season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: UpdateSeason
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateSeason'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SeasonResponseModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '409':
+          description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
+          schema:
+            $ref: '#/definitions/ErrorDuplicateModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    patch:
+      tags:
+      - Seasons
+      summary: Patch existing season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - in: body
+        name: PatchSeason
+        required: true
+        schema:
+          $ref: '#/definitions/PatchSeason'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SeasonResponseModel'
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '409':
+          description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
+          schema:
+            $ref: '#/definitions/ErrorDuplicateModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /seasons/{id}:
+    options:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/Empty'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+      tags:
+      - Seasons
+    get:
+      tags:
+      - Seasons
+      summary: Retrieve seasons details by ID.
+      description: Returns seasons details including sport specific details (metadata properties)
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: id
+        in: path
+        description: Single season ID to return details for
+        required: true
+        type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SeasonResponseModel'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    delete:
+      tags:
+      - Seasons
+      summary: Delete existing season
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Success
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /seasons/{id}/competitors:
+    options:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: 200 response
+          schema:
+            $ref: '#/definitions/Empty'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Methods:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+      tags:
+      - Seasons
+    get:
+      tags:
+      - Seasons
+      summary: Retrieve season competitors by Season ID/s. MAX 200 per page.
+      description: Returns the competitors which will take part in the season related to the GSS Season Id in the path, wrapped inside a HATEOAS model
+      produces:
+      - application/json
+      parameters:
+      - name: page
+        in: query
+        description: The number of page to be returned. The default value is 1.
+        required: false
+        type: string
+      - name: pageSize
+        in: query
+        description: The size of the page to be returned. The default value is 10.
+        required: false
+        type: string
+      - name: sortBy
+        in: query
+        description: 'The field to ''order by'' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, competitortype)'
+        required: false
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: filter
+        in: query
+        description: 'The field to ''filter'' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, competitortype, isactive (default = true))'
+        required: false
+        type: string
+      - name: id
+        in: path
+        description: Single season ID to return details for
+        required: true
+        type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SeasonCompetitorsResponseModelHATEOASReponseModel'
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '413':
+          description: Payload Too Large
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '415':
+          description: Unsupported Media Type
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+    post:
+      tags:
+      - Seasons
+      summary: Adds new competitor to the season
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: id
+        in: path
+        required: true
+        type: string
+      - in: body
+        name: CreateSeasonCompetitor
+        required: true
+        schema:
+          $ref: '#/definitions/CreateSeasonCompetitor'
+      responses:
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/SeasonResponseModel'
+          headers:
+            gs-duplicate-entity-replaced:
+              type: string
+              description: Returned when a duplicate entity has been replaced. Value is the 'duplicateEntityId' and the 'originalEntityId'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '429':
+          description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '409':
+          description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
+          schema:
+            $ref: '#/definitions/ErrorDuplicateModel'
+      security:
+      - Auth0: []
+      - api_key: []
+  /seasons/{id}/competitors/{competitorId}:
+    delete:
+      tags:
+      - Seasons
+      summary: Removes competitor added to season
+      produces:
+      - application/json
+      parameters:
+      - name: gs-fixtures-api-sub-source
+        in: header
+        description: Sub Source Name
+        required: false
+        type: string
+      - name: competitorId
+        in: path
+        required: true
+        type: string
+      - name: x-api-key
+        in: header
+        required: true
+        type: string
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: Success
+        '520':
+          description: Unknown error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/BadRequestModel'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/AcceptedModel'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        '504':
+          description: Gateway Timeout
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+      - Auth0: []
+      - api_key: []
+definitions:
+  SeasonResponseModel:
+    type: object
+    required:
+    - competition
+    - createdOn
+    - endDate
+    - genderType
+    - id
+    - name
+    - sport
+    - startDate
+    - updatesCount
+    properties:
+      id:
+        type: integer
+        format: int64
+      createdOn:
+        type: string
+        format: date-time
+      modifiedOn:
+        type: string
+        format: date-time
+      updatesCount:
+        type: integer
+        format: int32
+      metadataProperties:
+        type: array
+        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/season/metadata
+        items:
+          $ref: '#/definitions/JsonbModel'
+      externalIds:
+        $ref: '#/definitions/ExternalIdsViewModel'
+      name:
+        type: string
+      startDate:
+        type: string
+        format: date-time
+      endDate:
+        type: string
+        format: date-time
+      locality:
+        $ref: '#/definitions/HALEmbededResponse'
+      timezone:
+        $ref: '#/definitions/HALEmbededResponse'
+      genderType:
+        type: string
+        description: Undefined, Male, Female, Mixed.
+      sport:
+        $ref: '#/definitions/HALEmbededResponse'
+      competition:
+        $ref: '#/definitions/HALEmbededResponse'
+  BadRequestModel:
+    type: object
+    properties:
+      messages:
+        type: array
+        items:
+          type: string
+  CreateSeason:
+    type: object
+    required:
+    - competitionId
+    - endDate
+    - startDate
+    properties:
+      name:
+        type: string
+        description: Default season name will be generated by the competition if no name is provided
+        title: Season Name
+      startDate:
+        type: string
+        format: date-time
+        description: The start date of the season in UTC ISO-8601 format
+        title: Start Date
+      endDate:
+        type: string
+        format: date-time
+        description: The end date of the season in UTC ISO-8601 format
+        title: End Date
+      localityId:
+        type: integer
+        format: int64
+        description: Id of the country,virtual place, etc. where the season will be held. Competition's Locality will be set if this is not passed on request!
+        title: Locality Id
+      competitionId:
+        type: integer
+        format: int64
+        description: Id of the competition to which the season will be associated!
+        title: Competition Id
+      competitors:
+        type: array
+        description: Array of competitors to be added to the season.
+        title: Competitors
+        items:
+          type: integer
+          description: Competitors which are associated with the season.
+          title: Competitors
+      timezone:
+        type: string
+        description: 'The timezone which will be set as default timezone for the season''s fixtures if timezone is not specified. Possible timezones (splited by '',''): Africa/Abidjan,Africa/Accra,Africa/Addis_Ababa,Africa/Algiers,Africa/Bamako,Africa/Bangui,Africa/Banjul,Africa/Bissau,Africa/Blantyre,Africa/Brazzaville,Africa/Bujumbura,Africa/Cairo,Africa/Casablanca,Africa/Ceuta,Africa/Conakry,Africa/Dakar,Africa/Dar_es_Salaam,Africa/Djibouti,Africa/Douala,Africa/Freetown,Africa/Gaborone,Africa/Harare,Africa/Johannesburg,Africa/Juba,Africa/Kampala,Africa/Khartoum,Africa/Kigali,Africa/Kinshasa,Africa/Lagos,Africa/Libreville,Africa/Lome,Africa/Luanda,Africa/Lubumbashi,Africa/Lusaka,Africa/Malabo,Africa/Maputo,Africa/Maseru,Africa/Mbabane,Africa/Mogadishu,Africa/Monrovia,Africa/Nairobi,Africa/Ndjamena,Africa/Niamey,Africa/Nouakchott,Africa/Ouagadougou,Africa/Porto-Novo,Africa/Sao_Tome,Africa/Tripoli,Africa/Tunis,Africa/Windhoek,America/Adak,America/Anguilla,America/Antigua,America/Argentina/Buenos_Aires,America/Argentina/Catamarca,America/Argentina/Cordoba,America/Argentina/Jujuy,America/Argentina/Mendoza,America/Argentina/Rio_Gallegos,America/Argentina/Salta,America/Argentina/San_Juan,America/Argentina/San_Luis,America/Argentina/Tucuman,America/Aruba,America/Asuncion,America/Bahia,America/Barbados,America/Belem,America/Belize,America/Bogota,America/Boise,America/Buenos_Aires,America/Campo_Grande,America/Cancun,America/Caracas,America/Chicago,America/Chihuahua,America/Costa_Rica,America/Cuiaba,America/Curacao,America/Denver,America/Detroit,America/Dominica,America/Edmonton,America/El_Salvador,America/Fortaleza,America/Grenada,America/Guadeloupe,America/Guatemala,America/Guayaquil,America/Guyana,America/Halifax,America/Havana,America/Hermosillo,America/Indiana/Indianapolis,America/Indiana/Petersburg,America/Indiana/Vevay,America/Indiana/Vincennes,America/Indianapolis,America/Jamaica,America/Kentucky/Louisville,America/Kentucky/Monticello,America/La_Paz,America/Lima,America/Los_Angeles,America/Louisville,America/Managua,America/Manaus,America/Mazatlan,America/Mendoza,America/Menominee,America/Merida,America/Mexico_City,America/Moncton,America/Monterrey,America/Montevideo,America/Montreal,America/Nassau,America/New_York,America/Panama,America/Paramaribo,America/Phoenix,America/Port-au-Prince,America/Porto_Velho,America/Port_of_Spain,America/Puerto_Rico,America/Recife,America/Rio_Branco,America/Rosario,America/Santiago,America/Santo_Domingo,America/Sao_Paulo,America/Scoresbysund,America/St_Johns,America/St_Kitts,America/St_Lucia,America/St_Thomas,America/Tegucigalpa,America/Tijuana,America/Toronto,America/Vancouver,America/Whitehorse,Asia/Aden,Asia/Almaty,Asia/Amman,Asia/Aqtobe,Asia/Ashgabat,Asia/Ashkhabad,Asia/Baghdad,Asia/Bahrain,Asia/Baku,Asia/Bangkok,Asia/Beirut,Asia/Bishkek,Asia/Brunei,Asia/Calcutta,Asia/Chita,Asia/Chongqing,Asia/Chungking,Asia/Colombo,Asia/Dacca,Asia/Damascus,Asia/Dhaka,Asia/Dubai,Asia/Dushanbe,Asia/Gaza,Asia/Harbin,Asia/Hong_Kong,Asia/Hovd,Asia/Ho_Chi_Minh,Asia/Irkutsk,Asia/Istanbul,Asia/Jakarta,Asia/Jayapura,Asia/Jerusalem,Asia/Kabul,Asia/Karachi,Asia/Kathmandu,Asia/Katmandu,Asia/Kolkata,Asia/Krasnoyarsk,Asia/Kuala_Lumpur,Asia/Kuching,Asia/Kuwait,Asia/Macao,Asia/Macau,Asia/Makassar,Asia/Manila,Asia/Muscat,Asia/Nicosia,Asia/Novokuznetsk,Asia/Novosibirsk,Asia/Omsk,Asia/Oral,Asia/Phnom_Penh,Asia/Pyongyang,Asia/Qatar,Asia/Rangoon,Asia/Riyadh,Asia/Saigon,Asia/Sakhalin,Asia/Samarkand,Asia/Seoul,Asia/Shanghai,Asia/Singapore,Asia/Taipei,Asia/Tashkent,Asia/Tbilisi,Asia/Tehran,Asia/Tel_Aviv,Asia/Thimphu,Asia/Tokyo,Asia/Ulaanbaatar,Asia/Vientiane,Asia/Vladivostok,Asia/Yakutsk,Asia/Yekaterinburg,Asia/Yerevan,Atlantic/Azores,Atlantic/Bermuda,Atlantic/Canary,Atlantic/Cape_Verde,Atlantic/Faeroe,Atlantic/Faroe,Atlantic/Madeira,Atlantic/Reykjavik,Australia/ACT,Australia/Adelaide,Australia/Brisbane,Australia/Canberra,Australia/Currie,Australia/Darwin,Australia/Hobart,Australia/Melbourne,Australia/North,Australia/NSW,Australia/Perth,Australia/Queensland,Australia/South,Australia/Sydney,Australia/Tasmania,Australia/Victoria,Australia/West,Brazil/Acre,Brazil/DeNoronha,Brazil/East,Brazil/West,Canada/Atlantic,Canada/Central,Canada/Eastern,Canada/Mountain,Canada/Newfoundland,Canada/Pacific,CET,Chile/Continental,CST6CDT,Cuba,EET,Egypt,EST,Etc/GMT,Etc/GMT+1,Etc/GMT+12,Etc/GMT+2,Etc/GMT+3,Etc/GMT+4,Etc/GMT+5,Etc/GMT+6,Etc/GMT+7,Etc/GMT+8,Etc/GMT+9,Etc/GMT-0,Etc/GMT-1,Etc/GMT-2,Etc/GMT-3,Etc/GMT-4,Etc/GMT-5,Etc/GMT-7,Etc/GMT-8,Etc/Greenwich,Etc/UTC,Europe/Amsterdam,Europe/Andorra,Europe/Athens,Europe/Belfast,Europe/Belgrade,Europe/Berlin,Europe/Bratislava,Europe/Brussels,Europe/Bucharest,Europe/Budapest,Europe/Chisinau,Europe/Copenhagen,Europe/Dublin,Europe/Gibraltar,Europe/Helsinki,Europe/Isle_of_Man,Europe/Istanbul,Europe/Kaliningrad,Europe/Kiev,Europe/Lisbon,Europe/Ljubljana,Europe/London,Europe/Luxembourg,Europe/Madrid,Europe/Malta,Europe/Minsk,Europe/Monaco,Europe/Moscow,Europe/Nicosia,Europe/Oslo,Europe/Paris,Europe/Podgorica,Europe/Prague,Europe/Riga,Europe/Rome,Europe/Samara,Europe/San_Marino,Europe/Sarajevo,Europe/Skopje,Europe/Sofia,Europe/Stockholm,Europe/Tallinn,Europe/Tirane,Europe/Tiraspol,Europe/Uzhgorod,Europe/Vaduz,Europe/Vatican,Europe/Vienna,Europe/Vilnius,Europe/Volgograd,Europe/Warsaw,Europe/Zagreb,Europe/Zaporozhye,Europe/Zurich,GB,GB-Eire,GMT,GMT0,Hongkong,Iceland,Indian/Cocos,Indian/Kerguelen,Indian/Mahe,Indian/Maldives,Indian/Mauritius,Indian/Reunion,Iran,Israel,Jamaica,Japan,Libya,Mexico/BajaNorte,Mexico/BajaSur,Mexico/General,MST,MST7MDT,NZ,Pacific/Apia,Pacific/Auckland,Pacific/Easter,Pacific/Fiji,Pacific/Guadalcanal,Pacific/Kosrae,Pacific/Noumea,Pacific/Ponape,Pacific/Port_Moresby,Pacific/Tahiti,Poland,Portugal,Singapore,Turkey,UCT,US/Arizona,US/Central,US/East-Indiana,US/Eastern,US/Hawaii,US/Indiana-Starke,US/Michigan,US/Mountain,US/Pacific,US/Pacific-New,UTC,WET'
+        title: Competition timezone
+      metadataProperties:
+        type: array
+        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/season/metadata
+        items:
+          $ref: '#/definitions/JsonbModelViewModel'
+      externalIds:
+        $ref: '#/definitions/ExternalIdsViewModel'
+  Error:
+    type: object
+    required:
+    - domain
+    - message
+    - reason
+    properties:
+      reason:
+        type: string
+      domain:
+        type: string
+      locationType:
+        type: string
+      location:
+        type: string
+      message:
+        type: string
+  UpdateSeason:
+    type: object
+    required:
+    - endDate
+    - id
+    - startDate
+    properties:
+      name:
+        type: string
+        description: Default season name will be generated by the competition if no name is provided
+        title: Season Name
+      startDate:
+        type: string
+        format: date-time
+        description: The start date of the season in UTC ISO-8601 format
+        title: Start Date
+      endDate:
+        type: string
+        format: date-time
+        description: The end date of the season in UTC ISO-8601 format
+        title: End Date
+      localityId:
+        type: integer
+        format: int64
+        description: Id of the country,virtual place, etc. where the season will be held. Competition's Locality will be set if this is not passed on request!
+        title: Locality Id
+      id:
+        type: integer
+        format: int64
+        description: Id of the season which will be updated!
+        title: Season Id
+      competitors:
+        type: array
+        description: Array of competitors to be added to the season.
+        title: Competitors
+        items:
+          type: integer
+          description: Competitors which are associated with the season.
+          title: Competitors
+      timezone:
+        type: string
+        description: 'The timezone which will be set as default timezone for the season''s fixtures if timezone is not specified. Possible timezones (splited by '',''): Africa/Abidjan,Africa/Accra,Africa/Addis_Ababa,Africa/Algiers,Africa/Bamako,Africa/Bangui,Africa/Banjul,Africa/Bissau,Africa/Blantyre,Africa/Brazzaville,Africa/Bujumbura,Africa/Cairo,Africa/Casablanca,Africa/Ceuta,Africa/Conakry,Africa/Dakar,Africa/Dar_es_Salaam,Africa/Djibouti,Africa/Douala,Africa/Freetown,Africa/Gaborone,Africa/Harare,Africa/Johannesburg,Africa/Juba,Africa/Kampala,Africa/Khartoum,Africa/Kigali,Africa/Kinshasa,Africa/Lagos,Africa/Libreville,Africa/Lome,Africa/Luanda,Africa/Lubumbashi,Africa/Lusaka,Africa/Malabo,Africa/Maputo,Africa/Maseru,Africa/Mbabane,Africa/Mogadishu,Africa/Monrovia,Africa/Nairobi,Africa/Ndjamena,Africa/Niamey,Africa/Nouakchott,Africa/Ouagadougou,Africa/Porto-Novo,Africa/Sao_Tome,Africa/Tripoli,Africa/Tunis,Africa/Windhoek,America/Adak,America/Anguilla,America/Antigua,America/Argentina/Buenos_Aires,America/Argentina/Catamarca,America/Argentina/Cordoba,America/Argentina/Jujuy,America/Argentina/Mendoza,America/Argentina/Rio_Gallegos,America/Argentina/Salta,America/Argentina/San_Juan,America/Argentina/San_Luis,America/Argentina/Tucuman,America/Aruba,America/Asuncion,America/Bahia,America/Barbados,America/Belem,America/Belize,America/Bogota,America/Boise,America/Buenos_Aires,America/Campo_Grande,America/Cancun,America/Caracas,America/Chicago,America/Chihuahua,America/Costa_Rica,America/Cuiaba,America/Curacao,America/Denver,America/Detroit,America/Dominica,America/Edmonton,America/El_Salvador,America/Fortaleza,America/Grenada,America/Guadeloupe,America/Guatemala,America/Guayaquil,America/Guyana,America/Halifax,America/Havana,America/Hermosillo,America/Indiana/Indianapolis,America/Indiana/Petersburg,America/Indiana/Vevay,America/Indiana/Vincennes,America/Indianapolis,America/Jamaica,America/Kentucky/Louisville,America/Kentucky/Monticello,America/La_Paz,America/Lima,America/Los_Angeles,America/Louisville,America/Managua,America/Manaus,America/Mazatlan,America/Mendoza,America/Menominee,America/Merida,America/Mexico_City,America/Moncton,America/Monterrey,America/Montevideo,America/Montreal,America/Nassau,America/New_York,America/Panama,America/Paramaribo,America/Phoenix,America/Port-au-Prince,America/Porto_Velho,America/Port_of_Spain,America/Puerto_Rico,America/Recife,America/Rio_Branco,America/Rosario,America/Santiago,America/Santo_Domingo,America/Sao_Paulo,America/Scoresbysund,America/St_Johns,America/St_Kitts,America/St_Lucia,America/St_Thomas,America/Tegucigalpa,America/Tijuana,America/Toronto,America/Vancouver,America/Whitehorse,Asia/Aden,Asia/Almaty,Asia/Amman,Asia/Aqtobe,Asia/Ashgabat,Asia/Ashkhabad,Asia/Baghdad,Asia/Bahrain,Asia/Baku,Asia/Bangkok,Asia/Beirut,Asia/Bishkek,Asia/Brunei,Asia/Calcutta,Asia/Chita,Asia/Chongqing,Asia/Chungking,Asia/Colombo,Asia/Dacca,Asia/Damascus,Asia/Dhaka,Asia/Dubai,Asia/Dushanbe,Asia/Gaza,Asia/Harbin,Asia/Hong_Kong,Asia/Hovd,Asia/Ho_Chi_Minh,Asia/Irkutsk,Asia/Istanbul,Asia/Jakarta,Asia/Jayapura,Asia/Jerusalem,Asia/Kabul,Asia/Karachi,Asia/Kathmandu,Asia/Katmandu,Asia/Kolkata,Asia/Krasnoyarsk,Asia/Kuala_Lumpur,Asia/Kuching,Asia/Kuwait,Asia/Macao,Asia/Macau,Asia/Makassar,Asia/Manila,Asia/Muscat,Asia/Nicosia,Asia/Novokuznetsk,Asia/Novosibirsk,Asia/Omsk,Asia/Oral,Asia/Phnom_Penh,Asia/Pyongyang,Asia/Qatar,Asia/Rangoon,Asia/Riyadh,Asia/Saigon,Asia/Sakhalin,Asia/Samarkand,Asia/Seoul,Asia/Shanghai,Asia/Singapore,Asia/Taipei,Asia/Tashkent,Asia/Tbilisi,Asia/Tehran,Asia/Tel_Aviv,Asia/Thimphu,Asia/Tokyo,Asia/Ulaanbaatar,Asia/Vientiane,Asia/Vladivostok,Asia/Yakutsk,Asia/Yekaterinburg,Asia/Yerevan,Atlantic/Azores,Atlantic/Bermuda,Atlantic/Canary,Atlantic/Cape_Verde,Atlantic/Faeroe,Atlantic/Faroe,Atlantic/Madeira,Atlantic/Reykjavik,Australia/ACT,Australia/Adelaide,Australia/Brisbane,Australia/Canberra,Australia/Currie,Australia/Darwin,Australia/Hobart,Australia/Melbourne,Australia/North,Australia/NSW,Australia/Perth,Australia/Queensland,Australia/South,Australia/Sydney,Australia/Tasmania,Australia/Victoria,Australia/West,Brazil/Acre,Brazil/DeNoronha,Brazil/East,Brazil/West,Canada/Atlantic,Canada/Central,Canada/Eastern,Canada/Mountain,Canada/Newfoundland,Canada/Pacific,CET,Chile/Continental,CST6CDT,Cuba,EET,Egypt,EST,Etc/GMT,Etc/GMT+1,Etc/GMT+12,Etc/GMT+2,Etc/GMT+3,Etc/GMT+4,Etc/GMT+5,Etc/GMT+6,Etc/GMT+7,Etc/GMT+8,Etc/GMT+9,Etc/GMT-0,Etc/GMT-1,Etc/GMT-2,Etc/GMT-3,Etc/GMT-4,Etc/GMT-5,Etc/GMT-7,Etc/GMT-8,Etc/Greenwich,Etc/UTC,Europe/Amsterdam,Europe/Andorra,Europe/Athens,Europe/Belfast,Europe/Belgrade,Europe/Berlin,Europe/Bratislava,Europe/Brussels,Europe/Bucharest,Europe/Budapest,Europe/Chisinau,Europe/Copenhagen,Europe/Dublin,Europe/Gibraltar,Europe/Helsinki,Europe/Isle_of_Man,Europe/Istanbul,Europe/Kaliningrad,Europe/Kiev,Europe/Lisbon,Europe/Ljubljana,Europe/London,Europe/Luxembourg,Europe/Madrid,Europe/Malta,Europe/Minsk,Europe/Monaco,Europe/Moscow,Europe/Nicosia,Europe/Oslo,Europe/Paris,Europe/Podgorica,Europe/Prague,Europe/Riga,Europe/Rome,Europe/Samara,Europe/San_Marino,Europe/Sarajevo,Europe/Skopje,Europe/Sofia,Europe/Stockholm,Europe/Tallinn,Europe/Tirane,Europe/Tiraspol,Europe/Uzhgorod,Europe/Vaduz,Europe/Vatican,Europe/Vienna,Europe/Vilnius,Europe/Volgograd,Europe/Warsaw,Europe/Zagreb,Europe/Zaporozhye,Europe/Zurich,GB,GB-Eire,GMT,GMT0,Hongkong,Iceland,Indian/Cocos,Indian/Kerguelen,Indian/Mahe,Indian/Maldives,Indian/Mauritius,Indian/Reunion,Iran,Israel,Jamaica,Japan,Libya,Mexico/BajaNorte,Mexico/BajaSur,Mexico/General,MST,MST7MDT,NZ,Pacific/Apia,Pacific/Auckland,Pacific/Easter,Pacific/Fiji,Pacific/Guadalcanal,Pacific/Kosrae,Pacific/Noumea,Pacific/Ponape,Pacific/Port_Moresby,Pacific/Tahiti,Poland,Portugal,Singapore,Turkey,UCT,US/Arizona,US/Central,US/East-Indiana,US/Eastern,US/Hawaii,US/Indiana-Starke,US/Michigan,US/Mountain,US/Pacific,US/Pacific-New,UTC,WET'
+        title: Competition timezone
+      metadataProperties:
+        type: array
+        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/season/metadata
+        items:
+          $ref: '#/definitions/JsonbModelViewModel'
+      externalIds:
+        $ref: '#/definitions/ExternalIdsViewModel'
+  JsonbModelViewModel:
+    type: object
+    required:
+    - name
+    properties:
+      name:
+        type: string
+        description: Name of the property.
+        title: Property name
+      value:
+        type: string
+        description: Value of the property.
+        title: Property value
+    title: Create/Update Property Model
+    description: This model should be used to create or update single property value for specific property name for specific model.
+  SeasonResponseModelHATEOASReponseModel:
+    type: object
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/SeasonResponseModel'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  SeasonCompetitorsResponseModelHATEOASReponseModel:
+    type: object
+    properties:
+      page:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      totalItems:
+        type: integer
+        format: int64
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/SeasonCompetitorsResponseModel'
+      self:
+        type: string
+      previous:
+        type: string
+      next:
+        type: string
+      first:
+        type: string
+      last:
+        type: string
+  PatchSeason:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: The ID of the season.
+        title: Id
+      startDate:
+        type: string
+        format: date-time
+        description: The start date of the season in UTC ISO-8601 format
+        title: Start Date
+      endDate:
+        type: string
+        format: date-time
+        description: The end date of the season in UTC ISO-8601 format
+        title: End Date
+    title: Patch Season Model
+    description: This model should be used to propose a partial update/patch to a season.
+  ErrorDuplicateModel:
+    type: object
+    properties:
+      messages:
+        type: array
+        items:
+          type: string
+      geniusSportsConflictId:
+        type: string
+        description: This is the official genius sports ID, which you have conflict with.
+  Empty:
+    type: object
+  SeasonCompetitorsResponseModel:
+    type: object
+    required:
+    - competitorType
+    - genderType
+    - id
+    - locality
+    - name
+    - ref
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id of the competitor
+      name:
+        type: string
+        description: Name of the competitor
+      competitorType:
+        type: string
+        description: Type of the competitor
+      ref:
+        type: string
+        description: Endpoint to competitor
+      genderType:
+        type: string
+        description: Gender of the competitor
+      locality:
+        $ref: '#/definitions/HALEmbededResponse'
+      confirmed:
+        type: boolean
+        description: Indicates if the competitor is confirmed for the season
+  JsonbModel:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+      isDeleted:
+        type: boolean
+  ExternalIdsViewModel:
+    type: object
+    properties:
+      optaId:
+        type: string
+      optaLegacyId:
+        type: string
+      fibaId:
+        type: string
+      vesselId:
+        type: string
+      statsEngineId:
+        type: string
+    description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+  ErrorModel:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      error:
+        $ref: '#/definitions/Error'
+  CreateSeasonCompetitor:
+    type: object
+    properties:
+      competitorId:
+        type: integer
+        format: int64
+        description: The id of the competitor which will be added in the season
+        title: Competitor Id
+  HALEmbededResponse:
+    type: object
+    required:
+    - id
+    - name
+    - ref
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      externalIds:
+        $ref: '#/definitions/ExternalIdsViewModel'
+      ref:
+        type: string
+  AcceptedModel:
+    type: object
+    properties:
+      messages:
+        type: array
+        items:
+          type: string
+securityDefinitions:
+  Auth0:
+    type: apiKey
+    name: Authorization
+    in: header
+    x-amazon-apigateway-authtype: oauth2
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+x-amazon-apigateway-security-policy: TLS_1_0
