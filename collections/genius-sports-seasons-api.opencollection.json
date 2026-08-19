@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Seasons API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Seasons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve seasons by ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/seasons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, competitionId, sportId, genderType, localityId)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, competitionId, sportId, genderType, localityId)"
+              }
+            ]
+          },
+          "docs": "Returns seasons wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new season",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/seasons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new season"
+        },
+        {
+          "info": {
+            "name": "Update existing season",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/seasons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update existing season"
+        },
+        {
+          "info": {
+            "name": "Patch existing season",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/seasons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Patch existing season"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /seasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/seasons"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve seasons details by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/seasons/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single season ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns seasons details including sport specific details (metadata properties)"
+        },
+        {
+          "info": {
+            "name": "Delete existing season",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/seasons/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing season"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /seasons/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/seasons/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve season competitors by Season ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/seasons/:id/competitors",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, competitortype)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, competitortype, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single season ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the competitors which will take part in the season related to the GSS Season Id in the path, wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Adds new competitor to the season",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/seasons/:id/competitors",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Adds new competitor to the season"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /seasons/{id}/competitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/seasons/:id/competitors",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Removes competitor added to season",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/seasons/:id/competitors/:competitorId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "competitorId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes competitor added to season"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

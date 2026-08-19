@@ -1,0 +1,473 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Contracts API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve contracts between person and different types of competitors.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (competitor.Id, competitor.Name, person.Id, person.Name, player.Id, player.Name, createdon, modifiedon, updatedcount, startDate, endDate, isactive)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (competitor.Id, competitor.Name, person.Id, person.Name, player.Id, player.Name, createdon, modifiedon, updatedcount, startDate, endDate, isactive)"
+              }
+            ]
+          },
+          "docs": "Returns the persons, the corresponding player and the competitor with which the person has contract of wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new contract between competitor of any type and person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new contract between competitor of any type and person"
+        },
+        {
+          "info": {
+            "name": "Update existing contract between competitor of any type and person",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update existing contract between competitor of any type and person"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/contracts"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve persons which are part of the doubles partnership by Doubles Partnership ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles/:id/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (competitorfromname, competitorfromid, competitorfromcompetitortype, createdon, modifiedon, updatedcount, from, to)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (competitorfromname, competitorfromid, competitorfromcompetitortype, createdon, modifiedon, updatedcount, from, to, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (doubles) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the persons which are part of the doubles partnership by GSS Doubles Partnership Id in the path, wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Retrieve persons which are associated with the current player (e.g. coaches) by Player ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/players/:id/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (competitortoname, competitortoid, competitortocompetitortype, createdon, modifiedon, updatedcount, from, to)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (competitortoname, competitortoid, competitortocompetitortype, createdon, modifiedon, updatedcount, from, to, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (players) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the persons which are associated with the current player (e.g. coaches) by GSS Player Id in the path, wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Retrieve persons which are part of the team (a.k.a. Rosters) or persons which were part of the team by Team ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/teams/:id/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (competitorfromname, competitorfromid, competitorfromcompetitortype, createdon, modifiedon, updatedcount, from, to)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (competitorfromname, competitorfromid, competitorfromcompetitortype, createdon, modifiedon, updatedcount, from, to, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (teams) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the persons which were or are part of the team by GSS Team Id in the path, wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new contract between competitor and person who has a team official role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contracts/officials",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new contract between competitor and person who has a team official role"
+        },
+        {
+          "info": {
+            "name": "Delete existing contract by team and person Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/contracts/team/:teamId/person/:personId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "personId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing contract by team and person Ids"
+        },
+        {
+          "info": {
+            "name": "Delete existing contract by team and player Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/contracts/team/:teamId/player/:playerId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing contract by team and player Ids"
+        },
+        {
+          "info": {
+            "name": "Delete existing contract by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/contracts/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing contract by id"
+        },
+        {
+          "info": {
+            "name": "Retrieve a snapshot of the contracts that were active for the competitors which were part of the fixture when the fixture took place.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures/:id/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixture ID to return officials for"
+              }
+            ]
+          },
+          "docs": "Returns the competitor, the person and the corresponding player"
+        },
+        {
+          "info": {
+            "name": "Retrieve teams/doubles partnerships/players/etc in which the person takes (as coach, player in team, owner etc.) part by Person ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/persons/:id/contracts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (competitortoname, competitortoid, competitortocompetitortype, createdon, modifiedon, updatedcount, from, to)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (competitortoname, competitortoid, competitortocompetitortype, createdon, modifiedon, updatedcount, from, to, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single person ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the teams/doubles partnership/players/etc in which the person takes part by GSS Person Id in the path, wrapped inside a HATEOAS model"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

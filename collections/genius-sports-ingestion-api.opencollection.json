@@ -1,0 +1,498 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Ingestion API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for ingestion proposals by competition Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/competitions/searchById",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "onlyOwned",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether proposals from other sources should be included."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of competition Ids"
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by competition Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/competitions/searchById",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/competitions/searchById"
+          }
+        },
+        {
+          "info": {
+            "name": "Search for ingestion proposals by source entity Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/competitions/searchBySourceEntityId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sourceEntityIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of source entity Ids"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source that ingested the proposals."
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by source entity Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/competitions/searchBySourceEntityId",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/competitions/searchBySourceEntityId"
+          }
+        },
+        {
+          "info": {
+            "name": "Tracking the progress of the asynchronous execution.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/competitions/:trackingRequestId/status",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path",
+                "description": "GUID returned from an ingestion request"
+              }
+            ]
+          },
+          "docs": "Returns the current state of the ingestion request"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/competitions/{trackingRequestId}/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/competitions/:trackingRequestId/status",
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Search for ingestion proposals by fixture Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/fixtures/searchById",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "onlyOwned",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether proposals from other sources should be included."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of fixture Ids"
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by fixture Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/fixtures/searchById",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/fixtures/searchById"
+          }
+        },
+        {
+          "info": {
+            "name": "Search for ingestion proposals by source entity Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/fixtures/searchBySourceEntityId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sourceEntityIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of source entity Ids"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source that ingested the proposals."
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by source entity Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/fixtures/searchBySourceEntityId",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/fixtures/searchBySourceEntityId"
+          }
+        },
+        {
+          "info": {
+            "name": "Tracking the progress of the asynchronous execution.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/fixtures/:trackingRequestId/status",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path",
+                "description": "GUID returned from an ingestion request"
+              }
+            ]
+          },
+          "docs": "Returns the current state of the ingestion request"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/fixtures/{trackingRequestId}/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/fixtures/:trackingRequestId/status",
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Search for ingestion proposals by squad Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/squads/searchById",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "onlyOwned",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether proposals from other sources should be included."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of squad Ids"
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by squad Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/squads/searchById",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/squads/searchById"
+          }
+        },
+        {
+          "info": {
+            "name": "Search for ingestion proposals by source entity Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/squads/searchBySourceEntityId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sourceEntityIds",
+                "value": "",
+                "type": "query",
+                "description": "A list of source entity Ids"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "The source that ingested the proposals."
+              }
+            ]
+          },
+          "docs": "Search for ingestion proposals by source entity Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/squads/searchBySourceEntityId",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/squads/searchBySourceEntityId"
+          }
+        },
+        {
+          "info": {
+            "name": "Tracking the progress of the asynchronous execution.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ingestion/squads/:trackingRequestId/status",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path",
+                "description": "GUID returned from an ingestion request"
+              }
+            ]
+          },
+          "docs": "Returns the current state of the ingestion request"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /ingestion/squads/{trackingRequestId}/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/ingestion/squads/:trackingRequestId/status",
+            "params": [
+              {
+                "name": "trackingRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Ingest competition data for update or create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ingestion/competitions",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Ingest competition data for update or create"
+        },
+        {
+          "info": {
+            "name": "Ingest fixture data for update or create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ingestion/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Ingesting competitors requires indicating the competitor type. There are 3 options: Specify competitionType on competition level. Specify competitorType on competitor level. Include one of the teamPropertiesModel/playerPropertiesModel/doublesPropertiesModel fields on a competitor level."
+        },
+        {
+          "info": {
+            "name": "Patch existing fixture request. Currently support only lineups patch by sourceEntityId of the fixture.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/ingestion/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Patch existing fixture request. Currently support only lineups patch by sourceEntityId of the fixture."
+        },
+        {
+          "info": {
+            "name": "Ingest team squad players data for update or create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ingestion/squads",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Ingest team squad players data for update or create"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Sourcerequests API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sourcerequests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves info about the status of a Source Request, given its Request Id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sourcerequests/:requestId/status",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves info about the status of a Source Request, given its Request Id."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /sourcerequests/{requestId}/status",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/sourcerequests/:requestId/status",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

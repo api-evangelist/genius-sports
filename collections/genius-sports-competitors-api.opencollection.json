@@ -1,0 +1,429 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Competitors API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Competitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType, competitorType)"
+              }
+            ]
+          },
+          "docs": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/doubles",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/doubles"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/doubles/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/doubles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/doubles/{id}/contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/doubles/:id/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/doubles/{id}/rounds",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/doubles/:id/rounds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/doubles/{id}/seasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/doubles/:id/seasons",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/horses",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/horses"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/horses/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/horses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/players",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/players"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/players/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/players/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/players/{id}/contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/players/:id/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/players/{id}/rounds",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/players/:id/rounds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/players/{id}/seasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/players/:id/seasons",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/tbds",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/tbds"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/tbds/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/tbds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/teams"
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/teams/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/teams/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/teams/{id}/contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/teams/:id/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/teams/{id}/rounds",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/teams/:id/rounds",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/teams/{id}/seasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/teams/:id/seasons",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors ID to return information for"
+              }
+            ]
+          },
+          "docs": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint by ID."
+        },
+        {
+          "info": {
+            "name": "Delete existing existing competitor of any type - Team, Player, Double partnership etc",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/competitors/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing existing competitor of any type - Team, Player, Double partnership etc"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /competitors/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/competitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,217 @@
+{
+  "item": [
+    {
+      "id": "5e24eec8-9da5-484d-a33c-bb59c48465a4",
+      "name": "Matches",
+      "description": {
+        "content": "Match data and broadcasts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82912490-e8e9-49bd-a4da-9b0d84dd45ce",
+          "name": "List matches",
+          "request": {
+            "name": "List matches",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "competitionId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "921b0cea-422f-41e0-a72e-fd51435aea1f",
+              "name": "Matches envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "competitionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e499639-1011-42a5-a3e2-66f7fae84b64",
+          "name": "Get a match",
+          "request": {
+            "name": "Get a match",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "matches",
+                ":matchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "matchId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ec9ebc4-6585-4c00-8ddc-9101428377ea",
+              "name": "Match envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "matches",
+                    ":matchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "matchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://fixtures.api.geniussports.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bb16fb09-f835-4716-a3bc-163361f5bae2",
+    "name": "Fixtures-v2 Competitions Matches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header 'content-type: application/json'             --data '{'client_id':'4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7','client_secret':'client-secret','audience':'https://api.geniussports.com','grant_type':'client_credentials'}'        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        'access_token' property. At this point you are ready to get started!    </li>    <li>        <ul style='line-height:150%'>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href='https://en.wikipedia.org/wiki/HATEOAS'            target='_blank'>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>'sortBy' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>'filter' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this 'range' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style='line-height:130%'>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style='line-height:130%'>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for 'England Premier League'</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style='line-height:130%'>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul>\n\nContact Support:\n Email: sbonboarding@geniussports.com",
+      "type": "text/plain"
+    }
+  }
+}

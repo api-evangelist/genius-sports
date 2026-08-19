@@ -1,0 +1,525 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "v2 Competitions Fixtures API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fixtures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve fixtures by ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "This field specifies whether to include deleted, not deleted, or both. Possible values: False, True, or All."
+              },
+              {
+                "name": "eventTypes",
+                "value": "",
+                "type": "query",
+                "description": "This field specifies the event type to be returned (Match, SeasonOutright, PartialOutright, AggregateEvent). By default, if not provided, 'Match' is returned. Multiple types can be combined in a single request, separated by commas."
+              },
+              {
+                "name": "withCompetitors",
+                "value": "",
+                "type": "query",
+                "description": "This field specifies whether when set to true to return fixtures without any TBD competitors or false for all fixtures"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)"
+              }
+            ]
+          },
+          "docs": "Returns fixtures wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new fixture"
+        },
+        {
+          "info": {
+            "name": "Update existing fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update existing fixture"
+        },
+        {
+          "info": {
+            "name": "Patch existing fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/fixtures",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Patch existing fixture"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve fixtures refdata by filter. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures/refdata",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)"
+              }
+            ]
+          },
+          "docs": "Returns fixtures refdata wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/refdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/refdata"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve fixtures details by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "This field specifies whether to include deleted, not deleted, or both. Possible values: False, True, or All."
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "The field specifies the type of event to return (Match, SeasonOutright, PartialOutright, AggregateEvent). If not provided, the search defaults to fixtures of type 'Match'."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixtures ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns fixtures details including sport specific details (metadata properties)"
+        },
+        {
+          "info": {
+            "name": "Delete existing fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/fixtures/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing fixture"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/{id}/contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/:id/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve whole fixture's lineups by fixture ID for both teams ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures/:id/lineups",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixture ID to return lineups for"
+              }
+            ]
+          },
+          "docs": "Lineup availability may vary depending on the sport and specific fixture. In certain sports, lineups are provided only for selected competitions only. When lineup data is not available, the API will return an empty response."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/{id}/lineups",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/:id/lineups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve fixture's officials by fixture ID. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/fixtures/:id/officials",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixture ID to return officials for"
+              }
+            ]
+          },
+          "docs": "Returns fixture's officials wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Adds new official to the fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/fixtures/:id/officials",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixture ID to create official for"
+              }
+            ]
+          },
+          "docs": "Adds new official to the fixture"
+        },
+        {
+          "info": {
+            "name": "Update existing fixture official",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/fixtures/:id/officials",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single fixture ID to update official for"
+              }
+            ]
+          },
+          "docs": "Update existing fixture official"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/{id}/officials",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/:id/officials",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Removes official added to fixture",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/fixtures/:id/officials/:personId",
+            "headers": [
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "personId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes official added to fixture"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /fixtures/{id}/officials/{personId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/fixtures/:id/officials/:personId",
+            "params": [
+              {
+                "name": "personId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,4235 @@
+{
+  "item": [
+    {
+      "id": "b1b234bc-54ad-41b2-ac0e-8f2c963b7845",
+      "name": "Competitors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b16a0695-84e7-4d1e-a6fd-0818bf768ef6",
+          "name": "/competitors",
+          "request": {
+            "name": "/competitors",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f37178ad-d31b-45d5-bd64-4d3f783f129d",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28d13c82-224d-41e5-a302-9ce543b51e8e",
+          "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint. MAX 200 per page.",
+          "request": {
+            "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint. MAX 200 per page.",
+            "description": {
+              "content": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint wrapped inside a HATEOAS model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "competitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "The number of page to be returned. The default value is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<string>",
+                  "description": "The size of the page to be returned. The default value is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType, competitorType)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4d7618c9-5762-4da1-b1a2-e64db451c80b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 8832,\n  \"pageSize\": 717,\n  \"totalItems\": 3683,\n  \"items\": [\n    {\n      \"competitorStatusType\": \"string\",\n      \"competitorType\": \"string\",\n      \"createdOn\": \"1988-07-27T22:31:41.920Z\",\n      \"genderType\": \"string\",\n      \"id\": 7736,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"sport\": {\n        \"id\": 7005,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"updatesCount\": 3313,\n      \"modifiedOn\": \"2002-03-20T19:50:26.930Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": true\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        }\n      ],\n      \"locality\": {\n        \"id\": 9007,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"venue\": {\n        \"id\": 59,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      }\n    },\n    {\n      \"competitorStatusType\": \"string\",\n      \"competitorType\": \"string\",\n      \"createdOn\": \"1983-10-04T10:47:55.454Z\",\n      \"genderType\": \"string\",\n      \"id\": 4354,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"sport\": {\n        \"id\": 3273,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"updatesCount\": 6803,\n      \"modifiedOn\": \"2014-01-23T10:43:50.962Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": true\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        }\n      ],\n      \"locality\": {\n        \"id\": 2375,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"venue\": {\n        \"id\": 4147,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      }\n    }\n  ],\n  \"self\": \"string\",\n  \"previous\": \"string\",\n  \"next\": \"string\",\n  \"first\": \"string\",\n  \"last\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc0b9c69-f93f-4014-bf86-130678d29229",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e630a413-5947-454b-9766-51fe4679734e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39e4c920-aa9a-4a21-9ce2-3e7c7b97168e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea2bd69-cb7d-4296-b7a4-f06b2e12491c",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3312681d-b229-4642-9b37-c9887dde3606",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3816911-e31c-478a-a833-930a3865a8ef",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b51c57d4-88f0-4cf0-98f2-e80ba87ca006",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f75cd4fe-f2ae-4b49-a165-5e1d4f0ce151",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b53b163-a44f-4662-803c-e7d6d51262b5",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8e2b084-5fac-4339-a739-e059bc842c2b",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f0f12b2-7f0e-46ec-ad45-60495553433b",
+          "name": "/competitors/doubles",
+          "request": {
+            "name": "/competitors/doubles",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "doubles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9eb3b893-58c1-4832-93ac-8e04208355f2",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "doubles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c24ad490-e7de-467f-b327-846d49762222",
+          "name": "/competitors/doubles/:id",
+          "request": {
+            "name": "/competitors/doubles/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "doubles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2f671bd-e20e-4438-9725-674f9e1fd208",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "doubles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e6313e6-959a-4c28-806c-abc3050d2f04",
+          "name": "/competitors/doubles/:id/contracts",
+          "request": {
+            "name": "/competitors/doubles/:id/contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "doubles",
+                ":id",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f8b5ccb-a848-4eb7-92c8-299e2a6f3664",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "doubles",
+                    ":id",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78321733-3d7e-4304-aac1-07dbcc8196ab",
+          "name": "/competitors/doubles/:id/rounds",
+          "request": {
+            "name": "/competitors/doubles/:id/rounds",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "doubles",
+                ":id",
+                "rounds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb67f528-875d-4b91-98ef-04e80a133f8b",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "doubles",
+                    ":id",
+                    "rounds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3af7a541-3223-492e-ab1a-d2775c07baa4",
+          "name": "/competitors/doubles/:id/seasons",
+          "request": {
+            "name": "/competitors/doubles/:id/seasons",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "doubles",
+                ":id",
+                "seasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ec11a72-8a7a-4f80-a0e6-e5d5741326d5",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "doubles",
+                    ":id",
+                    "seasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "363363ae-aa02-46d4-991b-988829b77592",
+          "name": "/competitors/horses",
+          "request": {
+            "name": "/competitors/horses",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "horses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ca8a91d-c0ed-4622-ae9e-7d9d93f9878e",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "horses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0eb5e36b-9c42-4400-94a8-1546432b9482",
+          "name": "/competitors/horses/:id",
+          "request": {
+            "name": "/competitors/horses/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "horses",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5546f9a7-8a8e-4633-bfef-5640e88c6bfc",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "horses",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d0fb365-3e61-4ec1-9a12-2715debab21f",
+          "name": "/competitors/players",
+          "request": {
+            "name": "/competitors/players",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "players"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bfe9b86-c30d-4441-b703-2ee288f5f6dc",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "players"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc607d34-49ee-40b7-9f88-c761fb43e4dd",
+          "name": "/competitors/players/:id",
+          "request": {
+            "name": "/competitors/players/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "players",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "641fa79d-27ab-47ba-b2ce-1597207db129",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "players",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86cfdcd-a698-4e38-bf65-edad0b61c294",
+          "name": "/competitors/players/:id/contracts",
+          "request": {
+            "name": "/competitors/players/:id/contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "players",
+                ":id",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1b344e1-5431-4774-9904-7fea1f59aba2",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "players",
+                    ":id",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "189a14be-9e3c-454e-bd32-643e6c20ee58",
+          "name": "/competitors/players/:id/rounds",
+          "request": {
+            "name": "/competitors/players/:id/rounds",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "players",
+                ":id",
+                "rounds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "262bebde-6f40-4afe-8966-da23bb4bf27b",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "players",
+                    ":id",
+                    "rounds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45fda464-2001-45b3-9ac5-135bf8cdfe2d",
+          "name": "/competitors/players/:id/seasons",
+          "request": {
+            "name": "/competitors/players/:id/seasons",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "players",
+                ":id",
+                "seasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a956a1a5-dcf4-4f9e-bd76-286f45abe896",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "players",
+                    ":id",
+                    "seasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a67d76c5-431d-4bff-9e7b-2eb8302409f4",
+          "name": "/competitors/tbds",
+          "request": {
+            "name": "/competitors/tbds",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "tbds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "452efbb4-3229-40cc-a0c8-02254a3046c6",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "tbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bb90c88-6114-48df-9dc7-0b835f8a9845",
+          "name": "/competitors/tbds/:id",
+          "request": {
+            "name": "/competitors/tbds/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "tbds",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3d06a8c-61fe-46c1-92a4-559c80c6754c",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "tbds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49162a94-10e0-46d6-8f63-7e6eb044fcd3",
+          "name": "/competitors/teams",
+          "request": {
+            "name": "/competitors/teams",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76e3ac19-21eb-4a23-ac7b-73da8543818b",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edb6739c-9cf4-4730-8620-d07e28f5269b",
+          "name": "/competitors/teams/:id",
+          "request": {
+            "name": "/competitors/teams/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "teams",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34199d27-0f88-4868-af10-56d9304f01c0",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "teams",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1380786-0e3d-46c4-b050-668335b83a1f",
+          "name": "/competitors/teams/:id/contracts",
+          "request": {
+            "name": "/competitors/teams/:id/contracts",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "teams",
+                ":id",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0eb6fe29-08b1-45d5-8d44-98ffc06f0784",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "teams",
+                    ":id",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fce9212-2cc9-4008-8eed-ddca700874a0",
+          "name": "/competitors/teams/:id/rounds",
+          "request": {
+            "name": "/competitors/teams/:id/rounds",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "teams",
+                ":id",
+                "rounds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ab12a12-1a28-4f9a-bfba-5643afb9aa58",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "teams",
+                    ":id",
+                    "rounds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5716edb5-66e3-4566-b9b4-ba823a9a06e2",
+          "name": "/competitors/teams/:id/seasons",
+          "request": {
+            "name": "/competitors/teams/:id/seasons",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                "teams",
+                ":id",
+                "seasons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ed50f3b-6af1-43cd-aa53-2ec5e90e8aef",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    "teams",
+                    ":id",
+                    "seasons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f69e756e-7b1e-45a9-b825-09170763aa35",
+          "name": "/competitors/:id",
+          "request": {
+            "name": "/competitors/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5216975f-aea1-4fcc-a2be-cd575381346d",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e104810-1625-428e-85d4-691089ff9adb",
+          "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint by ID.",
+          "request": {
+            "name": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint by ID.",
+            "description": {
+              "content": "Retrieve competitors basic info regardless their type with reference to the detailed endpoint by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "competitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Single competitors ID to return information for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a62daecf-6817-4023-9bcd-21b4b96d5d5e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"competitorStatusType\": \"string\",\n  \"competitorType\": \"string\",\n  \"createdOn\": \"2003-11-16T15:34:42.242Z\",\n  \"genderType\": \"string\",\n  \"id\": 5741,\n  \"name\": \"string\",\n  \"ref\": \"string\",\n  \"sport\": {\n    \"id\": 6894,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"string\",\n      \"optaLegacyId\": \"string\",\n      \"fibaId\": \"string\",\n      \"vesselId\": \"string\",\n      \"statsEngineId\": \"string\"\n    }\n  },\n  \"updatesCount\": 7403,\n  \"modifiedOn\": \"1967-03-30T10:14:27.180Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"locality\": {\n    \"id\": 1624,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"string\",\n      \"optaLegacyId\": \"string\",\n      \"fibaId\": \"string\",\n      \"vesselId\": \"string\",\n      \"statsEngineId\": \"string\"\n    }\n  },\n  \"venue\": {\n    \"id\": 7861,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"string\",\n      \"optaLegacyId\": \"string\",\n      \"fibaId\": \"string\",\n      \"vesselId\": \"string\",\n      \"statsEngineId\": \"string\"\n    }\n  },\n  \"externalIds\": {\n    \"optaId\": \"string\",\n    \"optaLegacyId\": \"string\",\n    \"fibaId\": \"string\",\n    \"vesselId\": \"string\",\n    \"statsEngineId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d19c874-09d9-478d-8389-f2e0ce19a9b0",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eecfa147-e3ff-40ee-ac20-def6f644ffeb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49d5cc2f-921f-44df-a758-556c856d4c08",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "204291a2-6f92-4626-b785-a7001a661ec9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "222af7c7-8418-4acd-b996-c119eeaf02af",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd152c7b-b853-4569-b852-2ad2a212c148",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c296dd4-a887-495b-b907-7f9dcbff7acb",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aca399b8-eeb5-462e-a9b0-9c91c2235192",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cef254e0-883a-43ae-a014-00f7902948f4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4b1ec8f-d882-4128-a691-1a6a93a777aa",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9b9865d-abea-4f31-9c3a-e426afe8e140",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competitors ID to return information for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad2478d9-556a-427a-8ccc-fa45cead87c7",
+          "name": "Delete existing existing competitor of any type - Team, Player, Double partnership etc",
+          "request": {
+            "name": "Delete existing existing competitor of any type - Team, Player, Double partnership etc",
+            "description": {},
+            "url": {
+              "path": [
+                "competitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6543c322-2b70-4d65-8ab5-bcf525de6951",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f20170b0-7023-4746-b287-95fcbf140378",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e33fb10-8d5b-4271-86a4-1b8ee35abad1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "057cfeac-4326-4e74-82fa-8a1f7e6c65f3",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b7143c9-8066-4c6c-b98a-a22cb08d97f0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a3a33a1-b790-42b9-b495-6519a5a0d25d",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "776a09f8-793d-445d-b48d-86775f0775c3",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4673,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://fixtures.api.geniussports.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "382e06fa-115f-4edd-b3c6-c57e64ed8007",
+    "name": "Fixtures-v2 Competitions Competitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header 'content-type: application/json'             --data '{'client_id':'4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7','client_secret':'client-secret','audience':'https://api.geniussports.com','grant_type':'client_credentials'}'        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        'access_token' property. At this point you are ready to get started!    </li>    <li>        <ul style='line-height:150%'>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href='https://en.wikipedia.org/wiki/HATEOAS'            target='_blank'>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>'sortBy' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>'filter' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this 'range' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style='line-height:130%'>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style='line-height:130%'>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for 'England Premier League'</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style='line-height:130%'>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul>\n\nContact Support:\n Email: sbonboarding@geniussports.com",
+      "type": "text/plain"
+    }
+  }
+}

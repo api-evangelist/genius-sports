@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions People API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List persons (players, officials, staff)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/persons",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List persons (players, officials, staff)"
+        },
+        {
+          "info": {
+            "name": "Get a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/persons/:personId",
+            "params": [
+              {
+                "name": "personId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a person"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

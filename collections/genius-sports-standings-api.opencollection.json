@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Standings API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/standings",
+            "params": [
+              {
+                "name": "competitionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List standings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

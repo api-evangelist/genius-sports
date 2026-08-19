@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Persons API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Persons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve persons by ID/s. MAX 200 per page. (Not available yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/persons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name)"
+              }
+            ]
+          },
+          "docs": "Returns persons wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/persons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new person"
+        },
+        {
+          "info": {
+            "name": "Update existing person",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/persons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update existing person"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /persons",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/persons"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve persons which were in the past or are currently coaches by ID/s. MAX 200 per page. (Not available yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/persons/coaches",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name)"
+              }
+            ]
+          },
+          "docs": "Returns persons wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /persons/coaches",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/persons/coaches"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve persons details by ID. (not available yet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/persons/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single person ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns persons details including sport specific details (metadata properties)"
+        },
+        {
+          "info": {
+            "name": "Delete existing person",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/persons/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete existing person"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /persons/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/persons/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "OPTIONS /persons/{id}/contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/persons/:id/contracts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve person's officials by person ID. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/persons/:id/officials",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single person ID to return officials for"
+              }
+            ]
+          },
+          "docs": "Returns person's officials wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /persons/{id}/officials",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/persons/:id/officials",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

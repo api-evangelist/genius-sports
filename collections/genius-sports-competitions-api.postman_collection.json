@@ -1,0 +1,4103 @@
+{
+  "item": [
+    {
+      "id": "89901586-2a46-4d4b-b839-f989da0704ba",
+      "name": "Competitions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92ae2c8b-19f0-461b-9cd8-65079f17d6dd",
+          "name": "/competitions",
+          "request": {
+            "name": "/competitions",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b08ee9bd-49f0-4e45-b4fd-9bcd300b738e",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33b70ee7-28b8-4c31-b006-fa3fd31eb2af",
+          "name": "Retrieve competition by ID/s. MAX 200 per page.",
+          "request": {
+            "name": "Retrieve competition by ID/s. MAX 200 per page.",
+            "description": {
+              "content": "Returns competitions wrapped inside a HATEOAS model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "competitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "The number of page to be returned. The default value is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<string>",
+                  "description": "The size of the page to be returned. The default value is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, sportId, genderType, localityId)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, sportId, genderType, localityId)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "50ea618c-3e07-4513-83b0-372e1e93ec37",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 6991,\n  \"pageSize\": 3201,\n  \"totalItems\": 554,\n  \"items\": [\n    {\n      \"createdOn\": \"1948-04-15T08:24:15.277Z\",\n      \"genderType\": \"string\",\n      \"id\": 6206,\n      \"locality\": {\n        \"id\": 3311,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"sport\": {\n        \"id\": 5301,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"timezone\": {\n        \"id\": 246,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"updatesCount\": 5186,\n      \"modifiedOn\": \"1949-03-21T08:21:54.793Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": true\n        }\n      ],\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 4995,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"ageCategory\": \"string\",\n      \"tier\": \"string\",\n      \"shortName\": \"string\",\n      \"longName\": \"string\",\n      \"sponsorName\": \"string\",\n      \"youth\": true,\n      \"isProtected\": true\n    },\n    {\n      \"createdOn\": \"1967-12-16T02:58:48.288Z\",\n      \"genderType\": \"string\",\n      \"id\": 7060,\n      \"locality\": {\n        \"id\": 5959,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"name\": \"string\",\n      \"sport\": {\n        \"id\": 3182,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"timezone\": {\n        \"id\": 7091,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"updatesCount\": 718,\n      \"modifiedOn\": \"1993-05-20T13:28:14.992Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        }\n      ],\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      },\n      \"organization\": {\n        \"id\": 7806,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"ageCategory\": \"string\",\n      \"tier\": \"string\",\n      \"shortName\": \"string\",\n      \"longName\": \"string\",\n      \"sponsorName\": \"string\",\n      \"youth\": false,\n      \"isProtected\": false\n    }\n  ],\n  \"self\": \"string\",\n  \"previous\": \"string\",\n  \"next\": \"string\",\n  \"first\": \"string\",\n  \"last\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5426287f-35d5-481c-80f6-31237c3a0b1b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d08b6a-9655-410d-b070-93eee2cd0382",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f909fc5-7f19-4ca3-afa9-d901292cf7eb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c90231d-7e35-46b4-b908-a75a4cd553ea",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46c7a255-28ff-4187-a7fb-bc0e9539141c",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b84457-1436-4c2e-816b-4ef6e3a82270",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19a115b8-2304-4d22-acb8-3a7414d864f8",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b92a358-8b1e-4c31-b6d7-2421d40bd38a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3745a7e-f633-4d55-9b12-e7b2a8cd7ab6",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cec4db75-e077-4ba9-97d4-6b94a3f25520",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c7bcc8b-2aac-42d6-9771-81b303aea335",
+          "name": "Create new competition",
+          "request": {
+            "name": "Create new competition",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4393d16e-e9a2-4383-b0ab-aeac39b1bff7",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1952-07-13T00:13:31.510Z\",\n  \"genderType\": \"string\",\n  \"id\": 7241,\n  \"locality\": {\n    \"id\": 6612,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"name\": \"string\",\n  \"sport\": {\n    \"id\": 5218,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"timezone\": {\n    \"id\": 8672,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"updatesCount\": 8736,\n  \"modifiedOn\": \"2007-12-19T12:14:02.980Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": false\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": 5169,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"shortName\": \"string\",\n  \"longName\": \"string\",\n  \"sponsorName\": \"string\",\n  \"youth\": true,\n  \"isProtected\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "596b7eea-76ed-4f92-89b5-e92ba258f9cc",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2896f243-52f3-4c89-9e99-acdae7797d83",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c79a1b3f-e0fa-4325-bbc0-d4d4877eadf7",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c91a9b50-c0d4-4f20-ad22-3862925dc4e8",
+              "name": "Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geniusSportsConflictId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fb2e3c2-eed1-4dab-a92f-94fc6653a2bb",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61476e53-e300-410b-a24f-f1f66a00c551",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d7745ac-2b19-4634-a9d7-50b5fd477ab1",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b67f45a-176f-4302-890e-d1c550e10b46",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"sportId\": \"<long>\",\n  \"organizationId\": \"<long>\",\n  \"genderType\": \"<integer>\",\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "989fc63b-15cf-4984-b1df-032f74625657",
+          "name": "Update existing competition",
+          "request": {
+            "name": "Update existing competition",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21e8428b-830d-4fa9-a13f-bd1358ec107b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1952-07-13T00:13:31.510Z\",\n  \"genderType\": \"string\",\n  \"id\": 7241,\n  \"locality\": {\n    \"id\": 6612,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"name\": \"string\",\n  \"sport\": {\n    \"id\": 5218,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"timezone\": {\n    \"id\": 8672,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"updatesCount\": 8736,\n  \"modifiedOn\": \"2007-12-19T12:14:02.980Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": false\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": 5169,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"shortName\": \"string\",\n  \"longName\": \"string\",\n  \"sponsorName\": \"string\",\n  \"youth\": true,\n  \"isProtected\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61dc9409-a995-45b4-89f1-345989c037bf",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52856676-e9db-4812-8272-8e9ca88b343b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55ac9dec-8552-4624-bc51-fce2d9a0f917",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9033df0-37ea-474a-aa04-36aecc486714",
+              "name": "Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geniusSportsConflictId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3cb5f92-6fd1-4190-971e-f7c50311272a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dc7d3c2-54b6-497a-915e-c0fe3c629f22",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52b7bf3c-26ca-4569-ac73-b33ba1f2881b",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"localityId\": \"<long>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<long>\",\n  \"timezone\": \"<string>\",\n  \"shortName\": \"<string>\",\n  \"longName\": \"<string>\",\n  \"sponsorName\": \"<string>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"youth\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dd50e09-e9cd-4253-9215-7d38a0739020",
+          "name": "Patch existing competition",
+          "request": {
+            "name": "Patch existing competition",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb824f53-a18a-4444-97cf-f948b3cfe71c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1952-07-13T00:13:31.510Z\",\n  \"genderType\": \"string\",\n  \"id\": 7241,\n  \"locality\": {\n    \"id\": 6612,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"name\": \"string\",\n  \"sport\": {\n    \"id\": 5218,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"timezone\": {\n    \"id\": 8672,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"updatesCount\": 8736,\n  \"modifiedOn\": \"2007-12-19T12:14:02.980Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": false\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": 5169,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"shortName\": \"string\",\n  \"longName\": \"string\",\n  \"sponsorName\": \"string\",\n  \"youth\": true,\n  \"isProtected\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2931fdc-6279-44a9-ae37-408ad6fcb831",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a6fccf2-519b-4f28-94e7-6c422d4453b2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c45511b5-09ab-4b2d-872c-ce31296cc5f0",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccc1b7cb-123d-4250-b168-f1fd12bb7cb6",
+              "name": "Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geniusSportsConflictId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc1dce6-e8c8-427e-b387-d972fc2d55c3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b440955e-c871-4129-9fd0-775c82c2ea94",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3391ea55-fdd1-45dc-981c-6547b5abb0d5",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a5f62cb-4c44-43be-a4e0-781f3bae8a64",
+          "name": "/competitions/:id",
+          "request": {
+            "name": "/competitions/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52644c63-37fb-43a4-be2f-0bf32902235c",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "709b6da7-df72-45da-8d07-308036e5fc21",
+          "name": "Retrieve competition details by ID.",
+          "request": {
+            "name": "Retrieve competition details by ID.",
+            "description": {
+              "content": "Returns competition details including sport specific details (metadata properties)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "competitions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Single competition ID to return details for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "30a2d513-eff4-4c9b-8978-b7bf8ffdca42",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1952-07-13T00:13:31.510Z\",\n  \"genderType\": \"string\",\n  \"id\": 7241,\n  \"locality\": {\n    \"id\": 6612,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"name\": \"string\",\n  \"sport\": {\n    \"id\": 5218,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"timezone\": {\n    \"id\": 8672,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"updatesCount\": 8736,\n  \"modifiedOn\": \"2007-12-19T12:14:02.980Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": false\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"organization\": {\n    \"id\": 5169,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"ageCategory\": \"<string>\",\n  \"tier\": \"<string>\",\n  \"shortName\": \"string\",\n  \"longName\": \"string\",\n  \"sponsorName\": \"string\",\n  \"youth\": true,\n  \"isProtected\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fef0240-87d4-4bda-806d-fd326dd0c058",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b60ac764-78e5-49d5-9a28-f68b5bdeec8a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b583960-5891-4ad3-8019-e881edde3d9e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eb38bdd-8915-4bd3-a308-6087d893f147",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "770f406d-7081-4933-b4d2-582acc05976a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9258cb2c-a1e1-46f6-8bbc-33b21b5f60bf",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "973f96d6-61da-4697-829d-e319b6365ed4",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e47b80-2595-4040-90da-6b19e55388c7",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "042e22e9-08d5-43c7-b16d-7364a93bd56c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01958099-a3ea-4be3-bf49-7cba23486626",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "750d4711-1b30-4fb0-949b-70e52cccbc43",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single competition ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79379154-c99c-4446-b874-5a872391a662",
+          "name": "Delete existing competition",
+          "request": {
+            "name": "Delete existing competition",
+            "description": {},
+            "url": {
+              "path": [
+                "competitions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "706ed0bd-1080-4e4e-85b8-700611b82c57",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2005c5e4-26c0-45a8-b34b-3fd86f2e5411",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "563f6ef6-04f4-4553-b520-3da3bb984393",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1d75a29-85d6-4c72-a438-1ab70adce91d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92e7f15a-1363-4f44-bbee-ffe452bc2084",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "810b7fa9-df8f-41ca-963a-da4de6ffdcf4",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b955f31-01e4-486d-ad22-757f3a38ac94",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "competitions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1601,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://fixtures.api.geniussports.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "59141600-ea17-4ffc-a0c0-49bb4443e540",
+    "name": "Fixtures-v2 Competitions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header 'content-type: application/json'             --data '{'client_id':'4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7','client_secret':'client-secret','audience':'https://api.geniussports.com','grant_type':'client_credentials'}'        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        'access_token' property. At this point you are ready to get started!    </li>    <li>        <ul style='line-height:150%'>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href='https://en.wikipedia.org/wiki/HATEOAS'            target='_blank'>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>'sortBy' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>'filter' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this 'range' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style='line-height:130%'>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style='line-height:130%'>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for 'England Premier League'</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style='line-height:130%'>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul>\n\nContact Support:\n Email: sbonboarding@geniussports.com",
+      "type": "text/plain"
+    }
+  }
+}

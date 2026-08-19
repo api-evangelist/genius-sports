@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Organization API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List leagues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/leagues",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "List leagues"
+        },
+        {
+          "info": {
+            "name": "Get a league",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/leagues/:leagueId",
+            "params": [
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a league"
+        },
+        {
+          "info": {
+            "name": "List competitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/competitions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List competitions"
+        },
+        {
+          "info": {
+            "name": "Get a competition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/competitions/:competitionId",
+            "params": [
+              {
+                "name": "competitionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a competition"
+        },
+        {
+          "info": {
+            "name": "List teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/teams",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Record limit (default 10, maximum 500)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Skip the first N records"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "List teams"
+        },
+        {
+          "info": {
+            "name": "Get a team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/teams/:teamId",
+            "params": [
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a team"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1868 @@
+{
+  "item": [
+    {
+      "id": "c1edac68-b2b0-4888-87f2-e61cc42369de",
+      "name": "Sports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64df02ab-598d-4d8e-b6b1-98c0b174e900",
+          "name": "/sports",
+          "request": {
+            "name": "/sports",
+            "description": {},
+            "url": {
+              "path": [
+                "sports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "373a7c61-4fcb-4871-89b5-7e2efef495e4",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99ba9f93-5a5e-4aba-bd98-d454960bcc9f",
+          "name": "Retrieve sports by ID/s. MAX 200 per page.",
+          "request": {
+            "name": "Retrieve sports by ID/s. MAX 200 per page.",
+            "description": {
+              "content": "Returns sports wrapped inside a HATEOAS model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "The number of page to be returned. The default value is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<string>",
+                  "description": "The size of the page to be returned. The default value is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "79cce919-2cfc-4332-92d8-8f7a4ac8bac1",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 6657,\n  \"pageSize\": 9700,\n  \"totalItems\": 4556,\n  \"items\": [\n    {\n      \"allowsDoubles\": false,\n      \"allowsPlayers\": false,\n      \"createdOn\": \"2021-03-05T05:22:15.486Z\",\n      \"id\": 6289,\n      \"name\": \"string\",\n      \"updatesCount\": 6101,\n      \"maxNumberOfCompetitorsInFixture\": 8701,\n      \"modifiedOn\": \"2016-06-28T11:37:15.317Z\"\n    },\n    {\n      \"allowsDoubles\": false,\n      \"allowsPlayers\": true,\n      \"createdOn\": \"1988-05-06T04:18:34.345Z\",\n      \"id\": 9429,\n      \"name\": \"string\",\n      \"updatesCount\": 9035,\n      \"maxNumberOfCompetitorsInFixture\": 2591,\n      \"modifiedOn\": \"1953-10-06T04:41:17.602Z\"\n    }\n  ],\n  \"self\": \"string\",\n  \"previous\": \"string\",\n  \"next\": \"string\",\n  \"first\": \"string\",\n  \"last\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5565ae4c-3b71-452d-8484-38ffaaf9741a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7a07eb1-fb06-4775-be03-7744f635e411",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f391f5e-68f4-4415-9fbd-225031f4aafb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2d336f6-c337-45fb-a483-3ee074960d6d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75664970-93d9-4a37-84ec-ba29013a52c2",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d05026a-8973-4bf0-a5a1-7081a348e69a",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb23047c-bd28-4777-962d-ac71f03f8d15",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00a20c47-c343-484a-a869-e82047b2d50f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8369c044-982b-4bad-a94c-7c1592413b32",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aad5fdec-a409-478f-a89a-337ac73a56bf",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee959189-0809-4362-9855-3caee752ab55",
+          "name": "/sports/:id/:entityType/metadata",
+          "request": {
+            "name": "/sports/:id/:entityType/metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "sports",
+                ":id",
+                ":entityType",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityType",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5175681d-3d0f-4a53-868e-94fa65856646",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bcdbf42-d4e3-41d4-ac26-e30dc901158b",
+          "name": "Retrieve allowed properties per entity type name and per sport.",
+          "request": {
+            "name": "Retrieve allowed properties per entity type name and per sport.",
+            "description": {
+              "content": "Retrieve allowed properties per entity type name and per sport.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sports",
+                ":id",
+                ":entityType",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityType",
+                  "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The sport for which the allowed properties will be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e52b4e79-99f3-4f7e-aaaa-84640a1bec1a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"allowNonPredefinedValues\": true,\n    \"id\": 1331,\n    \"isRequired\": false,\n    \"name\": \"string\",\n    \"values\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"allowNonPredefinedValues\": true,\n    \"id\": 4466,\n    \"isRequired\": false,\n    \"name\": \"string\",\n    \"values\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd79de4d-f81b-4cd5-9aef-c8f6750c65fb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a86095d1-08c4-4125-8544-e3a57e4b9a24",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72fa6ba1-bb8f-419f-a2a6-506929263734",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39f641c8-4690-4904-8e76-e39f1e11b72b",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6aa7b30d-2d1b-4c78-9832-c63a8a91c211",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c556706a-9dc4-418e-ab84-a47c73d64c3d",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b70bae93-df98-4753-88ec-224bf92b3d8c",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04fab5fb-24d3-4301-a30e-bc44aad40f19",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a648532-4dad-4473-ba2c-f3acc7c687c5",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac605cd9-abb5-4008-bcb1-5e73112a1e80",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sports",
+                    ":id",
+                    ":entityType",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityType",
+                      "description": "(Required) Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The sport for which the allowed properties will be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 130,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://fixtures.api.geniussports.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e3cb8fa3-bfe0-4ff6-ae47-de958be17cee",
+    "name": "Fixtures-v2 Competitions Sports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header 'content-type: application/json'             --data '{'client_id':'4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7','client_secret':'client-secret','audience':'https://api.geniussports.com','grant_type':'client_credentials'}'        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        'access_token' property. At this point you are ready to get started!    </li>    <li>        <ul style='line-height:150%'>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href='https://en.wikipedia.org/wiki/HATEOAS'            target='_blank'>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>'sortBy' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>'filter' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this 'range' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style='line-height:130%'>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style='line-height:130%'>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for 'England Premier League'</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style='line-height:130%'>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul>\n\nContact Support:\n Email: sbonboarding@geniussports.com",
+      "type": "text/plain"
+    }
+  }
+}

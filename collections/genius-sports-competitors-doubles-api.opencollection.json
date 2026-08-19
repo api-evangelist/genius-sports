@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions competitors/doubles API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "competitors/doubles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve competitors (doubles) by ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+              }
+            ]
+          },
+          "docs": "Returns competitors (doubles) wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Create new double partnership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/competitors/doubles",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create new double partnership"
+        },
+        {
+          "info": {
+            "name": "Update existing double partnership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/competitors/doubles",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "gs-fixtures-api-sub-source",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update existing double partnership"
+        },
+        {
+          "info": {
+            "name": "Retrieve competitors (doubles) details by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (doubles) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns competitors (doubles) details including sport specific details (metadata properties)"
+        },
+        {
+          "info": {
+            "name": "Retrieve rounds in which the Doubles Partnership will take part by Team ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles/:id/rounds",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (doubles) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the rounds in which the doubles partnership will take part by GSS Doubles Partnership Id in the path, wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Retrieve seasons in which the Doubles Partnership will take part by Team ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/doubles/:id/seasons",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, isactive (default = true))"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (doubles) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns the seasons in which the Doubles Partnership will take part by GSS Doubles Partnership Id in the path, wrapped inside a HATEOAS model"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,3596 @@
+{
+  "item": [
+    {
+      "id": "892d5dbc-720a-4a6d-a257-483f34036f1f",
+      "name": "Venues",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54e235aa-36f6-416d-a803-b77f9e686e9f",
+          "name": "/venues",
+          "request": {
+            "name": "/venues",
+            "description": {},
+            "url": {
+              "path": [
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c70c8f8a-d029-4761-abef-4945c1865a3f",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd48699e-1a91-4449-b8e4-add443deac53",
+          "name": "Retrieve venues by ID/s. MAX 200 per page.",
+          "request": {
+            "name": "Retrieve venues by ID/s. MAX 200 per page.",
+            "description": {
+              "content": "Returns venues wrapped inside a HATEOAS model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "The number of page to be returned. The default value is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<string>",
+                  "description": "The size of the page to be returned. The default value is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9904af15-c9ce-46df-b2a7-c4e18ea5786e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": 6266,\n  \"pageSize\": 9674,\n  \"totalItems\": 1124,\n  \"items\": [\n    {\n      \"createdOn\": \"1987-11-01T10:51:20.269Z\",\n      \"id\": 3358,\n      \"latitude\": 6564.8149774011545,\n      \"longitude\": 5182.021131713734,\n      \"name\": \"string\",\n      \"updatesCount\": 7386,\n      \"modifiedOn\": \"1947-01-09T17:14:46.968Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": true\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        }\n      ],\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      },\n      \"locality\": {\n        \"id\": 6367,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"capacity\": 5133,\n      \"cityName\": \"string\",\n      \"sports\": [\n        {\n          \"id\": 3315,\n          \"name\": \"string\",\n          \"ref\": \"string\",\n          \"externalIds\": {\n            \"optaId\": \"string\",\n            \"optaLegacyId\": \"string\",\n            \"fibaId\": \"string\",\n            \"vesselId\": \"string\",\n            \"statsEngineId\": \"string\"\n          }\n        },\n        {\n          \"id\": 4432,\n          \"name\": \"string\",\n          \"ref\": \"string\",\n          \"externalIds\": {\n            \"optaId\": \"string\",\n            \"optaLegacyId\": \"string\",\n            \"fibaId\": \"string\",\n            \"vesselId\": \"string\",\n            \"statsEngineId\": \"string\"\n          }\n        }\n      ],\n      \"parentVenue\": {\n        \"id\": 6909,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      }\n    },\n    {\n      \"createdOn\": \"1948-09-03T16:36:40.838Z\",\n      \"id\": 9548,\n      \"latitude\": 4229.821240693471,\n      \"longitude\": 5602.001759784321,\n      \"name\": \"string\",\n      \"updatesCount\": 7665,\n      \"modifiedOn\": \"2002-08-25T12:59:01.886Z\",\n      \"metadataProperties\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"isDeleted\": false\n        }\n      ],\n      \"externalIds\": {\n        \"optaId\": \"string\",\n        \"optaLegacyId\": \"string\",\n        \"fibaId\": \"string\",\n        \"vesselId\": \"string\",\n        \"statsEngineId\": \"string\"\n      },\n      \"locality\": {\n        \"id\": 7300,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      },\n      \"capacity\": 1492,\n      \"cityName\": \"string\",\n      \"sports\": [\n        {\n          \"id\": 2645,\n          \"name\": \"string\",\n          \"ref\": \"string\",\n          \"externalIds\": {\n            \"optaId\": \"string\",\n            \"optaLegacyId\": \"string\",\n            \"fibaId\": \"string\",\n            \"vesselId\": \"string\",\n            \"statsEngineId\": \"string\"\n          }\n        },\n        {\n          \"id\": 3873,\n          \"name\": \"string\",\n          \"ref\": \"string\",\n          \"externalIds\": {\n            \"optaId\": \"string\",\n            \"optaLegacyId\": \"string\",\n            \"fibaId\": \"string\",\n            \"vesselId\": \"string\",\n            \"statsEngineId\": \"string\"\n          }\n        }\n      ],\n      \"parentVenue\": {\n        \"id\": 4512,\n        \"name\": \"string\",\n        \"ref\": \"string\",\n        \"externalIds\": {\n          \"optaId\": \"string\",\n          \"optaLegacyId\": \"string\",\n          \"fibaId\": \"string\",\n          \"vesselId\": \"string\",\n          \"statsEngineId\": \"string\"\n        }\n      }\n    }\n  ],\n  \"self\": \"string\",\n  \"previous\": \"string\",\n  \"next\": \"string\",\n  \"first\": \"string\",\n  \"last\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "009101f9-03e2-4c47-abec-5c9f5b1bb141",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52a8ebea-9c3b-48b6-807a-4c4872e9d05b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e3e5c52-5f96-4ad5-9fab-6453dc926f12",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e83b300-646f-418a-bc92-707652281f75",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a2ecd83-b97c-46de-94f4-edbbd5204822",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d8249f9-3a0c-4348-a42a-1a4f162a48f8",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f611fc23-38e3-492b-b84b-3bdf3046344c",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f15da94-9b4a-48df-b48a-524f4ffd83a9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d4b0058-778e-49e0-881d-56e1f591f796",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0b25c42-6216-4ed0-bbd5-fa0cba5669a1",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "650f6fde-fa6e-4e39-adf7-5dd525f7b28e",
+          "name": "Create new venue",
+          "request": {
+            "name": "Create new venue",
+            "description": {},
+            "url": {
+              "path": [
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d78e0bab-7fe9-4bb2-9d80-22270fb1ff4c",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1986-01-13T09:30:09.445Z\",\n  \"id\": 908,\n  \"latitude\": 4002.184557004572,\n  \"longitude\": 5695.633938993041,\n  \"name\": \"string\",\n  \"updatesCount\": 9982,\n  \"modifiedOn\": \"1956-08-15T15:53:38.625Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"locality\": {\n    \"id\": 3764,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"capacity\": 6186,\n  \"cityName\": \"string\",\n  \"sports\": [\n    {\n      \"id\": 6267,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": 2477,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    }\n  ],\n  \"parentVenue\": {\n    \"id\": 1936,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c28bc0d6-a728-4a5a-a432-89e7f3646b9e",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8f04d66-9f4d-4c71-8a5c-4f089c5dac2f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0301fddb-020c-4ca9-b1b7-5fbc0ba0b086",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08dcc6fe-a2b4-4916-813a-f44bff8d5dbd",
+              "name": "Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geniusSportsConflictId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebbca2fd-5e46-4fc5-8f66-3b83fd553e90",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd98676b-1638-4f46-b00a-d4f3e53c81e6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49576473-166d-439e-83de-16b5c0ba7d05",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0727e627-e5c6-4216-a950-fb8c4be8a432",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"cityName\": \"<string>\",\n  \"longitude\": \"<double>\",\n  \"latitude\": \"<double>\",\n  \"localityId\": \"<long>\",\n  \"parentVenueId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "962818e0-9bb8-4116-8518-2d42cdb0bea0",
+          "name": "Update existing venue",
+          "request": {
+            "name": "Update existing venue",
+            "description": {},
+            "url": {
+              "path": [
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af0c2a00-4cae-4880-9677-7af5ba44e4cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1986-01-13T09:30:09.445Z\",\n  \"id\": 908,\n  \"latitude\": 4002.184557004572,\n  \"longitude\": 5695.633938993041,\n  \"name\": \"string\",\n  \"updatesCount\": 9982,\n  \"modifiedOn\": \"1956-08-15T15:53:38.625Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"locality\": {\n    \"id\": 3764,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"capacity\": 6186,\n  \"cityName\": \"string\",\n  \"sports\": [\n    {\n      \"id\": 6267,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": 2477,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    }\n  ],\n  \"parentVenue\": {\n    \"id\": 1936,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a17c75c0-f8f6-4837-a98c-732e5a172215",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46b76670-359a-4f56-8756-7891d8223dfc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da24dacd-e365-405b-a7d4-20f5e846c609",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5b300e6-7e1a-42cc-8746-55e118a99f48",
+              "name": "Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ],\n  \"geniusSportsConflictId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e165538b-e675-4bcb-a3ba-274e2775224e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f44594d-0cb4-4f2a-b3e6-9b7f62e0ef55",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec5f057a-1888-4897-8ce3-d9e54a735210",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"sports\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"id\": \"<long>\",\n  \"cityName\": \"<string>\",\n  \"localityId\": \"<long>\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c9c032d-f0aa-4253-995e-7b0f3aa178bf",
+          "name": "/venues/:id",
+          "request": {
+            "name": "/venues/:id",
+            "description": {},
+            "url": {
+              "path": [
+                "venues",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "OPTIONS",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da0246b7-dbd7-4c79-aac7-0e739f86e879",
+              "name": "200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "OPTIONS",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Methods",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Headers",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d3eab3d-6e35-495d-b397-60eab6f365cf",
+          "name": "Retrieve venues details by ID.",
+          "request": {
+            "name": "Retrieve venues details by ID.",
+            "description": {
+              "content": "Returns venues details including sport specific details (metadata properties)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "venues",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Single venues ID to return details for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e55eec6e-fd1c-4845-8f5a-50b177205cd4",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdOn\": \"1986-01-13T09:30:09.445Z\",\n  \"id\": 908,\n  \"latitude\": 4002.184557004572,\n  \"longitude\": 5695.633938993041,\n  \"name\": \"string\",\n  \"updatesCount\": 9982,\n  \"modifiedOn\": \"1956-08-15T15:53:38.625Z\",\n  \"metadataProperties\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    },\n    {\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"isDeleted\": true\n    }\n  ],\n  \"externalIds\": {\n    \"optaId\": \"<string>\",\n    \"optaLegacyId\": \"<string>\",\n    \"fibaId\": \"<string>\",\n    \"vesselId\": \"<string>\",\n    \"statsEngineId\": \"<string>\"\n  },\n  \"locality\": {\n    \"id\": 3764,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  },\n  \"capacity\": 6186,\n  \"cityName\": \"string\",\n  \"sports\": [\n    {\n      \"id\": 6267,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": 2477,\n      \"name\": \"string\",\n      \"ref\": \"string\",\n      \"externalIds\": {\n        \"optaId\": \"<string>\",\n        \"optaLegacyId\": \"<string>\",\n        \"fibaId\": \"<string>\",\n        \"vesselId\": \"<string>\",\n        \"statsEngineId\": \"<string>\"\n      }\n    }\n  ],\n  \"parentVenue\": {\n    \"id\": 1936,\n    \"name\": \"string\",\n    \"ref\": \"string\",\n    \"externalIds\": {\n      \"optaId\": \"<string>\",\n      \"optaLegacyId\": \"<string>\",\n      \"fibaId\": \"<string>\",\n      \"vesselId\": \"<string>\",\n      \"statsEngineId\": \"<string>\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f3ab4fe-758a-4e0a-a61a-92381724c562",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52907ffb-ba41-491d-b001-265659d3f7c8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8f5def7-16d9-4e57-a215-c654bd6c7359",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e12a985-cb20-4636-8210-ef4fa3d81ed5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c42c73cd-cc1d-452b-82bc-8fd4d0ca7e66",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa038e7b-c0be-4678-9a0b-ce3634e4253e",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2d54c7a-7b08-4857-8705-1e413caf6ba7",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ad2e740-80fe-433e-9514-53da50001ed5",
+              "name": "Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a26a0423-dbcd-4ed2-8ff2-e551531f31f6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13fe3ecf-0d32-439a-adce-34ca387af407",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53889bf4-e7f9-4189-bad9-9940ae7e7181",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Single venues ID to return details for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9383e79-57bd-4ea1-8dcc-844949f36194",
+          "name": "Delete existing venue",
+          "request": {
+            "name": "Delete existing venue",
+            "description": {},
+            "url": {
+              "path": [
+                "venues",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Sub Source Name",
+                "key": "gs-fixtures-api-sub-source",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8c9bcd91-9b08-466c-8a35-73fbb0b425bf",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40820d45-1eb1-45cc-999c-463148d8c45e",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d0efad2-e953-4d21-b252-80e166dfe771",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba0d7327-776b-48d7-a3cb-1abba7752a8a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70da4cc0-b01d-4934-9e8c-e7d228651075",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c90fdb06-0eaa-44ca-9af2-ba02392606bb",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eb062d0-906c-4c34-a22e-c7faa2879b74",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "venues",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Sub Source Name",
+                    "key": "gs-fixtures-api-sub-source",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 520,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8081,\n  \"message\": \"string\",\n  \"error\": {\n    \"domain\": \"string\",\n    \"message\": \"string\",\n    \"reason\": \"string\",\n    \"locationType\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0d561f5-31c1-434c-9b8a-253189c6cabc",
+          "name": "List venues",
+          "request": {
+            "name": "List venues",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "venues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34bfb0c8-79e2-4abd-9564-844b5edfe699",
+              "name": "Venues envelope",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "venues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://fixtures.api.geniussports.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1b16980e-d613-4ac6-be08-fcd6220e9a75",
+    "name": "Fixtures-v2 Competitions Venues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header 'content-type: application/json'             --data '{'client_id':'4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7','client_secret':'client-secret','audience':'https://api.geniussports.com','grant_type':'client_credentials'}'        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        'access_token' property. At this point you are ready to get started!    </li>    <li>        <ul style='line-height:150%'>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href='https://en.wikipedia.org/wiki/HATEOAS'            target='_blank'>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>'sortBy' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>'filter' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this 'range' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style='line-height:130%'>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style='line-height:130%'>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for 'England Premier League'</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style='line-height:130%'>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H 'Content-Type: application/json' -H 'x-api-key: YOUR_API_KEY' -H 'Authorization: Bearer YOUR_ID_TOKEN'</code>    </li></ul>\n\nContact Support:\n Email: sbonboarding@geniussports.com",
+      "type": "text/plain"
+    }
+  }
+}

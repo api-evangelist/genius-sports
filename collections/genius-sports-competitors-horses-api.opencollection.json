@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions competitors/horses API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "competitors/horses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve competitors (horses) by ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/horses",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name, sportId, genderType, localityId, venueId, competitorStatusType)"
+              }
+            ]
+          },
+          "docs": "Returns competitors (horses) wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "Retrieve competitors (horses) details by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/competitors/horses/:id",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Single competitors (horses) ID to return details for"
+              }
+            ]
+          },
+          "docs": "Returns competitors (horses) details including sport specific details (metadata properties)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fixtures-v2 Competitions Sports API",
+    "version": "2.0.280"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve sports by ID/s. MAX 200 per page.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sports",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The number of page to be returned. The default value is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The size of the page to be returned. The default value is 10."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'order by' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, name)"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The field to 'filter' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, name)"
+              }
+            ]
+          },
+          "docs": "Returns sports wrapped inside a HATEOAS model"
+        },
+        {
+          "info": {
+            "name": "OPTIONS /sports",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/sports"
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieve allowed properties per entity type name and per sport.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/sports/:id/:entityType/metadata",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "path",
+                "description": "Entity type is the name of the entity for which the allowed properties will be retrieved. Entity types: competition, competitor, contract, fixture, round, season, venue, fixtureperson, player, team"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The sport for which the allowed properties will be retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieve allowed properties per entity type name and per sport."
+        },
+        {
+          "info": {
+            "name": "OPTIONS /sports/{id}/{entityType}/metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "OPTIONS",
+            "url": "{{baseUrl}}/sports/:id/:entityType/metadata",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
