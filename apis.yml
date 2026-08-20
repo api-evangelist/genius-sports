@@ -262,6 +262,8 @@ apis:
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -352,6 +354,8 @@ apis:
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
