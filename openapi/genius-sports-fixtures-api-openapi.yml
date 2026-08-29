@@ -1,38 +1,37 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   description: 'This is Genius Sports Services Fixture API.<h3>Changelog resume</h3><ul>    <li>2.0.261 - Ability to filter by WELL-KNOWN external system identifiers        e.g optaId, vesselId, fibaId, etc.</li>    <li>2.0.196 - Added the ability to retrieve deleted fixtures</li>    <li>2.0.193 - Expose outright fixtures with an extra query param        (eventTypes) on GET and (eventType) on GetById for fixtures.</li>    <li>2.0.107 - Made fixtures round optional for POST and PUT.</li></ul><h3>Authentication</h3><p>You need to provide two tokens in every API call. The access_token for Auth0    client AND your API key</p><ul>    <li>        In order to get Auth0 client and API-KEY contact the SBOT team.    </li>    <li>Once you have the client you can make a request to Auth0 to get a token        by:        <code> curl --request POST             --url https://{env or nothing for prod}.auth.geniussports.com/oauth/token             --header ''content-type: application/json''             --data ''{''client_id'':''4Ew9c8DX58O1i0zsrTW9DlLSlDg9Rrt7'',''client_secret'':''client-secret'',''audience'':''https://api.geniussports.com'',''grant_type'':''client_credentials''}''        </code>    </li>    <li>        Once you the get the response you would need to take the value from the        ''access_token'' property. At this point you are ready to get started!    </li>    <li>        <ul style=''line-height:150%''>            <li>                Use the sports/10 call to retrieve Football (sport ID = 10)                <ul>                    <li><code>curl https://{env or nothing for prod}fixtures.api.geniussports.com/v2/sports?filter=id[equals]:10 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ACCESS_TOKEN''</code>                    </li>                </ul>            </li>        </ul>    </li></ul><h3>    What is new in Fixtures API v2.</h3><ul>    <li>Consistent pagination with up to 200 items per page</li>    <li>Consistent response using <a            href=''https://en.wikipedia.org/wiki/HATEOAS''            target=''_blank''>HATEOAS</a> model wrapper (when listing items)</li>    </li>    <li>Sorting by specific field(s) (see each endpoint details for fore info,        about which fields you can sort by)        <ul>            <li>in order to sort just pass <strong>''sortBy'' query                    param</strong>,                example: <strong>sortBy=id</strong> </li>            <li>then by sorting, example: <strong> sortBy=id,name</strong></li>            <li>sort by descending: example: <strong>                    sortBy=id:desc,name</strong></li>        </ul>    </li>    <li>Powerful filter by specific field (see each endpoint details for fore        info, about        which fields you can filter by)        <ul>            <li>in order to filter just pass <strong>''filter'' query                    param</strong>,                example: <strong>filter=id[equals]:1</strong> </li>            <li>multiple IDs filtering, example: <strong>                    filter=id[in]:1,2,3</strong></li>            <li>Filter stacking (separate them with <strong>~</strong>),                example: <strong>                    filter=id[in]:1,2,3~sportId[in]:1,2,3,4,5</strong></li>            <li>different filter comparators: equals, in, gte,                lte, contains, startsWith, notequals, nin: <strong>                    <ul>                        <li>filter=id[equals]:1 - Equals comparator works with                            all data type</li>                        <li>filter=id[notequals]:1 - Not Equals comparator works                            with all data type</li>                        <li>filter=id[in]:1,2,3 - In comparator works only with                            integer and decimal values</li>                        <li>filter=id[nin]:1,2,3 - NIN comparator works only                            with integer and decimal values</li>                        <li>filter=startDate[gte]:2021-07-28~startDate[lte]:2021-07-29                            - duplications of filter property allowed only in                            this ''range'' case</li>                        <li>filter=name[contains]:test</li>                        <li>filter=name[startsWith]:test</li>                        <li>filter=cityName[equals]:null</li>                        <li>filter=cityName[notequals]:null</li>                    </ul>                </strong>            </li>            <li>Filter by external id. Filter works only the Fixtures system has                external provider and have explicitly allowed persisting                external ids fir tat source.                example: <strong>                    filter=externalIds.optaId[equals]:12345</strong></li>        </ul>    </li>    <li>Imporoved and consistent structure of the API endpoints        <ul>            <li>Each endpoint (which needs) from the hierarchy has exactly 2                endpoints:</li>            <ul>                <li>One for listing multiple items - the filtering sorting are                    implemented by query params</li>                <li>One for single item by id</li>            </ul>        </ul>    </li>    <li>No deleted fixtures by default</li>    <li>Does not use SpoCoSy database (Party), but the Proposal API database        (therefore there is <strong> Eventual consistency</strong>, and not        everything is        available right away)</li></ul><h3>Fixture Tree Structure</h3><ul style=''line-height:130%''>    <li>organisations</li>    <li>venue</li>    <li>locality</li>    <li>sports</li>    <ul>        <li>competitions</li>        <ul>            <li>seasons</li>            <ul>                <li>rounds (competitionPhase)</li>                <ul>                    <li>fixture</li>                    <ul>                        <li>fixturecompetitors</li>                        <ul>                            <li>competitor (team, player, doubles, horse, etc)                            </li>                        </ul>                    </ul>                </ul>            </ul>        </ul>    </ul></ul><h3>Examples</h3><h4>I am interested in round 2 fixtures for the English Premier League</h4><ul style=''line-height:130%''>    <li>Use sports call to retrieve the relevant sport ID - in this case ID 10        for Football</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/sports -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use competitions call to see competitions for your sport - in this case        ID 36 for ''England Premier League''</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitions?filter=sportId[equals]:10~name[contains]:Premier -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use seasons call to see seasons for your competition - in this case you        will see the 2017/2018 season as ID        64525</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons?filter=competitionId[equals]:36 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use rounds call to see rounds for your season - Find Round 2 with ID        338088</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/rounds?filter=seasonId[equals]:64525 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Use fixtures call to get all fixtures we have for Round 2</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/fixtures?filter=roundId[equals]:338088 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li></ul><br><h4>I am interested in Arsenal and their players</h4><ul style=''line-height:130%''>    <li>You can re-use the 2017/2018 EPL season ID from the example above, ID        64525 to get Season Details</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/seasons/64525 - ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li>    <li>Find Arsenal in the response with competitor ID 10025 and use this ID to        get all Arsenal contracts</li>    <li><code>curl https://ci.fixtures.api.geniussports.com/v2/competitors/teams/10025 -H ''Content-Type: application/json'' -H ''x-api-key: YOUR_API_KEY'' -H ''Authorization: Bearer YOUR_ID_TOKEN''</code>    </li></ul>'
   version: 2.0.280
-  title: v2 Competitions Fixtures API
+  title: v2 Fixtures API
   contact:
     email: sbonboarding@geniussports.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: fixtures.api.geniussports.com
-basePath: /v2
-schemes:
-- https
+servers:
+- url: https://fixtures.api.geniussports.com/v2
 tags:
 - name: Fixtures
 paths:
   /fixtures:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     get:
@@ -40,104 +39,135 @@ paths:
       - Fixtures
       summary: Retrieve fixtures by ID/s. MAX 200 per page.
       description: Returns fixtures wrapped inside a HATEOAS model
-      produces:
-      - application/json
       parameters:
       - name: pageSize
         in: query
         description: The size of the page to be returned. The default value is 10.
         required: false
-        type: string
+        schema:
+          type: string
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: deleted
         in: query
         description: 'This field specifies whether to include deleted, not deleted, or both. Possible values: False, True, or All.'
         required: false
-        type: string
+        schema:
+          type: string
       - name: eventTypes
         in: query
         description: This field specifies the event type to be returned (Match, SeasonOutright, PartialOutright, AggregateEvent). By default, if not provided, 'Match' is returned. Multiple types can be combined in a single request, separated by commas.
         required: false
-        type: string
+        schema:
+          type: string
       - name: withCompetitors
         in: query
         description: This field specifies whether when set to true to return fixtures without any TBD competitors or false for all fixtures
         required: false
-        type: string
+        schema:
+          type: string
       - name: page
         in: query
         description: The number of page to be returned. The default value is 1.
         required: false
-        type: string
+        schema:
+          type: string
       - name: sortBy
         in: query
         description: 'The field to ''order by'' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)'
         required: false
-        type: string
+        schema:
+          type: string
       - name: filter
         in: query
         description: 'The field to ''filter'' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)'
         required: false
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            $ref: '#/definitions/FixtureResponseModelHATEOASReponseModel'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureResponseModelHATEOASReponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '301':
           description: redirect operation
           headers:
             x-gs-attr-oldnewentityidssmap:
-              type: string
               description: 'oldId=newId separated by semicolon '';'' e.g.: 1=2;3=4;...'
+              schema:
+                type: string
             Location:
-              type: string
+              schema:
+                type: string
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '401':
           description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '413':
           description: Payload Too Large
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '415':
           description: Unsupported Media Type
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
@@ -145,213 +175,264 @@ paths:
       tags:
       - Fixtures
       summary: Create new fixture
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
-      - in: body
-        name: CreateFixture
-        required: true
         schema:
-          $ref: '#/definitions/CreateFixture'
+          type: string
       responses:
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '201':
           description: Created
-          schema:
-            $ref: '#/definitions/FixtureResponseModel'
           headers:
             gs-duplicate-entity-replaced:
-              type: string
               description: Returned when a duplicate entity has been replaced. Value is the 'duplicateEntityId' and the 'originalEntityId'
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureResponseModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '409':
           description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
-          schema:
-            $ref: '#/definitions/ErrorDuplicateModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDuplicateModel'
       security:
       - Auth0: []
       - api_key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFixture'
+        required: true
     put:
       tags:
       - Fixtures
       summary: Update existing fixture
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
-      - in: body
-        name: UpdateFixture
-        required: true
         schema:
-          $ref: '#/definitions/UpdateFixture'
+          type: string
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/FixtureResponseModel'
           headers:
             gs-duplicate-entity-replaced:
-              type: string
               description: Returned when a duplicate entity has been replaced. Value is the 'duplicateEntityId' and the 'originalEntityId'
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureResponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '409':
           description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
-          schema:
-            $ref: '#/definitions/ErrorDuplicateModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDuplicateModel'
       security:
       - Auth0: []
       - api_key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFixture'
+        required: true
     patch:
       tags:
       - Fixtures
       summary: Patch existing fixture
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
-      - in: body
-        name: PatchFixture
-        required: true
         schema:
-          $ref: '#/definitions/PatchFixture'
+          type: string
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/FixtureResponseModel'
           headers:
             gs-duplicate-entity-replaced:
-              type: string
               description: Returned when a duplicate entity has been replaced. Value is the 'duplicateEntityId' and the 'originalEntityId'
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureResponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '409':
           description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
-          schema:
-            $ref: '#/definitions/ErrorDuplicateModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDuplicateModel'
       security:
       - Auth0: []
       - api_key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchFixture'
+        required: true
   /fixtures/refdata:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     get:
@@ -359,115 +440,145 @@ paths:
       - Fixtures
       summary: Retrieve fixtures refdata by filter. MAX 200 per page.
       description: Returns fixtures refdata wrapped inside a HATEOAS model
-      produces:
-      - application/json
       parameters:
       - name: page
         in: query
         description: The number of page to be returned. The default value is 1.
         required: false
-        type: string
+        schema:
+          type: string
       - name: pageSize
         in: query
         description: The size of the page to be returned. The default value is 10.
         required: false
-        type: string
+        schema:
+          type: string
       - name: sortBy
         in: query
         description: 'The field to ''order by'' by. Descending ordering also allowed. Fields to order by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)'
         required: false
-        type: string
+        schema:
+          type: string
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: filter
         in: query
         description: 'The field to ''filter'' by. Check main description for filter comparators. Fields to filter by for this endpoint: (id, roundId, seasonId, competitionId, sportId, eventStatusType, localityId, timezoneId, venueId, startDate)'
         required: false
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            $ref: '#/definitions/FixtureRefdataResponseModelHATEOASReponseModel'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureRefdataResponseModelHATEOASReponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '301':
           description: redirect operation
           headers:
             x-gs-attr-oldnewentityidssmap:
-              type: string
               description: 'oldId=newId separated by semicolon '';'' e.g.: 1=2;3=4;...'
+              schema:
+                type: string
             Location:
-              type: string
+              schema:
+                type: string
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '401':
           description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '413':
           description: Payload Too Large
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '415':
           description: Unsupported Media Type
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
   /fixtures/{id}:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     get:
@@ -475,85 +586,113 @@ paths:
       - Fixtures
       summary: Retrieve fixtures details by ID.
       description: Returns fixtures details including sport specific details (metadata properties)
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: deleted
         in: query
         description: 'This field specifies whether to include deleted, not deleted, or both. Possible values: False, True, or All.'
         required: false
-        type: string
+        schema:
+          type: string
       - name: eventType
         in: query
         description: The field specifies the type of event to return (Match, SeasonOutright, PartialOutright, AggregateEvent). If not provided, the search defaults to fixtures of type 'Match'.
         required: false
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         description: Single fixtures ID to return details for
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            $ref: '#/definitions/FixtureResponseModel'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureResponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '301':
           description: redirect operation
           headers:
             Location:
-              type: string
+              schema:
+                type: string
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '401':
           description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '413':
           description: Payload Too Large
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '415':
           description: Unsupported Media Type
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
@@ -561,100 +700,117 @@ paths:
       tags:
       - Fixtures
       summary: Delete existing fixture
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: Success
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
   /fixtures/{id}/contracts:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
   /fixtures/{id}/lineups:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     get:
@@ -662,97 +818,123 @@ paths:
       - Fixtures
       summary: 'Retrieve whole fixture''s lineups by fixture ID for both teams '
       description: Lineup availability may vary depending on the sport and specific fixture. In certain sports, lineups are provided only for selected competitions only. When lineup data is not available, the API will return an empty response.
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         description: Single fixture ID to return lineups for
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            $ref: '#/definitions/FixtureLineupsResponseModel'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureLineupsResponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '301':
           description: redirect operation
           headers:
             Location:
-              type: string
+              schema:
+                type: string
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '401':
           description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '413':
           description: Payload Too Large
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '415':
           description: Unsupported Media Type
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
   /fixtures/{id}/officials:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     get:
@@ -760,91 +942,119 @@ paths:
       - Fixtures
       summary: Retrieve fixture's officials by fixture ID. MAX 200 per page.
       description: Returns fixture's officials wrapped inside a HATEOAS model
-      produces:
-      - application/json
       parameters:
       - name: page
         in: query
         description: The number of page to be returned. The default value is 1.
         required: false
-        type: string
+        schema:
+          type: string
       - name: pageSize
         in: query
         description: The size of the page to be returned. The default value is 10.
         required: false
-        type: string
+        schema:
+          type: string
       - name: sortBy
         in: query
         description: The field to 'order by' by. Descending ordering also allowed.
         required: false
-        type: string
+        schema:
+          type: string
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: filter
         in: query
         description: The field to 'filter' by. Check main description for filter comparators.
         required: false
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         description: Single fixture ID to return officials for
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            $ref: '#/definitions/FixtureOfficialResponseModelHATEOASReponseModel'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureOfficialResponseModelHATEOASReponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '301':
           description: redirect operation
           headers:
             Location:
-              type: string
+              schema:
+                type: string
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '401':
           description: Unauthorized
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '413':
           description: Payload Too Large
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '415':
           description: Unsupported Media Type
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
@@ -852,1000 +1062,1052 @@ paths:
       tags:
       - Fixtures
       summary: Adds new official to the fixture
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         description: Single fixture ID to create official for
         required: true
-        type: string
-      - in: body
-        name: CreateFixtureOfficial
-        required: true
         schema:
-          $ref: '#/definitions/CreateFixtureOfficial'
+          type: string
       responses:
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '201':
           description: Created
-          schema:
-            $ref: '#/definitions/FixtureOfficialResponseModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureOfficialResponseModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '429':
           description: Too Many Requests  OR  Limit Exceeded  - On reason = Too Many requests one should re-try, for Limit Exceeded that does not help you
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '409':
           description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
-          schema:
-            $ref: '#/definitions/ErrorDuplicateModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDuplicateModel'
       security:
       - Auth0: []
       - api_key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFixtureOfficial'
+        required: true
     put:
       tags:
       - Fixtures
       summary: Update existing fixture official
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         description: Single fixture ID to update official for
         required: true
-        type: string
-      - in: body
-        name: CreateFixtureOfficial
-        required: true
         schema:
-          $ref: '#/definitions/CreateFixtureOfficial'
+          type: string
       responses:
         '200':
           description: Success
-          schema:
-            $ref: '#/definitions/FixtureOfficialResponseModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureOfficialResponseModel'
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '409':
           description: Conflict, see the response message or the 'geniussports-conflict-id' header to see the ID of the conflict!
-          schema:
-            $ref: '#/definitions/ErrorDuplicateModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDuplicateModel'
       security:
       - Auth0: []
       - api_key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFixtureOfficial'
+        required: true
   /fixtures/{id}/officials/{personId}:
     options:
-      consumes:
-      - application/json
-      produces:
-      - application/json
       parameters:
       - name: personId
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: 200 response
-          schema:
-            $ref: '#/definitions/Empty'
           headers:
             Access-Control-Allow-Origin:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Methods:
-              type: string
+              schema:
+                type: string
             Access-Control-Allow-Headers:
-              type: string
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
       tags:
       - Fixtures
     delete:
       tags:
       - Fixtures
       summary: Removes official added to fixture
-      produces:
-      - application/json
       parameters:
       - name: gs-fixtures-api-sub-source
         in: header
         description: Sub Source Name
         required: false
-        type: string
+        schema:
+          type: string
       - name: x-api-key
         in: header
         required: true
-        type: string
+        schema:
+          type: string
       - name: id
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       - name: personId
         in: path
         required: true
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: Success
         '520':
           description: Unknown error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '400':
           description: Bad request
-          schema:
-            $ref: '#/definitions/BadRequestModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestModel'
         '202':
           description: Accepted
-          schema:
-            $ref: '#/definitions/AcceptedModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptedModel'
         '500':
           description: Internal Server Error
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '404':
           description: Not found
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
         '504':
           description: Gateway Timeout
-          schema:
-            $ref: '#/definitions/ErrorModel'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
       security:
       - Auth0: []
       - api_key: []
-definitions:
-  Error:
-    type: object
-    required:
-    - domain
-    - message
-    - reason
-    properties:
-      reason:
-        type: string
-      domain:
-        type: string
-      locationType:
-        type: string
-      location:
-        type: string
-      message:
-        type: string
-  CompetitorHALEmbededResponse:
-    type: object
-    required:
-    - competitorType
-    - id
-    - name
-    - ref
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      competitorType:
-        type: string
-        description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
-      ref:
-        type: string
-  CreatePersonViewModel:
-    type: object
-    required:
-    - firstName
-    - genderType
-    - lastName
-    - localityId
-    - useNickname
-    properties:
-      firstName:
-        type: string
-        description: The first name of the person
-        title: First Name
-        maxLength: 256
-      lastName:
-        type: string
-        description: The last name of the person
-        title: Last Name
-        maxLength: 256
-      nickName:
-        type: string
-        description: The nickname of the person
-        title: Nickname
-        maxLength: 128
-      useNickname:
-        type: boolean
-        description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
-        title: Is active
-      localityId:
-        type: integer
-        format: int64
-        description: Id of the country,virtual place, etc. of the person!
-        title: Locality Id
-      dateOfBirth:
-        type: string
-        format: date-time
-        description: The date of birth of the person
-        title: Date of birth
-      genderType:
-        $ref: '#/definitions/PersonGenderType'
-      sports:
-        type: array
-        description: Array of sport Ids to be added to the person.
-        title: Sports
-        items:
+components:
+  schemas:
+    Empty:
+      type: object
+    JsonbModelViewModel:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the property.
+          title: Property name
+        value:
+          type: string
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
+    PatchFixture:
+      type: object
+      required:
+      - id
+      properties:
+        id:
           type: integer
-          description: Sports to which the person belongs to.
+          format: int64
+          description: The ID of the fixture.
+          title: Id
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format
+          title: Start Date
+        venueId:
+          type: integer
+          format: int64
+          description: The ID of the venue the fixture is played at.
+          title: Venue ID
+        roundId:
+          type: integer
+          format: int64
+          description: The ID of the round the fixture is for.
+          title: Round ID
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competition/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+      title: Patch Fixture Model
+      description: This model should be used to propose a partial update/patch to a fixture.
+    JsonbModel:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        isDeleted:
+          type: boolean
+    FixtureLineupsResponseModel:
+      type: object
+      required:
+      - confirmed
+      - createdOn
+      - id
+      - lineupPlayers
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        fixture:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        confirmed:
+          type: boolean
+        homeTeam:
+          $ref: '#/components/schemas/LineupTeamResponseModel'
+        awayTeam:
+          $ref: '#/components/schemas/LineupTeamResponseModel'
+        lineupPlayers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineupPlayerResponseModel'
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    FixtureRefdataSeason:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+    FixtureRefdataVenue:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+    FixtureRefdataFixture:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        startDate:
+          type: string
+          format: date-time
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureRefdataCompetitor'
+        season:
+          $ref: '#/components/schemas/FixtureRefdataSeason'
+        venue:
+          $ref: '#/components/schemas/FixtureRefdataVenue'
+        competition:
+          $ref: '#/components/schemas/FixtureRefdataCompetition'
+    CreateFixture:
+      type: object
+      required:
+      - competitors
+      - seasonId
+      - startDate
+      properties:
+        seasonId:
+          type: integer
+          format: int64
+          description: The ID of the season to fixture belongs to.
+          title: Season Id
+        competitors:
+          type: array
+          description: Array of competitors to be added to the fixture.
+          title: Competitors
+          items:
+            type: integer
+            description: Competitors which belong to the fixture.
+            title: Competitors
+        homeCompetitorId:
+          type: integer
+          format: int64
+          description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
+          title: Home Competitor Id
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format
+          title: Start Date
+        roundId:
+          type: integer
+          format: int64
+          description: The ID of the round the fixture belongs to.
+          title: Round ID
+        venueId:
+          type: integer
+          format: int64
+          description: The ID of the venue the fixture is played at.
+          title: Venue ID
+        localityId:
+          type: integer
+          format: int64
+          description: The ID of the country/region/administrative zone the fixture is played at.
+          title: Locality ID
+        name:
+          type: string
+          description: Optionally a name can be posted, which will override the default Competitor one V Competitor two logic. It's applicable for non two competitor sports
+          title: Name
+          maxLength: 250
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        matchDay:
+          type: integer
+          format: int32
+        attendance:
+          type: integer
+          format: int32
+      title: Create Fixture Model
+      description: This model should be used to propose a new fixture.
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    CreatePersonViewModel:
+      type: object
+      required:
+      - firstName
+      - genderType
+      - lastName
+      - localityId
+      - useNickname
+      properties:
+        firstName:
+          type: string
+          description: The first name of the person
+          title: First Name
+          maxLength: 256
+        lastName:
+          type: string
+          description: The last name of the person
+          title: Last Name
+          maxLength: 256
+        nickName:
+          type: string
+          description: The nickname of the person
+          title: Nickname
+          maxLength: 128
+        useNickname:
+          type: boolean
+          description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
+          title: Is active
+        localityId:
+          type: integer
+          format: int64
+          description: Id of the country,virtual place, etc. of the person!
+          title: Locality Id
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: The date of birth of the person
+          title: Date of birth
+        genderType:
+          $ref: '#/components/schemas/PersonGenderType'
+        sports:
+          type: array
+          description: Array of sport Ids to be added to the person.
           title: Sports
-  PatchFixture:
-    type: object
-    required:
-    - id
-    properties:
-      id:
-        type: integer
-        format: int64
-        description: The ID of the fixture.
-        title: Id
-      startDate:
-        type: string
-        format: date-time
-        description: The start date of the fixture in UTC ISO-8601 format
-        title: Start Date
-      venueId:
-        type: integer
-        format: int64
-        description: The ID of the venue the fixture is played at.
-        title: Venue ID
-      roundId:
-        type: integer
-        format: int64
-        description: The ID of the round the fixture is for.
-        title: Round ID
-      metadataProperties:
-        type: array
-        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competition/metadata
-        title: metadataProperties
-        items:
-          $ref: '#/definitions/JsonbModelViewModel'
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-    title: Patch Fixture Model
-    description: This model should be used to propose a partial update/patch to a fixture.
-  FixtureRefdataFixture:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      startDate:
-        type: string
-        format: date-time
-      metadataProperties:
-        type: array
-        items:
-          $ref: '#/definitions/JsonbModel'
-      competitors:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureRefdataCompetitor'
-      season:
-        $ref: '#/definitions/FixtureRefdataSeason'
-      venue:
-        $ref: '#/definitions/FixtureRefdataVenue'
-      competition:
-        $ref: '#/definitions/FixtureRefdataCompetition'
-  Empty:
-    type: object
-  FixtureRefdataLineupPlayer:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      order:
-        type: integer
-        format: int32
-      isStarter:
-        type: boolean
-      name:
-        type: string
-      shirtNumber:
-        type: string
-      position:
-        type: string
-      formationPosition:
-        type: string
-      formationPositionName:
-        type: string
-  CreateFixtureOfficial:
-    type: object
-    properties:
-      personId:
-        type: integer
-        format: int64
-        description: Id of the person which will be added as fixture official
-        minimum: 1.0
-      person:
-        description: Person information if not been created early, if the person already exists - leave empty.
-        $ref: '#/definitions/CreatePersonViewModel'
-      metadataProperties:
-        type: array
-        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixtureperson/metadata
-        title: metadataProperties
-        items:
-          $ref: '#/definitions/JsonbModelViewModel'
-  FixtureResponseModelHATEOASReponseModel:
-    type: object
-    properties:
-      page:
-        type: integer
-        format: int32
-      pageSize:
-        type: integer
-        format: int32
-      totalItems:
-        type: integer
-        format: int64
-      items:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureResponseModel'
-      self:
-        type: string
-      previous:
-        type: string
-      next:
-        type: string
-      first:
-        type: string
-      last:
-        type: string
-  BadRequestModel:
-    type: object
-    properties:
-      messages:
-        type: array
-        items:
+          items:
+            type: integer
+            description: Sports to which the person belongs to.
+            title: Sports
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
           type: string
-  ExternalIdsViewModel:
-    type: object
-    properties:
-      optaId:
-        type: string
-      optaLegacyId:
-        type: string
-      fibaId:
-        type: string
-      vesselId:
-        type: string
-      statsEngineId:
-        type: string
-    description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-  ErrorModel:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
-      error:
-        $ref: '#/definitions/Error'
-  FixtureOfficialResponseModelHATEOASReponseModel:
-    type: object
-    properties:
-      page:
-        type: integer
-        format: int32
-      pageSize:
-        type: integer
-        format: int32
-      totalItems:
-        type: integer
-        format: int64
-      items:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureOfficialResponseModel'
-      self:
-        type: string
-      previous:
-        type: string
-      next:
-        type: string
-      first:
-        type: string
-      last:
-        type: string
-  PersonGenderType:
-    type: integer
-    title: Gender Type
-    format: int32
-    description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
-    enum:
-    - '0'
-    - '1'
-    - '2'
-  AcceptedModel:
-    type: object
-    properties:
-      messages:
-        type: array
-        items:
+        domain:
           type: string
-  FixtureResponseModel:
-    type: object
-    required:
-    - competition
-    - createdOn
-    - eventStatusType
-    - eventType
-    - genderType
-    - id
-    - name
-    - sport
-    - startDate
-    - updatesCount
-    properties:
-      id:
-        type: integer
-        format: int64
-      createdOn:
-        type: string
-        format: date-time
-      modifiedOn:
-        type: string
-        format: date-time
-      updatesCount:
-        type: integer
-        format: int32
-      metadataProperties:
-        type: array
-        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
-        items:
-          $ref: '#/definitions/JsonbModel'
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      startDate:
-        type: string
-        format: date-time
-      name:
-        type: string
-      season:
-        $ref: '#/definitions/HALEmbededResponse'
-      eventStatusType:
-        type: string
-        description: Notstarted, Inprogress, Finished, Cancelled, Postponed.
-      locality:
-        $ref: '#/definitions/HALEmbededResponse'
-      timezone:
-        $ref: '#/definitions/HALEmbededResponse'
-      venue:
-        $ref: '#/definitions/HALEmbededResponse'
-      sport:
-        $ref: '#/definitions/HALEmbededResponse'
-      competition:
-        $ref: '#/definitions/HALEmbededResponse'
-      round:
-        $ref: '#/definitions/HALEmbededResponse'
-      homeCompetitor:
-        description: Id of the competitor marked as home competitor
-        $ref: '#/definitions/CompetitorHALEmbededResponse'
-      genderType:
-        type: string
-        description: Undefined, Male, Female, Mixed.
-      ageCategory:
-        $ref: '#/definitions/ageCategory'
-      competitors:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureCompetitorHALEmbededResponse'
-      fixtureLink:
-        $ref: '#/definitions/HALEmbededResponse'
-      eventType:
-        type: string
-        description: Match, VirtualMatch, SeasonOutright, PartialOutright, AggregateEvent
-      matchDay:
-        type: integer
-        format: int32
-      attendance:
-        type: integer
-        format: int32
-  FixtureOfficialResponseModel:
-    type: object
-    required:
-    - createdOn
-    - id
-    - person
-    - sport
-    - updatesCount
-    properties:
-      id:
-        type: integer
-        format: int64
-      createdOn:
-        type: string
-        format: date-time
-      modifiedOn:
-        type: string
-        format: date-time
-      updatesCount:
-        type: integer
-        format: int32
-      person:
-        $ref: '#/definitions/PersonHALEmbededResponse'
-      sport:
-        $ref: '#/definitions/HALEmbededResponse'
-      metadataProperties:
-        type: array
-        items:
-          $ref: '#/definitions/JsonbModel'
-  FixtureCompetitorHALEmbededResponse:
-    type: object
-    required:
-    - competitorType
-    - id
-    - name
-    - ref
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      competitorType:
-        type: string
-        description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      metadataProperties:
-        type: array
-        items:
-          $ref: '#/definitions/JsonbModelViewModel'
-      ref:
-        type: string
-  FixtureRefdataResponse:
-    type: object
-    properties:
-      fixture:
-        $ref: '#/definitions/FixtureRefdataFixture'
-  PersonHALEmbededResponse:
-    type: object
-    required:
-    - firstName
-    - fullName
-    - genderType
-    - id
-    - lastName
-    - locality
-    - ref
-    properties:
-      id:
-        type: integer
-        format: int64
-      dateOfBirth:
-        type: string
-        format: date-time
-      firstName:
-        type: string
-      lastName:
-        type: string
-      fullName:
-        type: string
-      nickName:
-        type: string
-      genderType:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      locality:
-        $ref: '#/definitions/HALEmbededResponse'
-      ref:
-        type: string
-  ageCategory:
-    type: string
-    title: Age Category
-    description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
-  LineupPlayerResponseModel:
-    type: object
-    properties:
-      player:
-        $ref: '#/definitions/CompetitorHALEmbededResponse'
-      shirtNumber:
-        type: string
-      position:
-        type: string
-      formationPosition:
-        type: string
-      formationPositionName:
-        type: string
-      isHome:
-        type: boolean
-      order:
-        type: integer
-        format: int32
-      isStarter:
-        type: boolean
-  FixtureRefdataVenue:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      name:
-        type: string
-  HALEmbededResponse:
-    type: object
-    required:
-    - id
-    - name
-    - ref
-    properties:
-      id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      ref:
-        type: string
-  FixtureRefdataCompetition:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      name:
-        type: string
-  UpdateFixture:
-    type: object
-    required:
-    - competitors
-    - startDate
-    properties:
-      id:
-        type: integer
-        format: int64
-        description: The ID of the fixture.
-        title: Id
-      competitors:
-        type: array
-        description: Array of competitors to be added to the fixture.
-        title: Competitors
-        items:
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    LineupTeamResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+      - properties:
+          formation:
+            type: string
+            description: The team formation for the current lineup
+            title: Team formation in the lineup, e.g. 4-4-2
+    CreateFixtureOfficial:
+      type: object
+      properties:
+        personId:
           type: integer
-          description: Competitors which belong to the fixture.
-          title: Competitors
-      homeCompetitorId:
-        type: integer
-        format: int64
-        description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
-        title: Home Competitor Id
-      startDate:
-        type: string
-        format: date-time
-        description: The start date of the fixture in UTC ISO-8601 format
-        title: Start Date
-      roundId:
-        type: integer
-        format: int64
-        description: The ID of the round the fixture belongs to.
-        title: Round ID
-      venueId:
-        type: integer
-        format: int64
-        description: The ID of the venue the fixture is played at.
-        title: Venue ID
-      localityId:
-        type: integer
-        format: int64
-        description: The ID of the country/region/administrative zone the fixture is played at.
-        title: Locality ID
-      EventStatusType:
-        type: integer
-        format: int32
-        description: 0 - Notstarted; 1 - Inprogress; 2 - Finished; 3 - Cancelled; 4 - Postponed
-        enum:
-        - 0
-        - 1
-        - 2
-        - 3
-        - 4
-      metadataProperties:
-        type: array
-        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
-        title: metadataProperties
-        items:
-          $ref: '#/definitions/JsonbModelViewModel'
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      matchDay:
-        type: integer
-        format: int32
-      attendance:
-        type: integer
-        format: int32
-    title: Update Fixture Model
-    description: This model should be used to propose an update to a fixture.
-  FixtureRefdataCompetitor:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      name:
-        type: string
-      isHome:
-        type: boolean
-      formation:
-        type: string
-      lineup:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureRefdataLineupPlayer'
-  FixtureRefdataSeason:
-    type: object
-    properties:
-      id:
-        type: string
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      name:
-        type: string
-  JsonbModelViewModel:
-    type: object
-    required:
-    - name
-    properties:
-      name:
-        type: string
-        description: Name of the property.
-        title: Property name
-      value:
-        type: string
-        description: Value of the property.
-        title: Property value
-    title: Create/Update Property Model
-    description: This model should be used to create or update single property value for specific property name for specific model.
-  FixtureLineupsResponseModel:
-    type: object
-    required:
-    - confirmed
-    - createdOn
-    - id
-    - lineupPlayers
-    - updatesCount
-    properties:
-      id:
-        type: integer
-        format: int64
-      createdOn:
-        type: string
-        format: date-time
-      modifiedOn:
-        type: string
-        format: date-time
-      updatesCount:
-        type: integer
-        format: int32
-      fixture:
-        $ref: '#/definitions/HALEmbededResponse'
-      confirmed:
-        type: boolean
-      homeTeam:
-        $ref: '#/definitions/LineupTeamResponseModel'
-      awayTeam:
-        $ref: '#/definitions/LineupTeamResponseModel'
-      lineupPlayers:
-        type: array
-        items:
-          $ref: '#/definitions/LineupPlayerResponseModel'
-  CreateFixture:
-    type: object
-    required:
-    - competitors
-    - seasonId
-    - startDate
-    properties:
-      seasonId:
-        type: integer
-        format: int64
-        description: The ID of the season to fixture belongs to.
-        title: Season Id
-      competitors:
-        type: array
-        description: Array of competitors to be added to the fixture.
-        title: Competitors
-        items:
+          format: int64
+          description: Id of the person which will be added as fixture official
+          minimum: 1.0
+        person:
+          description: Person information if not been created early, if the person already exists - leave empty.
+          $ref: '#/components/schemas/CreatePersonViewModel'
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixtureperson/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+    FixtureOfficialResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
           type: integer
-          description: Competitors which belong to the fixture.
-          title: Competitors
-      homeCompetitorId:
-        type: integer
-        format: int64
-        description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
-        title: Home Competitor Id
-      startDate:
-        type: string
-        format: date-time
-        description: The start date of the fixture in UTC ISO-8601 format
-        title: Start Date
-      roundId:
-        type: integer
-        format: int64
-        description: The ID of the round the fixture belongs to.
-        title: Round ID
-      venueId:
-        type: integer
-        format: int64
-        description: The ID of the venue the fixture is played at.
-        title: Venue ID
-      localityId:
-        type: integer
-        format: int64
-        description: The ID of the country/region/administrative zone the fixture is played at.
-        title: Locality ID
-      name:
-        type: string
-        description: Optionally a name can be posted, which will override the default Competitor one V Competitor two logic. It's applicable for non two competitor sports
-        title: Name
-        maxLength: 250
-      metadataProperties:
-        type: array
-        description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
-        title: metadataProperties
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
         items:
-          $ref: '#/definitions/JsonbModelViewModel'
-      externalIds:
-        $ref: '#/definitions/ExternalIdsViewModel'
-      matchDay:
-        type: integer
-        format: int32
-      attendance:
-        type: integer
-        format: int32
-    title: Create Fixture Model
-    description: This model should be used to propose a new fixture.
-  ErrorDuplicateModel:
-    type: object
-    properties:
-      messages:
-        type: array
-        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureOfficialResponseModel'
+        self:
           type: string
-      geniusSportsConflictId:
-        type: string
-        description: This is the official genius sports ID, which you have conflict with.
-  JsonbModel:
-    type: object
-    properties:
-      name:
-        type: string
-      value:
-        type: string
-      isDeleted:
-        type: boolean
-  FixtureRefdataResponseModelHATEOASReponseModel:
-    type: object
-    properties:
-      page:
-        type: integer
-        format: int32
-      pageSize:
-        type: integer
-        format: int32
-      totalItems:
-        type: integer
-        format: int64
-      items:
-        type: array
-        items:
-          $ref: '#/definitions/FixtureRefdataResponse'
-      self:
-        type: string
-      previous:
-        type: string
-      next:
-        type: string
-      first:
-        type: string
-      last:
-        type: string
-  LineupTeamResponseModel:
-    allOf:
-    - $ref: '#/definitions/CompetitorHALEmbededResponse'
-    - properties:
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    FixtureRefdataCompetitor:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+        isHome:
+          type: boolean
         formation:
           type: string
-          description: The team formation for the current lineup
-          title: Team formation in the lineup, e.g. 4-4-2
-securityDefinitions:
-  Auth0:
-    type: apiKey
-    name: Authorization
-    in: header
-    x-amazon-apigateway-authtype: oauth2
-  api_key:
-    type: apiKey
-    name: x-api-key
-    in: header
+        lineup:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureRefdataLineupPlayer'
+    PersonGenderType:
+      type: integer
+      title: Gender Type
+      format: int32
+      description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
+      enum:
+      - '0'
+      - '1'
+      - '2'
+    FixtureCompetitorHALEmbededResponse:
+      type: object
+      required:
+      - competitorType
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        competitorType:
+          type: string
+          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        ref:
+          type: string
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    LineupPlayerResponseModel:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+        shirtNumber:
+          type: string
+        position:
+          type: string
+        formationPosition:
+          type: string
+        formationPositionName:
+          type: string
+        isHome:
+          type: boolean
+        order:
+          type: integer
+          format: int32
+        isStarter:
+          type: boolean
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
+    ageCategory:
+      type: string
+      title: Age Category
+      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
+    FixtureRefdataResponse:
+      type: object
+      properties:
+        fixture:
+          $ref: '#/components/schemas/FixtureRefdataFixture'
+    FixtureOfficialResponseModel:
+      type: object
+      required:
+      - createdOn
+      - id
+      - person
+      - sport
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/PersonHALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+    AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    FixtureResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    PersonHALEmbededResponse:
+      type: object
+      required:
+      - firstName
+      - fullName
+      - genderType
+      - id
+      - lastName
+      - locality
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        dateOfBirth:
+          type: string
+          format: date-time
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        nickName:
+          type: string
+        genderType:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        ref:
+          type: string
+    ErrorDuplicateModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
+    FixtureRefdataLineupPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        order:
+          type: integer
+          format: int32
+        isStarter:
+          type: boolean
+        name:
+          type: string
+        shirtNumber:
+          type: string
+        position:
+          type: string
+        formationPosition:
+          type: string
+        formationPositionName:
+          type: string
+    CompetitorHALEmbededResponse:
+      type: object
+      required:
+      - competitorType
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        competitorType:
+          type: string
+          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
+        ref:
+          type: string
+    UpdateFixture:
+      type: object
+      required:
+      - competitors
+      - startDate
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The ID of the fixture.
+          title: Id
+        competitors:
+          type: array
+          description: Array of competitors to be added to the fixture.
+          title: Competitors
+          items:
+            type: integer
+            description: Competitors which belong to the fixture.
+            title: Competitors
+        homeCompetitorId:
+          type: integer
+          format: int64
+          description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
+          title: Home Competitor Id
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format
+          title: Start Date
+        roundId:
+          type: integer
+          format: int64
+          description: The ID of the round the fixture belongs to.
+          title: Round ID
+        venueId:
+          type: integer
+          format: int64
+          description: The ID of the venue the fixture is played at.
+          title: Venue ID
+        localityId:
+          type: integer
+          format: int64
+          description: The ID of the country/region/administrative zone the fixture is played at.
+          title: Locality ID
+        EventStatusType:
+          type: integer
+          format: int32
+          description: 0 - Notstarted; 1 - Inprogress; 2 - Finished; 3 - Cancelled; 4 - Postponed
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        matchDay:
+          type: integer
+          format: int32
+        attendance:
+          type: integer
+          format: int32
+      title: Update Fixture Model
+      description: This model should be used to propose an update to a fixture.
+    FixtureRefdataCompetition:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+    FixtureResponseModel:
+      type: object
+      required:
+      - competition
+      - createdOn
+      - eventStatusType
+      - eventType
+      - genderType
+      - id
+      - name
+      - sport
+      - startDate
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        startDate:
+          type: string
+          format: date-time
+        name:
+          type: string
+        season:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        eventStatusType:
+          type: string
+          description: Notstarted, Inprogress, Finished, Cancelled, Postponed.
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        timezone:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        venue:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        competition:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        round:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        homeCompetitor:
+          description: Id of the competitor marked as home competitor
+          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+        genderType:
+          type: string
+          description: Undefined, Male, Female, Mixed.
+        ageCategory:
+          $ref: '#/components/schemas/ageCategory'
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureCompetitorHALEmbededResponse'
+        fixtureLink:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        eventType:
+          type: string
+          description: Match, VirtualMatch, SeasonOutright, PartialOutright, AggregateEvent
+        matchDay:
+          type: integer
+          format: int32
+        attendance:
+          type: integer
+          format: int32
+    FixtureRefdataResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureRefdataResponse'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+  securitySchemes:
+    Auth0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: oauth2
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
 x-amazon-apigateway-security-policy: TLS_1_0
