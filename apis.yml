@@ -1,9 +1,8 @@
 aid: genius-sports
 name: Genius Sports
-description: >-
-  Genius Sports provides APIs to query information regarding matches, players,
-  statistics etc. both past and future across multiple sports including
-  basketball, football (soccer), volleyball, American football, and ice hockey.
+description: Genius Sports provides APIs to query information regarding matches, players, statistics etc.
+  both past and future across multiple sports including basketball, football (soccer), volleyball, American
+  football, and ice hockey.
 type: Index
 deliveryModel:
   model: unknown
@@ -34,21 +33,19 @@ position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/genius-sports.png
 tags:
-  - Sports
-  - Statistics
-  - Live Data
-  - Fixtures
+- Sports
+- Statistics
+- Live Data
+- Fixtures
 created: '2025-03-01'
-modified: '2026-05-30'
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml
+modified: '2026-09-16'
+url: https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
 - aid: genius-sports:rest-api
   name: Genius Sports REST API
-  description: >-
-    Query information regarding matches, players, statistics etc. both past and future. Covers basketball,
-    3x3, football (soccer), volleyball, American football, and ice hockey.
+  description: Query information regarding matches, players, statistics etc. both past and future. Covers
+    basketball, 3x3, football (soccer), volleyball, American football, and ice hockey.
   humanURL: https://developer.geniussports.com/
   tags:
   - Sports
@@ -58,9 +55,8 @@ apis:
     url: https://developer.geniussports.com/
 - aid: genius-sports:streaming-api
   name: Genius Sports Streaming API
-  description: >-
-    Delivers event-by-event data and aggregated statistics for matches in progress, supporting live consumption
-    of sporting event data.
+  description: Delivers event-by-event data and aggregated statistics for matches in progress, supporting
+    live consumption of sporting event data.
   humanURL: https://developer.geniussports.com/
   tags:
   - Sports
@@ -71,9 +67,8 @@ apis:
     url: https://developer.geniussports.com/
 - aid: genius-sports:publish-api
   name: Genius Sports Publish API
-  description: >-
-    Enables publishing of real-time event data from sporting events into the Genius Sports warehouse and
-    statistics engine.
+  description: Enables publishing of real-time event data from sporting events into the Genius Sports
+    warehouse and statistics engine.
   humanURL: https://developer.geniussports.com/
   tags:
   - Sports
@@ -83,9 +78,8 @@ apis:
     url: https://developer.geniussports.com/
 - aid: genius-sports:livestats-in-arena-feed
   name: Genius Sports LiveStats In-Arena Feed
-  description: >-
-    Live venue data delivered for TV production and consumers covering basketball, football (soccer),
-    and volleyball.
+  description: Live venue data delivered for TV production and consumers covering basketball, football
+    (soccer), and volleyball.
   humanURL: https://developer.geniussports.com/
   tags:
   - Sports
@@ -116,11 +110,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-api
   name: Genius Sports Competitors API
   description: The Competitors API from Genius Sports — 21 operation(s) for competitors.
@@ -134,17 +126,14 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-doubles-api
   name: Genius Sports competitors/doubles API
-  description: >-
-    Groups the operations related to competitors of type Double partnership. When creating a double partnership
-    the competitors must be of the same sport, and the sport should allow creation of double partnerships.
-    e.g tennis, beach volleyball and similar
+  description: Groups the operations related to competitors of type Double partnership. When creating
+    a double partnership the competitors must be of the same sport, and the sport should allow creation
+    of double partnerships. e.g tennis, beach volleyball and similar
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
   tags:
@@ -155,11 +144,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-horses-api
   name: Genius Sports competitors/horses API
   description: Groups the operations related to competitors of type Horse
@@ -173,11 +160,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-players-api
   name: Genius Sports competitors/players API
   description: Groups the operations related to competitors of type Player
@@ -191,11 +176,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-tbds-api
   name: Genius Sports competitors/tbds API
   description: Groups the operations related to to-be-determined competitors.
@@ -209,11 +192,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-teams-api
   name: Genius Sports competitors/teams API
   description: Groups the operations related to competitors of type Team
@@ -227,11 +208,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-contracts-api
   name: Genius Sports Contracts API
   description: The Contracts API from Genius Sports — 10 operation(s) for contracts.
@@ -245,11 +224,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-fixtures-api
   name: Genius Sports Fixtures API
   description: The Fixtures API from Genius Sports — 7 operation(s) for fixtures.
@@ -263,11 +240,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-groups-api
   name: Genius Sports Groups API
   description: The Groups API from Genius Sports — 2 operation(s) for groups.
@@ -283,11 +258,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-ingestion-api
   name: Genius Sports Ingestion API
   description: The Ingestion API from Genius Sports — 12 operation(s) for ingestion.
@@ -301,11 +274,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-localities-api
   name: Genius Sports Localities API
   description: The Localities API from Genius Sports — 2 operation(s) for localities.
@@ -319,11 +290,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-matches-api
   name: Genius Sports Matches API
   description: Match data and broadcasts
@@ -337,11 +306,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-organization-api
   name: Genius Sports Organization API
   description: Leagues, competitions, clubs, teams
@@ -355,11 +322,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-organizations-api
   name: Genius Sports Organizations API
   description: The Organizations API from Genius Sports — 2 operation(s) for organizations.
@@ -375,11 +340,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-pending-requests-api
   name: Genius Sports Pending requests API
   description: The Pending requests API from Genius Sports — 1 operation(s) for pending requests.
@@ -393,11 +356,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-people-api
   name: Genius Sports People API
   description: Players, officials, staff
@@ -411,11 +372,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-persons-api
   name: Genius Sports Persons API
   description: The Persons API from Genius Sports — 5 operation(s) for persons.
@@ -429,16 +388,13 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-probabilistic-matching-api
   name: Genius Sports Probabilistic matching API
-  description: >-
-    The results from the this kind of matching are always probabilistic. However we consider matches that
-    have above 90% match score as viable results.
+  description: The results from the this kind of matching are always probabilistic. However we consider
+    matches that have above 90% match score as viable results.
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
   tags:
@@ -449,11 +405,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-rounds-api
   name: Genius Sports Rounds API
   description: The Rounds API from Genius Sports — 5 operation(s) for rounds.
@@ -467,11 +421,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-seasons-api
   name: Genius Sports Seasons API
   description: The Seasons API from Genius Sports — 4 operation(s) for seasons.
@@ -485,11 +437,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-sourcerequests-api
   name: Genius Sports Sourcerequests API
   description: The Sourcerequests API from Genius Sports — 1 operation(s) for sourcerequests.
@@ -503,13 +453,11 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-sports-api
-  name: Genius Sports Sports API
+  name: Genius Sports API
   description: The Sports API from Genius Sports — 2 operation(s) for sports.
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
@@ -521,11 +469,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-standings-api
   name: Genius Sports Standings API
   description: Competition standings
@@ -539,11 +485,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-statistics-api
   name: Genius Sports Statistics API
   description: Team and player statistics
@@ -557,11 +501,9 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-venues-api
   name: Genius Sports Venues API
   description: The Venues API from Genius Sports — 3 operation(s) for venues.
@@ -575,26 +517,24 @@ apis:
   - type: Documentation
     url: https://developer.geniussports.com/
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json
   - type: SwaggerUI
-    url: >-
-      https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
+    url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 common:
-  - type: AgenticAccess
-    url: agentic-access/genius-sports-agentic-access.yml
-  - type: DomainSecurity
-    url: security/genius-sports-domain-security.yml
-  - type: Authentication
-    url: authentication/genius-sports-authentication.yml
-  - type: GitHubOrganization
-    url: https://github.com/geniussportsgroup
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/geniussports
-  - type: Website
-    url: https://geniussports.com/
-  - type: Documentation
-    url: https://developer.geniussports.com/
+- type: AgenticAccess
+  url: agentic-access/genius-sports-agentic-access.yml
+- type: DomainSecurity
+  url: security/genius-sports-domain-security.yml
+- type: Authentication
+  url: authentication/genius-sports-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/geniussportsgroup
+- type: LinkedIn
+  url: https://www.linkedin.com/company/geniussports
+- type: Website
+  url: https://geniussports.com/
+- type: Documentation
+  url: https://developer.geniussports.com/
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
