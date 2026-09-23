@@ -7,9 +7,7 @@ info:
 
     3x3, football (soccer), volleyball, American football, and ice hockey.
 
-    Authenticated with an x-api-key header issued to partners.
-
-    '
+    Authenticated with an x-api-key header issued to partners.'
   version: 1.0.0
   contact:
     name: Genius Sports Developer Centre

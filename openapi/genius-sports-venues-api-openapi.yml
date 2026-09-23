@@ -31,10 +31,14 @@ paths:
                 $ref: '#/components/schemas/Empty'
       tags:
       - Venues
+      summary: Describe venues
+      x-summary-source: derived
+      operationId: optionsVenues
+      x-operation-id-source: derived
     get:
       tags:
       - Venues
-      summary: Retrieve venues by ID/s. MAX 200 per page.
+      summary: Retrieve venues by ID/s. MAX 200 per page
       description: Returns venues wrapped inside a HATEOAS model
       parameters:
       - name: page
@@ -140,6 +144,8 @@ paths:
       security:
       - Auth0: []
       - api_key: []
+      operationId: getVenues
+      x-operation-id-source: derived
     post:
       tags:
       - Venues
@@ -220,6 +226,8 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateVenue'
         required: true
+      operationId: postVenues
+      x-operation-id-source: derived
     put:
       tags:
       - Venues
@@ -294,6 +302,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateVenue'
         required: true
+      operationId: putVenues
+      x-operation-id-source: derived
     servers:
     - url: https://fixtures.api.geniussports.com/v2
   /venues/{id}:
@@ -323,10 +333,14 @@ paths:
                 $ref: '#/components/schemas/Empty'
       tags:
       - Venues
+      summary: Describe venues by id
+      x-summary-source: derived
+      operationId: optionsVenuesById
+      x-operation-id-source: derived
     get:
       tags:
       - Venues
-      summary: Retrieve venues details by ID.
+      summary: Retrieve venues details by ID
       description: Returns venues details including sport specific details (metadata properties)
       parameters:
       - name: x-api-key
@@ -420,6 +434,8 @@ paths:
       security:
       - Auth0: []
       - api_key: []
+      operationId: getVenuesById
+      x-operation-id-source: derived
     delete:
       tags:
       - Venues
@@ -483,6 +499,8 @@ paths:
       security:
       - Auth0: []
       - api_key: []
+      operationId: deleteVenuesById
+      x-operation-id-source: derived
     servers:
     - url: https://fixtures.api.geniussports.com/v2
   /v1/venues:
@@ -511,21 +529,6 @@ components:
   schemas:
     Empty:
       type: object
-    JsonbModelViewModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the property.
-          title: Property name
-        value:
-          type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
     ExternalIdsViewModel:
       type: object
       properties:
@@ -540,159 +543,6 @@ components:
         statsEngineId:
           type: string
       description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    HALEmbededResponse:
-      type: object
-      required:
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        ref:
-          type: string
-    VenueResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/VenueResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    JsonbModel:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        isDeleted:
-          type: boolean
-    CreateVenue:
-      type: object
-      required:
-      - name
-      - sports
-      properties:
-        name:
-          type: string
-          description: The name of the venue
-          title: Venue name
-          maxLength: 250
-        cityName:
-          type: string
-          description: Name of the city where the Venue is
-          title: City name
-          maxLength: 256
-        longitude:
-          type: number
-          format: double
-          description: Longitude of the city where the Venue is
-          title: Longitude
-        latitude:
-          type: number
-          format: double
-          description: Latitude of the city where the Venue is
-          title: Latitude
-        localityId:
-          type: integer
-          format: int64
-          description: Id of the country,virtual place, etc. where the venue is located.
-          title: Locality Id
-        parentVenueId:
-          type: integer
-          format: int64
-          description: The id of the parent venue
-          title: Parent Venue Id
-        sports:
-          type: array
-          description: Array of sport Ids which can be played on this venue
-          title: Sports
-          items:
-            type: integer
-            description: Sports ids which can be played on the venue.
-            title: Sport ids
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/venue/metadata
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-    AcceptedModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
     VenueResponseModel:
       type: object
       required:
@@ -782,6 +632,174 @@ components:
             $ref: '#/components/schemas/JsonbModelViewModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    JsonbModel:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        isDeleted:
+          type: boolean
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    CreateVenue:
+      type: object
+      required:
+      - name
+      - sports
+      properties:
+        name:
+          type: string
+          description: The name of the venue
+          title: Venue name
+          maxLength: 250
+        cityName:
+          type: string
+          description: Name of the city where the Venue is
+          title: City name
+          maxLength: 256
+        longitude:
+          type: number
+          format: double
+          description: Longitude of the city where the Venue is
+          title: Longitude
+        latitude:
+          type: number
+          format: double
+          description: Latitude of the city where the Venue is
+          title: Latitude
+        localityId:
+          type: integer
+          format: int64
+          description: Id of the country,virtual place, etc. where the venue is located.
+          title: Locality Id
+        parentVenueId:
+          type: integer
+          format: int64
+          description: The id of the parent venue
+          title: Parent Venue Id
+        sports:
+          type: array
+          description: Array of sport Ids which can be played on this venue
+          title: Sports
+          items:
+            type: integer
+            description: Sports ids which can be played on the venue.
+            title: Sport ids
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/venue/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+    ErrorDuplicateModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
+    AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    VenueResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenueResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
+    JsonbModelViewModel:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the property.
+          title: Property name
+        value:
+          type: string
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
     ResponseEnvelope:
       type: object
       properties:

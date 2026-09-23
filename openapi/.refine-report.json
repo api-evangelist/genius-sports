@@ -118,7 +118,8 @@
     "genius-sports-matching-v2-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "genius-sports-matching-v2-openapi.yml: declared missing tag: Pending requests",
     "genius-sports-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Venues' spans 2 source specs (genius-sports-fixtures-v2-openapi.yml, genius-sports-openapi.yml): per-path servers applied"
+    "tag 'Venues' spans 2 source specs (genius-sports-fixtures-v2-openapi.yml, genius-sports-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "genius-sports-competitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -1,6 +1,9 @@
 openapi: 3.2.0
 info:
-  description: '<br><p><h3>Motivation</h3><br> The purpose of this API is to request matching betweenexternal sources data and the best genius sports representation. <br>Using the POST client can cache the matchingresult for specific time range, by making a mapping from client entity id togenius sports Id.<br></p><h3>Glossary</h3><br><p><b>Match</b>- the probabilistic result of the comparison of the clients input    to Genius Sports data</p><p><b>Map</b>- the link between an already matched result represented by the    clients entity Id and the Genius Sports Id, in the context of a specific    data provider. e.g for data Provider ''NFL'' we the client Id XYZ mapped to    123 </p><p><b>Competitor</b> - a team, player, double partnership or any other entity    that can participate in a fixture as top level competitore e.g Barcelena -    RealMadrid, Nadal - Federer etc. What is not a competitor is for example:    Leo Messi - he cannot participate in a fixture as a top level competitor,    but only as a part of a team.</p><h3>How does the security work?</h3><p>To access the API each request must provide two headers:</p><ul>    <li><code>Authorization</code> header with an OAuth2<br> JSON web token        (Bearer) issued by Auth0.</li>    <li> <code>x-api-key</code><br> with an API key secret of a key, registered        with the API gateway in AWS. <br> </li></ul><h3>How do I get a valid JW token for the <code>Authorization</code> header?</h3><p> As an API client, I must be provided with Auth0 Client credentials    (<code>client_ID</code> and <code>Client_secret</code>) by Genius    Sports (FA team) and obtain a valid token from the Auth0 token<br> endpoint    using the Machine-to-Machine (client credentials) flow. I must obtain a    new token whenever needed (based on the token expiration).</p><p> <br> Make a <code>POST</code> request to the token endpoint: <span        https://{env or nothing for prod}.auth.geniussports.com/oauth/token        </span> with the following        payload:</p><br><pre><br>    {<br>    <span>''client_id'': ''<code>YOUR_AUTH0_CLIENT_ID</code>''</span>,  <br>    <span>''client_secret'': ''<code>YOUR_AUTH0_CLIENT_SECRET</code>''</span>,     <br>    <span>''audience'': ''https://api.geniussports.com''</span>,        <br>    <span>''grant_type'' : ''client_credentials''</span>    <br>    }<br></pre><br><p>You will receive a new token in the response <code> access_token </code>    field.</p><br><p>Curl example:</p><br><code> curl -X ''POST'' https://{env or nothing for prod}.auth.geniussports.com/oauth/token <br>-H ''Content-Type: application / json''<br>-d ''{''client_id'':''YOUR_AUTH0_CLIENT_ID'', ''client_secret'':''YOUR_AUTH0_CLIENT_SECRET'', ''audience'':''https://api.geniussports.com'',<br>        ''grant_type'':''client_credentials''}''</code><br>'
+  description: 'Motivation
+
+
+    The purpose of this API is to request matching betweenexternal sources data and the best genius sports representation.'
   version: 2.0.106
   title: fixtures-matching-v2 Pending requests API
 servers:
@@ -101,48 +104,10 @@ paths:
       security:
       - Auth0: []
       - api_key: []
+      operationId: getMatchrequestsStatusById
+      x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    sourceHALEmbededResponse:
-      type: object
-      properties:
-        name:
-          type: string
-        id:
-          type: integer
-          format: int64
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     pendingMatchRequestStatusResponseModel:
       type: object
       properties:
@@ -170,6 +135,46 @@ components:
         reason:
           type: string
           description: The reason for NotMatched status. Free text. Should not be used to build logical flows on top of it! Only available when status is NotMatched!
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    sourceHALEmbededResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int64
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
   securitySchemes:
     Auth0:
       type: apiKey

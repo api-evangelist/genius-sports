@@ -7,9 +7,7 @@ info:
 
     3x3, football (soccer), volleyball, American football, and ice hockey.
 
-    Authenticated with an x-api-key header issued to partners.
-
-    '
+    Authenticated with an x-api-key header issued to partners.'
   version: 1.0.0
   contact:
     name: Genius Sports Developer Centre
@@ -122,15 +120,8 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   parameters:
-    Offset:
-      name: offset
-      in: query
-      description: Skip the first N records
-      schema:
-        type: integer
-        default: 0
-    CompetitionId:
-      name: competitionId
+    TeamId:
+      name: teamId
       in: path
       required: true
       schema:
@@ -145,6 +136,25 @@ components:
         - json
         - xml
         default: json
+    Offset:
+      name: offset
+      in: query
+      description: Skip the first N records
+      schema:
+        type: integer
+        default: 0
+    LeagueId:
+      name: leagueId
+      in: path
+      required: true
+      schema:
+        type: string
+    CompetitionId:
+      name: competitionId
+      in: path
+      required: true
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -157,18 +167,6 @@ components:
       name: fields
       in: query
       description: Comma-separated list of fields to return
-      schema:
-        type: string
-    LeagueId:
-      name: leagueId
-      in: path
-      required: true
-      schema:
-        type: string
-    TeamId:
-      name: teamId
-      in: path
-      required: true
       schema:
         type: string
   schemas:
