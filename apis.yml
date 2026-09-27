@@ -164,7 +164,7 @@ apis:
   - type: SwaggerUI
     url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-players-api
-  name: Genius Sports competitors/players API
+  name: Genius Sports Competitors/players API
   description: Groups the operations related to competitors of type Player
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
@@ -180,7 +180,7 @@ apis:
   - type: SwaggerUI
     url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-tbds-api
-  name: Genius Sports competitors/tbds API
+  name: Genius Sports Competitors/tbds API
   description: Groups the operations related to to-be-determined competitors.
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2
@@ -196,7 +196,7 @@ apis:
   - type: SwaggerUI
     url: https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json
 - aid: genius-sports:genius-sports-competitors-teams-api
-  name: Genius Sports competitors/teams API
+  name: Genius Sports Competitors/teams API
   description: Groups the operations related to competitors of type Team
   humanURL: https://developer.geniussports.com/
   baseURL: https://fixtures.api.geniussports.com/v2

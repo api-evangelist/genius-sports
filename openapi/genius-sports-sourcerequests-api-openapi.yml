@@ -140,6 +140,40 @@ components:
   schemas:
     Empty:
       type: object
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
     SourceRequestStatusInfoModel:
       type: object
       required:
@@ -160,40 +194,6 @@ components:
         gssName:
           type: string
           description: Name of the response data
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
   securitySchemes:
     Auth0:
       type: apiKey

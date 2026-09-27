@@ -289,51 +289,6 @@ components:
   schemas:
     Empty:
       type: object
-    LocalityResponseModel:
-      type: object
-      required:
-      - createdOn
-      - id
-      - localityType
-      - name
-      - updatesCount
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        localityType:
-          type: string
-          description: ConstituentCountry, Continent, Country, FirstOrderAdministrativeRegion, NonGeographic, World, Game.
-        code:
-          type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     AcceptedModel:
       type: object
       properties:
@@ -384,6 +339,51 @@ components:
           type: string
         message:
           type: string
+    LocalityResponseModel:
+      type: object
+      required:
+      - createdOn
+      - id
+      - localityType
+      - name
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        localityType:
+          type: string
+          description: ConstituentCountry, Continent, Country, FirstOrderAdministrativeRegion, NonGeographic, World, Game.
+        code:
+          type: string
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

@@ -288,6 +288,49 @@ components:
   schemas:
     Empty:
       type: object
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    MetadataPropertyTypesResponseModel:
+      type: object
+      required:
+      - allowNonPredefinedValues
+      - id
+      - isRequired
+      - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id of the property type
+        name:
+          type: string
+          title: Name of the property type
+        allowNonPredefinedValues:
+          type: boolean
+          title: True or false value. Defines whether you can use any value or you should use value from the list below.
+        isRequired:
+          type: boolean
+          description: Is property required for the specific entity for the specific sport
+          title: Is property required for the specific entity for the specific sport
+        values:
+          type: array
+          items:
+            type: string
     SportResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -314,10 +357,6 @@ components:
           type: string
         last:
           type: string
-    ArrayOfMetadataPropertyTypesResponseModel:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetadataPropertyTypesResponseModel'
     SportResponseModel:
       type: object
       required:
@@ -360,6 +399,17 @@ components:
           type: integer
           format: int32
           title: The number of updates made to the sport
+    ArrayOfMetadataPropertyTypesResponseModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataPropertyTypesResponseModel'
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
     ErrorModel:
       type: object
       properties:
@@ -370,56 +420,6 @@ components:
           type: string
         error:
           $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    MetadataPropertyTypesResponseModel:
-      type: object
-      required:
-      - allowNonPredefinedValues
-      - id
-      - isRequired
-      - name
-      properties:
-        id:
-          type: integer
-          format: int64
-          title: Id of the property type
-        name:
-          type: string
-          title: Name of the property type
-        allowNonPredefinedValues:
-          type: boolean
-          title: True or false value. Defines whether you can use any value or you should use value from the list below.
-        isRequired:
-          type: boolean
-          description: Is property required for the specific entity for the specific sport
-          title: Is property required for the specific entity for the specific sport
-        values:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
   securitySchemes:
     Auth0:
       type: apiKey

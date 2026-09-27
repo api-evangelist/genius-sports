@@ -386,63 +386,71 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExternalIdsViewModel:
+    AcceptedModel:
       type: object
       properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    TBDCompetitorResponseModel:
+        messages:
+          type: array
+          items:
+            type: string
+    PlayerCompetitorResponseModelHATEOASReponseModel:
       type: object
-      required:
-      - competitorStatusType
-      - createdOn
-      - genderType
-      - id
-      - name
-      - sport
-      - updatesCount
       properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
+        page:
           type: integer
           format: int32
-        metadataProperties:
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
           type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competitor/metadata
           items:
-            $ref: '#/components/schemas/JsonbModel'
+            $ref: '#/components/schemas/PlayerCompetitorResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    JsonbModelViewModel:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
-        sport:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        genderType:
+          description: Name of the property.
+          title: Property name
+        value:
           type: string
-          description: Undefined, Male, Female, Mixed.
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        competitorStatusType:
-          type: string
-          description: Active, Retired, Unattached
-        isProtected:
-          type: boolean
-          description: Whether the competitor is protected or not.
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
     CreateTBDCompetitor:
       type: object
       required:
@@ -463,16 +471,38 @@ components:
           format: int64
           description: Id of the sport in which the competitor can be used
           minimum: 1.0
-    ErrorModel:
+    ErrorDuplicateModel:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
           type: string
-        error:
-          $ref: '#/components/schemas/Error'
+          description: This is the official genius sports ID, which you have conflict with.
+    UpdateTBDCompetitor:
+      type: object
+      required:
+      - competitorStatusType
+      - id
+      - name
+      properties:
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        id:
+          type: integer
+          format: int64
+          minimum: 1.0
+        name:
+          type: string
+          description: The name of the competitor. It must be unique for the provided sport!
+          title: Competitor name
+          maxLength: 50
+        competitorStatusType:
+          $ref: '#/components/schemas/CompetitorStatusType'
     JsonbModel:
       type: object
       properties:
@@ -482,29 +512,64 @@ components:
           type: string
         isDeleted:
           type: boolean
-    BadRequestModel:
+    ExternalIdsViewModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
-    HALEmbededResponse:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    PlayerCompetitorResponseModel:
       type: object
       required:
+      - competitorStatusType
+      - createdOn
       - id
       - name
-      - ref
+      - person
+      - sport
+      - updatesCount
       properties:
         id:
           type: integer
           format: int64
-        name:
+        createdOn:
           type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
-        ref:
+        name:
           type: string
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        genderType:
+          type: string
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        competitorStatusType:
+          type: string
+        person:
+          $ref: '#/components/schemas/PersonForPlayerResponseModel'
+        isProtected:
+          type: boolean
+          description: Whether the competitor is protected or not.
     PersonForPlayerResponseModel:
       type: object
       required:
@@ -566,94 +631,21 @@ components:
       - '0'
       - '1'
       - '2'
-    PlayerCompetitorResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PlayerCompetitorResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    ErrorDuplicateModel:
+    BadRequestModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
-    AcceptedModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    UpdateTBDCompetitor:
-      type: object
-      required:
-      - competitorStatusType
-      - id
-      - name
-      properties:
-        metadataProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        id:
-          type: integer
-          format: int64
-          minimum: 1.0
-        name:
-          type: string
-          description: The name of the competitor. It must be unique for the provided sport!
-          title: Competitor name
-          maxLength: 50
-        competitorStatusType:
-          $ref: '#/components/schemas/CompetitorStatusType'
-    JsonbModelViewModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the property.
-          title: Property name
-        value:
-          type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
-    PlayerCompetitorResponseModel:
+    TBDCompetitorResponseModel:
       type: object
       required:
       - competitorStatusType
       - createdOn
+      - genderType
       - id
       - name
-      - person
       - sport
       - updatesCount
       properties:
@@ -671,42 +663,50 @@ components:
           format: int32
         metadataProperties:
           type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competitor/metadata
           items:
             $ref: '#/components/schemas/JsonbModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
         name:
           type: string
         sport:
           $ref: '#/components/schemas/HALEmbededResponse'
         genderType:
           type: string
+          description: Undefined, Male, Female, Mixed.
         locality:
           $ref: '#/components/schemas/HALEmbededResponse'
         competitorStatusType:
           type: string
-        person:
-          $ref: '#/components/schemas/PersonForPlayerResponseModel'
+          description: Active, Retired, Unattached
         isProtected:
           type: boolean
           description: Whether the competitor is protected or not.
-    Error:
+    HALEmbededResponse:
       type: object
       required:
-      - domain
-      - message
-      - reason
+      - id
+      - name
+      - ref
       properties:
-        reason:
+        id:
+          type: integer
+          format: int64
+        name:
           type: string
-        domain:
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
           type: string
-        locationType:
-          type: string
-        location:
-          type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
         message:
           type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

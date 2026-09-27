@@ -4220,7 +4220,260 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    teamMatch:
+    gender:
+      type: string
+      title: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
+    personMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/personRequest'
+      - properties:
+          team:
+            type: string
+            description: If the team is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: A team that this person played for. Accepts either team name or Genius Sports team Id.
+    ageCategory:
+      type: string
+      title: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27.'
+      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
+    teamMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/teamMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    venueMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          city:
+            type: string
+            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The city name where this venue is physically located.
+    season:
+      type: string
+      title: Allows either Genius Sports Id or the name of the season.
+      description: If the season is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
+    seasonMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            gender:
+              type: string
+            sport:
+              type: string
+            competition:
+              type: string
+            startDate:
+              type: string
+            endDate:
+              type: string
+            locality:
+              type: string
+            ageCategory:
+              type: string
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
+    fixtureMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/fixtureMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    localityMatchRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the entity to be matched to Genius Sports name, the ISO-3166-1 alpha-3 codes country code or the GsId if available. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        matchConfig:
+          type: object
+          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+          properties:
+            minCertainty:
+              type: number
+              format: double
+              description: The client can set the minimal % of the match certainty. Default is 70%.
+              minimum: 30.0
+              maximum: 100.0
+            dataSourceEntityId:
+              type: string
+              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
+            matchUntil:
+              type: string
+              format: date-time
+              description: The date and time by which the client needs his request matched manually.
+          required:
+          - dataSourceEntityId
+          - matchUntil
+    ArrayOfentityMapResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/entityMapResponse'
+    playerMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/personRequest'
+      - properties:
+          competition:
+            type: string
+            description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: A competition that this player participated in. Accepts either competition name or Genius Sports competition Id.
+          organization:
+            $ref: '#/components/schemas/organization'
+          team:
+            type: string
+            description: Name of any team the player was part of.
+          position:
+            type: string
+            description: Position of the player in a team if it is part of one.
+          shirtNumber:
+            type: string
+            description: Shirt number of the player in a team if it is part of one.
+    doublesMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/doublesMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    personMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/personMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    doublesMatch:
       type: object
       required:
       - certainty
@@ -4245,109 +4498,21 @@ components:
               type: string
             locality:
               type: string
-            ageCategory:
-              type: string
-            isNationalTeam:
-              type: boolean
             name:
               type: string
+            persons:
+              type: array
+              description: Reference for the genius sports person inside this double partnership.
+              items:
+                $ref: '#/components/schemas/entityRelation'
             aliases:
               type: array
               items:
                 type: string
-            homeVenue:
-              type: string
     locality:
       type: string
       title: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
       description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-    localityMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            name:
-              type: string
-            aliases:
-              type: array
-              items:
-                type: string
-    dataSourceReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        ref:
-          type: string
-    teamMatchRequest:
-      title: Contains all the fields the client can match by, as well as configurations about the match.
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          homeVenue:
-            type: string
-            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: If the client has the home venue of the team it can be sent as parameter to narrow down results.
-          isNationalTeam:
-            type: boolean
-            description: True for national teams, False for club teams
-          competition:
-            type: string
-            description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The name or Genius Sports Id of a competition, that this team participated in.
-          organization:
-            $ref: '#/components/schemas/organization'
-    organizationMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/organizationMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
     roundMatch:
       type: object
       required:
@@ -4387,484 +4552,6 @@ components:
               type: array
               items:
                 type: string
-    personMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/personMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    doublesMatchRequest:
-      title: Contains all the fields the client can match by, as well as configurations about the match.
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          competition:
-            type: string
-            description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: A competition that this double partnership participated in. Accepts either competition name or Genius Sports competition Id.
-          organization:
-            $ref: '#/components/schemas/organization'
-          person:
-            type: string
-            description: If the person is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: A person that participates in this double partnership. Accepts either person name or Genius Sports person Id.
-    seasonMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/seasonMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    venueMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            locality:
-              type: string
-            city:
-              type: string
-            parentVenue:
-              type: string
-            name:
-              type: string
-            aliases:
-              type: array
-              items:
-                type: string
-    competitionMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            gender:
-              type: string
-            sport:
-              type: string
-            locality:
-              type: string
-            organization:
-              type: string
-            ageCategory:
-              type: string
-            name:
-              type: string
-            aliases:
-              type: array
-              items:
-                type: string
-    competition:
-      type: string
-      title: Allows either Genius Sports Id or the name of the competition.
-      description: If the competition is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
-    localityMatchRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the entity to be matched to Genius Sports name, the ISO-3166-1 alpha-3 codes country code or the GsId if available. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
-        matchConfig:
-          type: object
-          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
-          properties:
-            minCertainty:
-              type: number
-              format: double
-              description: The client can set the minimal % of the match certainty. Default is 70%.
-              minimum: 30.0
-              maximum: 100.0
-            dataSourceEntityId:
-              type: string
-              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
-            matchUntil:
-              type: string
-              format: date-time
-              description: The date and time by which the client needs his request matched manually.
-          required:
-          - dataSourceEntityId
-          - matchUntil
-    sportMatchRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the entity to be matched to Genius Sports name or the GsId if available. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
-        matchConfig:
-          type: object
-          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
-          properties:
-            minCertainty:
-              type: number
-              format: double
-              description: The client can set the minimal % of the match certainty. Default is 70%.
-              minimum: 30.0
-              maximum: 100.0
-            dataSourceEntityId:
-              type: string
-              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
-            matchUntil:
-              type: string
-              format: date-time
-              description: The date and time by which the client needs his request matched manually.
-          required:
-          - dataSourceEntityId
-          - matchUntil
-    roundMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/roundMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    ArrayOfentityMapResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/entityMapResponse'
-    baseMatchModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
-        sport:
-          type: string
-          description: If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
-          title: Allows either Genius Sports Id or the name of the sport.
-        locality:
-          $ref: '#/components/schemas/locality'
-        matchConfig:
-          type: object
-          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
-          properties:
-            minCertainty:
-              type: number
-              format: double
-              description: The client can set the minimal % of the match certainty. Default is 70%.
-              minimum: 30.0
-              maximum: 100.0
-            dataSourceEntityId:
-              type: string
-              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
-            matchUntil:
-              type: string
-              format: date-time
-              description: The date and time by which the client needs his request matched manually.
-          required:
-          - dataSourceEntityId
-          - matchUntil
-    entityMapResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        dataSource:
-          $ref: '#/components/schemas/dataSourceReference'
-        dataSourceEntityId:
-          type: string
-        matchUntil:
-          type: string
-          format: date-time
-        requestId:
-          type: string
-          format: uuid
-        match:
-          $ref: '#/components/schemas/entityMatchReference'
-        certainty:
-          type: number
-          format: double
-        isManualMatch:
-          type: boolean
-    organizationMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          code:
-            type: string
-            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The code of organization.
-    matchResultSubsribableModel:
-      type: object
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        matchTrackingRequestId:
-          type: string
-          format: uuid
-          description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId` which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
-    entityMatchReference:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        geniusSportsId:
-          type: integer
-          format: int64
-    playerMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/playerMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    personMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            gender:
-              type: string
-            locality:
-              type: string
-            birthDate:
-              type: string
-            name:
-              type: string
-            aliases:
-              type: array
-              items:
-                type: string
-    entityRelation:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-    seasonMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          competition:
-            $ref: '#/components/schemas/competition'
-          startDate:
-            type: string
-            format: date
-            description: If sent a season will be searched with similar start date.
-            title: The date on which the season starts in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
-          endDate:
-            type: string
-            format: date
-            description: If sent a season will be searched with similar end date.
-            title: The date on which the season ends in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          locality:
-            $ref: '#/components/schemas/locality'
-    ageCategory:
-      type: string
-      title: 'One of: Senior, U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, U24, U25, U26, U27.'
-      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
-    doublesMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            sport:
-              type: string
-            gender:
-              type: string
-            locality:
-              type: string
-            name:
-              type: string
-            persons:
-              type: array
-              description: Reference for the genius sports person inside this double partnership.
-              items:
-                $ref: '#/components/schemas/entityRelation'
-            aliases:
-              type: array
-              items:
-                type: string
-    personMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/personRequest'
-      - properties:
-          team:
-            type: string
-            description: If the team is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: A team that this person played for. Accepts either team name or Genius Sports team Id.
-    gender:
-      type: string
-      title: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
-      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
     ErrorModel:
       type: object
       properties:
@@ -4875,147 +4562,6 @@ components:
           type: string
         error:
           $ref: '#/components/schemas/Error'
-    personRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          birthDate:
-            type: string
-            format: date
-            description: If sent an EXACT match is made on the birthdate, excluding all non-matching entities.
-            title: The birth date of the searched player in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    sportMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/sportMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    localityMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/localityMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    fixtureMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          startDate:
-            type: string
-            format: date-time
-            description: The start date of the fixture in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
-            title: The start date of the fixture.
-          venue:
-            type: string
-            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: If the client has the venue of the fixture it can be sent as parameter to narrow down results.
-          competition:
-            type: string
-            description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The name or Genius Sports Id of a competition, of this fixture.
-          organization:
-            $ref: '#/components/schemas/organization'
-          season:
-            type: string
-            description: If season is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The name or Genius Sports Id of a season, of this fixture.
-          round:
-            type: string
-            description: If round is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The name or Genius Sports Id of a round, of this fixture.
-          fixtureCompetitors:
-            type: array
-            description: 'If participating competitors names. e.g Barcelona, RealMadrid etc. This can also accept the Genius Sport Id of the competitor. e.g. Barcelona, 10106 '
-            items:
-              type: string
-    organizationMatch:
-      type: object
-      required:
-      - certainty
-      properties:
-        certainty:
-          type: number
-          format: double
-          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
-        Id:
-          type: string
-          description: The Id of the entity on Genius sports side
-        dataSourceEntityId:
-          type: string
-          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
-        relatedData:
-          type: object
-          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
-          properties:
-            code:
-              type: string
-            name:
-              type: string
-            aliases:
-              type: array
-              items:
-                type: string
     playerMatch:
       type: object
       required:
@@ -5051,6 +4597,73 @@ components:
               type: array
               items:
                 type: string
+    localityMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/localityMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    teamMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            sport:
+              type: string
+            gender:
+              type: string
+            locality:
+              type: string
+            ageCategory:
+              type: string
+            isNationalTeam:
+              type: boolean
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
+            homeVenue:
+              type: string
     venueMatchHATEOASResultModel:
       type: object
       required:
@@ -5081,40 +4694,62 @@ components:
           type: string
         last:
           type: string
-    competitionMatchHATEOASResultModel:
+    entityMapResponse:
       type: object
-      required:
-      - items
-      - page
-      - pageSize
       properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
+        id:
           type: integer
           format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/competitionMatch'
-        self:
+        createdOn:
           type: string
-        previous:
+          format: date-time
+        modifiedOn:
           type: string
-        next:
+          format: date-time
+        dataSource:
+          $ref: '#/components/schemas/dataSourceReference'
+        dataSourceEntityId:
           type: string
-        first:
+        matchUntil:
           type: string
-        last:
+          format: date-time
+        requestId:
           type: string
-    organization:
-      type: string
-      title: If the client has the organization of the fixture it can be sent as parameter to narrow down results.
-      description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+          format: uuid
+        match:
+          $ref: '#/components/schemas/entityMatchReference'
+        certainty:
+          type: number
+          format: double
+        isManualMatch:
+          type: boolean
+    organizationMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            code:
+              type: string
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
     sportMatch:
       type: object
       required:
@@ -5140,179 +4775,15 @@ components:
               type: array
               items:
                 type: string
-    failedMatchResponse:
+    dataSourceReference:
       type: object
-      required:
-      - description
-      - matchTrackingRequestId
       properties:
-        description:
-          type: string
-          description: 'MappedMatch, SingleMatch, NoMatch, MultipleMatchings, Description: MappedMatch - the first of the matches is the official match based on sourceId, SingleMatch - you have found the best non-matched representation of your entity into the genius sports system. You can cache it by making sending a MatchRequest on the same endpoint, NoMatch (You should adjust matching params or make a proposal to Fixtures Platform),  MultipleMatchings - we have found more that one matches based on your params, you should send more context in order to get to a single match or interpred the multiple results on your end'
-        matchTrackingRequestId:
-          type: string
-          description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId` which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
-        AsyncMatchTrackingUntilUTC:
-          type: string
-          format: date-time
-          description: Time until request should be matched and time until the match will be saved
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    teamMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
+        id:
           type: integer
           format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/teamMatch'
-        self:
+        name:
           type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    doublesMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/doublesMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    season:
-      type: string
-      title: Allows either Genius Sports Id or the name of the season.
-      description: If the season is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
-    roundMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          season:
-            $ref: '#/components/schemas/season'
-          startDate:
-            type: string
-            format: date
-            description: If sent a round will be searched with similar start date.
-            title: The date on which the round starts in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
-          endDate:
-            type: string
-            format: date
-            description: If sent a round will be searched with similar end date.
-            title: The date on which the round ends in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          locality:
-            $ref: '#/components/schemas/locality'
-    playerMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/personRequest'
-      - properties:
-          competition:
-            type: string
-            description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: A competition that this player participated in. Accepts either competition name or Genius Sports competition Id.
-          organization:
-            $ref: '#/components/schemas/organization'
-          team:
-            type: string
-            description: Name of any team the player was part of.
-          position:
-            type: string
-            description: Position of the player in a team if it is part of one.
-          shirtNumber:
-            type: string
-            description: Shirt number of the player in a team if it is part of one.
-    venueMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          city:
-            type: string
-            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-            title: The city name where this venue is physically located.
-    fixtureMatchHATEOASResultModel:
-      type: object
-      required:
-      - items
-      - page
-      - pageSize
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/fixtureMatch'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
+        ref:
           type: string
     fixtureMatch:
       type: object
@@ -5369,7 +4840,545 @@ components:
               description: If the fixture is played in double partnership sports, they will be linked here.
               items:
                 $ref: '#/components/schemas/entityRelation'
-    seasonMatch:
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    entityMatchReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        geniusSportsId:
+          type: integer
+          format: int64
+    personRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          birthDate:
+            type: string
+            format: date
+            description: If sent an EXACT match is made on the birthdate, excluding all non-matching entities.
+            title: The birth date of the searched player in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+    localityMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
+    organizationMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/organizationMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    roundMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/roundMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    competitionMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/competitionMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    competitionMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          locality:
+            $ref: '#/components/schemas/locality'
+          organization:
+            $ref: '#/components/schemas/organization'
+    organizationMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          code:
+            type: string
+            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The code of organization.
+    venueMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            locality:
+              type: string
+            city:
+              type: string
+            parentVenue:
+              type: string
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
+    playerMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/playerMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    organization:
+      type: string
+      title: If the client has the organization of the fixture it can be sent as parameter to narrow down results.
+      description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+    sportMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/sportMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    roundMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          season:
+            $ref: '#/components/schemas/season'
+          startDate:
+            type: string
+            format: date
+            description: If sent a round will be searched with similar start date.
+            title: The date on which the round starts in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+          endDate:
+            type: string
+            format: date
+            description: If sent a round will be searched with similar end date.
+            title: The date on which the round ends in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          locality:
+            $ref: '#/components/schemas/locality'
+    matchResultSubsribableModel:
+      type: object
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        matchTrackingRequestId:
+          type: string
+          format: uuid
+          description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId` which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
+    fixtureMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          startDate:
+            type: string
+            format: date-time
+            description: The start date of the fixture in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
+            title: The start date of the fixture.
+          venue:
+            type: string
+            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: If the client has the venue of the fixture it can be sent as parameter to narrow down results.
+          competition:
+            type: string
+            description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The name or Genius Sports Id of a competition, of this fixture.
+          organization:
+            $ref: '#/components/schemas/organization'
+          season:
+            type: string
+            description: If season is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The name or Genius Sports Id of a season, of this fixture.
+          round:
+            type: string
+            description: If round is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The name or Genius Sports Id of a round, of this fixture.
+          fixtureCompetitors:
+            type: array
+            description: 'If participating competitors names. e.g Barcelona, RealMadrid etc. This can also accept the Genius Sport Id of the competitor. e.g. Barcelona, 10106 '
+            items:
+              type: string
+    seasonMatchHATEOASResultModel:
+      type: object
+      required:
+      - items
+      - page
+      - pageSize
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/seasonMatch'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    personMatch:
+      type: object
+      required:
+      - certainty
+      properties:
+        certainty:
+          type: number
+          format: double
+          description: The % of the certainty of the match, based on sent criteria. Range from [minCertainty to 100]
+        Id:
+          type: string
+          description: The Id of the entity on Genius sports side
+        dataSourceEntityId:
+          type: string
+          description: The ID of the data source's entity. e.g competitonId, teamId, etc.
+        relatedData:
+          type: object
+          description: 'Contains name: value pairs for data related to the entity that can used to filter down the results'
+          properties:
+            gender:
+              type: string
+            locality:
+              type: string
+            birthDate:
+              type: string
+            name:
+              type: string
+            aliases:
+              type: array
+              items:
+                type: string
+    baseMatchModel:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        sport:
+          type: string
+          description: If the sport is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
+          title: Allows either Genius Sports Id or the name of the sport.
+        locality:
+          $ref: '#/components/schemas/locality'
+        matchConfig:
+          type: object
+          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+          properties:
+            minCertainty:
+              type: number
+              format: double
+              description: The client can set the minimal % of the match certainty. Default is 70%.
+              minimum: 30.0
+              maximum: 100.0
+            dataSourceEntityId:
+              type: string
+              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
+            matchUntil:
+              type: string
+              format: date-time
+              description: The date and time by which the client needs his request matched manually.
+          required:
+          - dataSourceEntityId
+          - matchUntil
+    sportMatchRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the entity to be matched to Genius Sports name or the GsId if available. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        matchConfig:
+          type: object
+          description: Sending a model containing the Id of the entity on your side, which will be mapped to our best match, either automatically or manually if needed. If a map already exists, it will be returned as a top score.
+          properties:
+            minCertainty:
+              type: number
+              format: double
+              description: The client can set the minimal % of the match certainty. Default is 70%.
+              minimum: 30.0
+              maximum: 100.0
+            dataSourceEntityId:
+              type: string
+              description: The unique identifier of the entity that the client want to match on his side. Upon succesfull match this Id will be mapped to the Genius Sports Id
+            matchUntil:
+              type: string
+              format: date-time
+              description: The date and time by which the client needs his request matched manually.
+          required:
+          - dataSourceEntityId
+          - matchUntil
+    seasonMatchRequest:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          competition:
+            $ref: '#/components/schemas/competition'
+          startDate:
+            type: string
+            format: date
+            description: If sent a season will be searched with similar start date.
+            title: The date on which the season starts in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+          endDate:
+            type: string
+            format: date
+            description: If sent a season will be searched with similar end date.
+            title: The date on which the season ends in format - full-date notation as defined by RFC 3339, section 5.6, for example, 2017-07-21
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          locality:
+            $ref: '#/components/schemas/locality'
+    doublesMatchRequest:
+      title: Contains all the fields the client can match by, as well as configurations about the match.
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          competition:
+            type: string
+            description: If the competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: A competition that this double partnership participated in. Accepts either competition name or Genius Sports competition Id.
+          organization:
+            $ref: '#/components/schemas/organization'
+          person:
+            type: string
+            description: If the person is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: A person that participates in this double partnership. Accepts either person name or Genius Sports person Id.
+    teamMatchRequest:
+      title: Contains all the fields the client can match by, as well as configurations about the match.
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          homeVenue:
+            type: string
+            description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: If the client has the home venue of the team it can be sent as parameter to narrow down results.
+          isNationalTeam:
+            type: boolean
+            description: True for national teams, False for club teams
+          competition:
+            type: string
+            description: If competition is sent as string name а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+            title: The name or Genius Sports Id of a competition, that this team participated in.
+          organization:
+            $ref: '#/components/schemas/organization'
+    competition:
+      type: string
+      title: Allows either Genius Sports Id or the name of the competition.
+      description: If the competition is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score.
+    failedMatchResponse:
+      type: object
+      required:
+      - description
+      - matchTrackingRequestId
+      properties:
+        description:
+          type: string
+          description: 'MappedMatch, SingleMatch, NoMatch, MultipleMatchings, Description: MappedMatch - the first of the matches is the official match based on sourceId, SingleMatch - you have found the best non-matched representation of your entity into the genius sports system. You can cache it by making sending a MatchRequest on the same endpoint, NoMatch (You should adjust matching params or make a proposal to Fixtures Platform),  MultipleMatchings - we have found more that one matches based on your params, you should send more context in order to get to a single match or interpred the multiple results on your end'
+        matchTrackingRequestId:
+          type: string
+          description: An unique identifier returned only when client have sent MatchConfig containing `dataSourceEntityId` which internally triggers either automatic or manual mapping from the best Genius Sports Id to the source entity
+        AsyncMatchTrackingUntilUTC:
+          type: string
+          format: date-time
+          description: Time until request should be matched and time until the match will be saved
+    competitionMatch:
       type: object
       required:
       - certainty
@@ -5392,13 +5401,9 @@ components:
               type: string
             sport:
               type: string
-            competition:
-              type: string
-            startDate:
-              type: string
-            endDate:
-              type: string
             locality:
+              type: string
+            organization:
               type: string
             ageCategory:
               type: string
@@ -5408,18 +5413,13 @@ components:
               type: array
               items:
                 type: string
-    competitionMatchRequest:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          locality:
-            $ref: '#/components/schemas/locality'
-          organization:
-            $ref: '#/components/schemas/organization'
+    entityRelation:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
   securitySchemes:
     Auth0:
       type: apiKey

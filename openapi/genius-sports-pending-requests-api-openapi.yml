@@ -135,31 +135,6 @@ components:
         reason:
           type: string
           description: The reason for NotMatched status. Free text. Should not be used to build logical flows on top of it! Only available when status is NotMatched!
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    sourceHALEmbededResponse:
-      type: object
-      properties:
-        name:
-          type: string
-        id:
-          type: integer
-          format: int64
     Error:
       type: object
       required:
@@ -175,6 +150,31 @@ components:
           type: string
         message:
           type: string
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    sourceHALEmbededResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: integer
+          format: int64
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

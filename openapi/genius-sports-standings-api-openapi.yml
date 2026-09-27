@@ -43,17 +43,6 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   schemas:
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
     ResponseMeta:
       type: object
       properties:
@@ -74,6 +63,17 @@ components:
           type: integer
         limit:
           type: integer
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
   parameters:
     Fields:
       name: fields
