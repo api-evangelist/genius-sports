@@ -893,21 +893,83 @@ components:
   schemas:
     Empty:
       type: object
-    CreateSeasonCompetitor:
+    JsonbModelViewModel:
       type: object
+      required:
+      - name
       properties:
-        competitorId:
+        name:
+          type: string
+          description: Name of the property.
+          title: Property name
+        value:
+          type: string
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
+    SeasonCompetitorsResponseModel:
+      type: object
+      required:
+      - competitorType
+      - genderType
+      - id
+      - locality
+      - name
+      - ref
+      properties:
+        id:
           type: integer
           format: int64
-          description: The id of the competitor which will be added in the season
-          title: Competitor Id
-    AcceptedModel:
+          description: Id of the competitor
+        name:
+          type: string
+          description: Name of the competitor
+        competitorType:
+          type: string
+          description: Type of the competitor
+        ref:
+          type: string
+          description: Endpoint to competitor
+        genderType:
+          type: string
+          description: Gender of the competitor
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        confirmed:
+          type: boolean
+          description: Indicates if the competitor is confirmed for the season
+    JsonbModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
+        name:
+          type: string
+        value:
+          type: string
+        isDeleted:
+          type: boolean
+    PatchSeason:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The ID of the season.
+          title: Id
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the season in UTC ISO-8601 format
+          title: Start Date
+        endDate:
+          type: string
+          format: date-time
+          description: The end date of the season in UTC ISO-8601 format
+          title: End Date
+      title: Patch Season Model
+      description: This model should be used to propose a partial update/patch to a season.
     SeasonResponseModel:
       type: object
       required:
@@ -959,24 +1021,36 @@ components:
           $ref: '#/components/schemas/HALEmbededResponse'
         competition:
           $ref: '#/components/schemas/HALEmbededResponse'
-    Error:
+    AcceptedModel:
       type: object
-      required:
-      - domain
-      - message
-      - reason
       properties:
-        reason:
+        messages:
+          type: array
+          items:
+            type: string
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
           type: string
-        domain:
+        optaLegacyId:
           type: string
-        locationType:
+        fibaId:
           type: string
-        location:
+        vesselId:
           type: string
-        message:
+        statsEngineId:
           type: string
-    SeasonCompetitorsResponseModelHATEOASReponseModel:
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    CreateSeasonCompetitor:
+      type: object
+      properties:
+        competitorId:
+          type: integer
+          format: int64
+          description: The id of the competitor which will be added in the season
+          title: Competitor Id
+    SeasonResponseModelHATEOASReponseModel:
       type: object
       properties:
         page:
@@ -991,7 +1065,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/SeasonCompetitorsResponseModel'
+            $ref: '#/components/schemas/SeasonResponseModel'
         self:
           type: string
         previous:
@@ -1002,38 +1076,13 @@ components:
           type: string
         last:
           type: string
-    PatchSeason:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: The ID of the season.
-          title: Id
-        startDate:
-          type: string
-          format: date-time
-          description: The start date of the season in UTC ISO-8601 format
-          title: Start Date
-        endDate:
-          type: string
-          format: date-time
-          description: The end date of the season in UTC ISO-8601 format
-          title: End Date
-      title: Patch Season Model
-      description: This model should be used to propose a partial update/patch to a season.
-    ErrorDuplicateModel:
+    BadRequestModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
     CreateSeason:
       type: object
       required:
@@ -1084,68 +1133,44 @@ components:
             $ref: '#/components/schemas/JsonbModelViewModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
-    JsonbModel:
+    Error:
       type: object
+      required:
+      - domain
+      - message
+      - reason
       properties:
-        name:
+        reason:
           type: string
-        value:
+        domain:
           type: string
-        isDeleted:
-          type: boolean
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
+        locationType:
           type: string
-        optaLegacyId:
+        location:
           type: string
-        fibaId:
+        message:
           type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    BadRequestModel:
+    ErrorDuplicateModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    SeasonCompetitorsResponseModel:
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
+    ErrorModel:
       type: object
-      required:
-      - competitorType
-      - genderType
-      - id
-      - locality
-      - name
-      - ref
       properties:
-        id:
+        code:
           type: integer
-          format: int64
-          description: Id of the competitor
-        name:
+          format: int32
+        message:
           type: string
-          description: Name of the competitor
-        competitorType:
-          type: string
-          description: Type of the competitor
-        ref:
-          type: string
-          description: Endpoint to competitor
-        genderType:
-          type: string
-          description: Gender of the competitor
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        confirmed:
-          type: boolean
-          description: Indicates if the competitor is confirmed for the season
-    SeasonResponseModelHATEOASReponseModel:
+        error:
+          $ref: '#/components/schemas/Error'
+    SeasonCompetitorsResponseModelHATEOASReponseModel:
       type: object
       properties:
         page:
@@ -1160,7 +1185,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/SeasonResponseModel'
+            $ref: '#/components/schemas/SeasonCompetitorsResponseModel'
         self:
           type: string
         previous:
@@ -1171,47 +1196,6 @@ components:
           type: string
         last:
           type: string
-    JsonbModelViewModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the property.
-          title: Property name
-        value:
-          type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
-    HALEmbededResponse:
-      type: object
-      required:
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        ref:
-          type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
     UpdateSeason:
       type: object
       required:
@@ -1262,6 +1246,22 @@ components:
             $ref: '#/components/schemas/JsonbModelViewModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
   securitySchemes:
     Auth0:
       type: apiKey

@@ -622,43 +622,60 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ageCategory:
-      type: string
-      title: Age Category
-      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
-    CompetitorSeasonsResponseModel:
+    JsonbModelViewModel:
       type: object
       required:
-      - id
       - name
-      - ref
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Id of the season
         name:
           type: string
-          description: Name of the season
-        ref:
+          description: Name of the property.
+          title: Property name
+        value:
           type: string
-          description: Endpoint to season
-    Error:
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
+    AcceptedModel:
       type: object
-      required:
-      - domain
-      - message
-      - reason
       properties:
-        reason:
+        messages:
+          type: array
+          items:
+            type: string
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    CompetitorRoundsResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompetitorRoundsResponseModel'
+        self:
           type: string
-        domain:
+        previous:
           type: string
-        locationType:
+        next:
           type: string
-        location:
+        first:
           type: string
-        message:
+        last:
           type: string
     UpdateTeamCompetitor:
       type: object
@@ -698,64 +715,10 @@ components:
           description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competitor/metadata
           items:
             $ref: '#/components/schemas/JsonbModelViewModel'
-    JsonbModel:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        isDeleted:
-          type: boolean
-    CompetitorRoundsResponseModel:
-      type: object
-      required:
-      - genderType
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Id of the round
-        name:
-          type: string
-          description: Name of the round
-        ref:
-          type: string
-          description: Endpoint to round
-        genderType:
-          type: string
-          description: Gender of the competitor
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-    TeamCompetitorResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamCompetitorResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
+    ageCategory:
+      type: string
+      title: Age Category
+      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
     HALEmbededResponse:
       type: object
       required:
@@ -772,68 +735,6 @@ components:
           $ref: '#/components/schemas/ExternalIdsViewModel'
         ref:
           type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    CompetitorRoundsResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompetitorRoundsResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    GenderType:
-      type: integer
-      title: Gender Type
-      format: int32
-      description: 'This property defines the possible gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female; 3 - Mixed.'
-      enum:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-    CompetitorStatusType:
-      type: integer
-      title: Competitor Status Type
-      format: int32
-      description: 'This property defines the possible status types which can be set as integer values. Each integer value is associated with relevant status type as follows: 0 - Active; 1 - Retired; 2 - Unattached.'
-      enum:
-      - '0'
-      - '1'
-      - '2'
     CompetitorSeasonsResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -860,80 +761,46 @@ components:
           type: string
         last:
           type: string
-    JsonbModelViewModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the property.
-          title: Property name
-        value:
-          type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
-    AcceptedModel:
+    ExternalIdsViewModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
-    CreateTeamCompetitor:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    TeamCompetitorResponseModelHATEOASReponseModel:
       type: object
-      required:
-      - genderType
-      - localityId
-      - name
-      - sportId
       properties:
-        name:
-          type: string
-          description: The name of the competitor. It must be unique for the provided sport, locality, gender and type! It must contain Women as name postfix when competitor is of CompetitorType Team (0) and gender is Female (2)! In any other case the Women postfix is forbidden!
-          title: Competitor name
-          maxLength: 50
-        abbreviation:
-          type: string
-          description: An abbreviation for the competitor
-          title: Competitor abbreviation
-          maxLength: 125
-        localityId:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
           type: integer
           format: int64
-          description: Id of the country,virtual place, etc. of the competitor!
-          title: Locality Id
-        venueId:
-          type: integer
-          format: int64
-          description: Id of the home venue of the competitor. The venue must be associated with the same sport as the competitor!
-          title: Venue Id
-        sportId:
-          type: integer
-          format: int64
-          description: Id of the sport to which the competitor will be associated. This id will restrict the possible metadataProperties and values which can be set to the competitor! Also it will restrict the competitors, rounds, fixtures and seasons associated with this competitor to be only for this sport!
-          title: Sport Id
-        genderType:
-          $ref: '#/components/schemas/GenderType'
-        ageCategory:
-          $ref: '#/components/schemas/ageCategory'
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competitor/metadata
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
+        items:
           type: array
           items:
-            type: string
-        geniusSportsConflictId:
+            $ref: '#/components/schemas/TeamCompetitorResponseModel'
+        self:
           type: string
-          description: This is the official genius sports ID, which you have conflict with.
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
     TeamCompetitorResponseModel:
       type: object
       required:
@@ -985,20 +852,153 @@ components:
         isProtected:
           type: boolean
           description: Whether the competitor is protected or not.
-    ExternalIdsViewModel:
+    CreateTeamCompetitor:
+      type: object
+      required:
+      - genderType
+      - localityId
+      - name
+      - sportId
+      properties:
+        name:
+          type: string
+          description: The name of the competitor. It must be unique for the provided sport, locality, gender and type! It must contain Women as name postfix when competitor is of CompetitorType Team (0) and gender is Female (2)! In any other case the Women postfix is forbidden!
+          title: Competitor name
+          maxLength: 50
+        abbreviation:
+          type: string
+          description: An abbreviation for the competitor
+          title: Competitor abbreviation
+          maxLength: 125
+        localityId:
+          type: integer
+          format: int64
+          description: Id of the country,virtual place, etc. of the competitor!
+          title: Locality Id
+        venueId:
+          type: integer
+          format: int64
+          description: Id of the home venue of the competitor. The venue must be associated with the same sport as the competitor!
+          title: Venue Id
+        sportId:
+          type: integer
+          format: int64
+          description: Id of the sport to which the competitor will be associated. This id will restrict the possible metadataProperties and values which can be set to the competitor! Also it will restrict the competitors, rounds, fixtures and seasons associated with this competitor to be only for this sport!
+          title: Sport Id
+        genderType:
+          $ref: '#/components/schemas/GenderType'
+        ageCategory:
+          $ref: '#/components/schemas/ageCategory'
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competitor/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorDuplicateModel:
       type: object
       properties:
-        optaId:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
           type: string
-        optaLegacyId:
+          description: This is the official genius sports ID, which you have conflict with.
+    JsonbModel:
+      type: object
+      properties:
+        name:
           type: string
-        fibaId:
+        value:
           type: string
-        vesselId:
+        isDeleted:
+          type: boolean
+    CompetitorSeasonsResponseModel:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Id of the season
+        name:
           type: string
-        statsEngineId:
+          description: Name of the season
+        ref:
           type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+          description: Endpoint to season
+    GenderType:
+      type: integer
+      title: Gender Type
+      format: int32
+      description: 'This property defines the possible gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female; 3 - Mixed.'
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+    CompetitorRoundsResponseModel:
+      type: object
+      required:
+      - genderType
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Id of the round
+        name:
+          type: string
+          description: Name of the round
+        ref:
+          type: string
+          description: Endpoint to round
+        genderType:
+          type: string
+          description: Gender of the competitor
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+    CompetitorStatusType:
+      type: integer
+      title: Competitor Status Type
+      format: int32
+      description: 'This property defines the possible status types which can be set as integer values. Each integer value is associated with relevant status type as follows: 0 - Active; 1 - Retired; 2 - Unattached.'
+      enum:
+      - '0'
+      - '1'
+      - '2'
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

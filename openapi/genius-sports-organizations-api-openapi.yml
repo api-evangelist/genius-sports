@@ -506,30 +506,16 @@ components:
   schemas:
     Empty:
       type: object
-    AcceptedModel:
+    ErrorModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
+        code:
+          type: integer
+          format: int32
         message:
           type: string
+        error:
+          $ref: '#/components/schemas/Error'
     OrganizationResponseModel:
       type: object
       required:
@@ -561,35 +547,20 @@ components:
         code:
           type: string
           description: Unique code of the organization
-    UpdateOrganization:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          title: Id of the organization
-        name:
-          type: string
-          description: Unique name of the organization
-    ErrorDuplicateModel:
+    AcceptedModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
-    CreateOrganization:
+    BadRequestModel:
       type: object
       properties:
-        name:
-          type: string
-          description: Unique name of the organization
-        code:
-          type: string
-          description: Unique code of the organization
+        messages:
+          type: array
+          items:
+            type: string
     OrganizationResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -616,23 +587,52 @@ components:
           type: string
         last:
           type: string
-    BadRequestModel:
+    CreateOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the organization
+        code:
+          type: string
+          description: Unique code of the organization
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    UpdateOrganization:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id of the organization
+        name:
+          type: string
+          description: Unique name of the organization
+    ErrorDuplicateModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        geniusSportsConflictId:
           type: string
-        error:
-          $ref: '#/components/schemas/Error'
+          description: This is the official genius sports ID, which you have conflict with.
   securitySchemes:
     Auth0:
       type: apiKey

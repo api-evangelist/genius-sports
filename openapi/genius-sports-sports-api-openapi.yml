@@ -288,6 +288,23 @@ components:
   schemas:
     Empty:
       type: object
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
     Error:
       type: object
       required:
@@ -331,32 +348,6 @@ components:
           type: array
           items:
             type: string
-    SportResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SportResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
     SportResponseModel:
       type: object
       required:
@@ -403,23 +394,32 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MetadataPropertyTypesResponseModel'
-    BadRequestModel:
+    SportResponseModelHATEOASReponseModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
+        page:
           type: integer
           format: int32
-        message:
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SportResponseModel'
+        self:
           type: string
-        error:
-          $ref: '#/components/schemas/Error'
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
   securitySchemes:
     Auth0:
       type: apiKey

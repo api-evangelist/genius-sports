@@ -228,6 +228,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
     AcceptedModel:
       type: object
       properties:
@@ -275,6 +285,27 @@ components:
         competitorStatusType:
           type: string
           description: Active, Retired, Unattached
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
     Error:
       type: object
       required:
@@ -301,20 +332,6 @@ components:
           type: string
         isDeleted:
           type: boolean
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
     HorseCompetitorResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -341,13 +358,6 @@ components:
           type: string
         last:
           type: string
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     HALEmbededResponse:
       type: object
       required:
@@ -364,16 +374,6 @@ components:
           $ref: '#/components/schemas/ExternalIdsViewModel'
         ref:
           type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

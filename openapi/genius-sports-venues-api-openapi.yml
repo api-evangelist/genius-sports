@@ -529,7 +529,78 @@ components:
   schemas:
     Empty:
       type: object
+    JsonbModelViewModel:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the property.
+          title: Property name
+        value:
+          type: string
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
+    VenueResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenueResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    JsonbModel:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        isDeleted:
+          type: boolean
     AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    BadRequestModel:
       type: object
       properties:
         messages:
@@ -575,33 +646,6 @@ components:
             $ref: '#/components/schemas/JsonbModelViewModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
     CreateVenue:
       type: object
       required:
@@ -703,77 +747,43 @@ components:
             $ref: '#/components/schemas/HALEmbededResponse'
         parentVenue:
           $ref: '#/components/schemas/HALEmbededResponse'
-    JsonbModel:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        isDeleted:
-          type: boolean
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    JsonbModelViewModel:
+    Error:
       type: object
       required:
-      - name
+      - domain
+      - message
+      - reason
       properties:
-        name:
+        reason:
           type: string
-          description: Name of the property.
-          title: Property name
-        value:
+        domain:
           type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
-    BadRequestModel:
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorDuplicateModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    VenueResponseModelHATEOASReponseModel:
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
+    ErrorModel:
       type: object
       properties:
-        page:
+        code:
           type: integer
           format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/VenueResponseModel'
-        self:
+        message:
           type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
+        error:
+          $ref: '#/components/schemas/Error'
     HALEmbededResponse:
       type: object
       required:
@@ -790,16 +800,17 @@ components:
           $ref: '#/components/schemas/ExternalIdsViewModel'
         ref:
           type: string
-    ErrorModel:
+    ResponseEnvelope:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
     ResponseMeta:
       type: object
       properties:
@@ -820,24 +831,7 @@ components:
           type: integer
         limit:
           type: integer
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
   parameters:
-    Fields:
-      name: fields
-      in: query
-      description: Comma-separated list of fields to return
-      schema:
-        type: string
     Offset:
       name: offset
       in: query
@@ -845,6 +839,12 @@ components:
       schema:
         type: integer
         default: 0
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to return
+      schema:
+        type: string
     Limit:
       name: limit
       in: query

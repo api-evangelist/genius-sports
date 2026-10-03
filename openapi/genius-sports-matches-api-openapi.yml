@@ -73,12 +73,6 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   parameters:
-    Fields:
-      name: fields
-      in: query
-      description: Comma-separated list of fields to return
-      schema:
-        type: string
     Offset:
       name: offset
       in: query
@@ -86,6 +80,12 @@ components:
       schema:
         type: integer
         default: 0
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to return
+      schema:
+        type: string
     Limit:
       name: limit
       in: query
@@ -95,6 +95,17 @@ components:
         default: 10
         maximum: 500
   schemas:
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
     ResponseMeta:
       type: object
       properties:
@@ -115,17 +126,6 @@ components:
           type: integer
         limit:
           type: integer
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
   securitySchemes:
     apiKey:
       type: apiKey

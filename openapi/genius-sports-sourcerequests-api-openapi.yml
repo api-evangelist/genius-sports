@@ -140,6 +140,13 @@ components:
   schemas:
     Empty:
       type: object
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
     Error:
       type: object
       required:
@@ -157,13 +164,6 @@ components:
           type: string
         message:
           type: string
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     ErrorModel:
       type: object
       properties:

@@ -1380,45 +1380,21 @@ components:
   schemas:
     Empty:
       type: object
-    ageCategory:
-      type: string
-      title: Age Category
-      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
-    PatchFixture:
+    JsonbModelViewModel:
       type: object
       required:
-      - id
+      - name
       properties:
-        id:
-          type: integer
-          format: int64
-          description: The ID of the fixture.
-          title: Id
-        startDate:
+        name:
           type: string
-          format: date-time
-          description: The start date of the fixture in UTC ISO-8601 format
-          title: Start Date
-        venueId:
-          type: integer
-          format: int64
-          description: The ID of the venue the fixture is played at.
-          title: Venue ID
-        roundId:
-          type: integer
-          format: int64
-          description: The ID of the round the fixture is for.
-          title: Round ID
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competition/metadata
-          title: metadataProperties
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-      title: Patch Fixture Model
-      description: This model should be used to propose a partial update/patch to a fixture.
+          description: Name of the property.
+          title: Property name
+        value:
+          type: string
+          description: Value of the property.
+          title: Property value
+      title: Create/Update Property Model
+      description: This model should be used to create or update single property value for specific property name for specific model.
     FixtureRefdataCompetitor:
       type: object
       properties:
@@ -1436,6 +1412,455 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FixtureRefdataLineupPlayer'
+    CompetitorHALEmbededResponse:
+      type: object
+      required:
+      - competitorType
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        competitorType:
+          type: string
+          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
+        ref:
+          type: string
+    FixtureLineupsResponseModel:
+      type: object
+      required:
+      - confirmed
+      - createdOn
+      - id
+      - lineupPlayers
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        fixture:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        confirmed:
+          type: boolean
+        homeTeam:
+          $ref: '#/components/schemas/LineupTeamResponseModel'
+        awayTeam:
+          $ref: '#/components/schemas/LineupTeamResponseModel'
+        lineupPlayers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineupPlayerResponseModel'
+    AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    FixtureRefdataVenue:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+    LineupTeamResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+      - properties:
+          formation:
+            type: string
+            description: The team formation for the current lineup
+            title: Team formation in the lineup, e.g. 4-4-2
+    FixtureRefdataLineupPlayer:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        order:
+          type: integer
+          format: int32
+        isStarter:
+          type: boolean
+        name:
+          type: string
+        shirtNumber:
+          type: string
+        position:
+          type: string
+        formationPosition:
+          type: string
+        formationPositionName:
+          type: string
+    LineupPlayerResponseModel:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+        shirtNumber:
+          type: string
+        position:
+          type: string
+        formationPosition:
+          type: string
+        formationPositionName:
+          type: string
+        isHome:
+          type: boolean
+        order:
+          type: integer
+          format: int32
+        isStarter:
+          type: boolean
+    ageCategory:
+      type: string
+      title: Age Category
+      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
+    FixtureOfficialResponseModel:
+      type: object
+      required:
+      - createdOn
+      - id
+      - person
+      - sport
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/PersonHALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+    FixtureResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    FixtureRefdataFixture:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        startDate:
+          type: string
+          format: date-time
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureRefdataCompetitor'
+        season:
+          $ref: '#/components/schemas/FixtureRefdataSeason'
+        venue:
+          $ref: '#/components/schemas/FixtureRefdataVenue'
+        competition:
+          $ref: '#/components/schemas/FixtureRefdataCompetition'
+    FixtureCompetitorHALEmbededResponse:
+      type: object
+      required:
+      - competitorType
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        competitorType:
+          type: string
+          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        metadataProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        ref:
+          type: string
+    PersonHALEmbededResponse:
+      type: object
+      required:
+      - firstName
+      - fullName
+      - genderType
+      - id
+      - lastName
+      - locality
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        dateOfBirth:
+          type: string
+          format: date-time
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        nickName:
+          type: string
+        genderType:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        ref:
+          type: string
+    UpdateFixture:
+      type: object
+      required:
+      - competitors
+      - startDate
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The ID of the fixture.
+          title: Id
+        competitors:
+          type: array
+          description: Array of competitors to be added to the fixture.
+          title: Competitors
+          items:
+            type: integer
+            description: Competitors which belong to the fixture.
+            title: Competitors
+        homeCompetitorId:
+          type: integer
+          format: int64
+          description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
+          title: Home Competitor Id
+        startDate:
+          type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format
+          title: Start Date
+        roundId:
+          type: integer
+          format: int64
+          description: The ID of the round the fixture belongs to.
+          title: Round ID
+        venueId:
+          type: integer
+          format: int64
+          description: The ID of the venue the fixture is played at.
+          title: Venue ID
+        localityId:
+          type: integer
+          format: int64
+          description: The ID of the country/region/administrative zone the fixture is played at.
+          title: Locality ID
+        EventStatusType:
+          type: integer
+          format: int32
+          description: 0 - Notstarted; 1 - Inprogress; 2 - Finished; 3 - Cancelled; 4 - Postponed
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        matchDay:
+          type: integer
+          format: int32
+        attendance:
+          type: integer
+          format: int32
+      title: Update Fixture Model
+      description: This model should be used to propose an update to a fixture.
+    FixtureRefdataSeason:
+      type: object
+      properties:
+        id:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        name:
+          type: string
+    CreatePersonViewModel:
+      type: object
+      required:
+      - firstName
+      - genderType
+      - lastName
+      - localityId
+      - useNickname
+      properties:
+        firstName:
+          type: string
+          description: The first name of the person
+          title: First Name
+          maxLength: 256
+        lastName:
+          type: string
+          description: The last name of the person
+          title: Last Name
+          maxLength: 256
+        nickName:
+          type: string
+          description: The nickname of the person
+          title: Nickname
+          maxLength: 128
+        useNickname:
+          type: boolean
+          description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
+          title: Is active
+        localityId:
+          type: integer
+          format: int64
+          description: Id of the country,virtual place, etc. of the person!
+          title: Locality Id
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: The date of birth of the person
+          title: Date of birth
+        genderType:
+          $ref: '#/components/schemas/PersonGenderType'
+        sports:
+          type: array
+          description: Array of sport Ids to be added to the person.
+          title: Sports
+          items:
+            type: integer
+            description: Sports to which the person belongs to.
+            title: Sports
+    CreateFixtureOfficial:
+      type: object
+      properties:
+        personId:
+          type: integer
+          format: int64
+          description: Id of the person which will be added as fixture official
+          minimum: 1.0
+        person:
+          description: Person information if not been created early, if the person already exists - leave empty.
+          $ref: '#/components/schemas/CreatePersonViewModel'
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixtureperson/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    PersonGenderType:
+      type: integer
+      title: Gender Type
+      format: int32
+      description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
+      enum:
+      - '0'
+      - '1'
+      - '2'
     Error:
       type: object
       required:
@@ -1531,26 +1956,16 @@ components:
         attendance:
           type: integer
           format: int32
-    LineupPlayerResponseModel:
+    ErrorDuplicateModel:
       type: object
       properties:
-        player:
-          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
-        shirtNumber:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
           type: string
-        position:
-          type: string
-        formationPosition:
-          type: string
-        formationPositionName:
-          type: string
-        isHome:
-          type: boolean
-        order:
-          type: integer
-          format: int32
-        isStarter:
-          type: boolean
+          description: This is the official genius sports ID, which you have conflict with.
     JsonbModel:
       type: object
       properties:
@@ -1560,102 +1975,6 @@ components:
           type: string
         isDeleted:
           type: boolean
-    HALEmbededResponse:
-      type: object
-      required:
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        ref:
-          type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    UpdateFixture:
-      type: object
-      required:
-      - competitors
-      - startDate
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: The ID of the fixture.
-          title: Id
-        competitors:
-          type: array
-          description: Array of competitors to be added to the fixture.
-          title: Competitors
-          items:
-            type: integer
-            description: Competitors which belong to the fixture.
-            title: Competitors
-        homeCompetitorId:
-          type: integer
-          format: int64
-          description: 'The ID of the competitor from the competitors list to be marked as home competitor of the fixture. Can only be updated if set to TBD competitor. By default if home competitor is not sent, the competitor which is first in the competitors list will be marked as home competitor. E.g. If you send competitors: [3,2,1], competitor with id 3 will be set as home competitor. If you send competitors: [1, 2, 3], competitor with id 1 will be marked as home competitor'
-          title: Home Competitor Id
-        startDate:
-          type: string
-          format: date-time
-          description: The start date of the fixture in UTC ISO-8601 format
-          title: Start Date
-        roundId:
-          type: integer
-          format: int64
-          description: The ID of the round the fixture belongs to.
-          title: Round ID
-        venueId:
-          type: integer
-          format: int64
-          description: The ID of the venue the fixture is played at.
-          title: Venue ID
-        localityId:
-          type: integer
-          format: int64
-          description: The ID of the country/region/administrative zone the fixture is played at.
-          title: Locality ID
-        EventStatusType:
-          type: integer
-          format: int32
-          description: 0 - Notstarted; 1 - Inprogress; 2 - Finished; 3 - Cancelled; 4 - Postponed
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixture/metadata
-          title: metadataProperties
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        matchDay:
-          type: integer
-          format: int32
-        attendance:
-          type: integer
-          format: int32
-      title: Update Fixture Model
-      description: This model should be used to propose an update to a fixture.
     CreateFixture:
       type: object
       required:
@@ -1722,181 +2041,11 @@ components:
           format: int32
       title: Create Fixture Model
       description: This model should be used to propose a new fixture.
-    FixtureRefdataFixture:
+    FixtureRefdataResponse:
       type: object
       properties:
-        id:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        startDate:
-          type: string
-          format: date-time
-        metadataProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonbModel'
-        competitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/FixtureRefdataCompetitor'
-        season:
-          $ref: '#/components/schemas/FixtureRefdataSeason'
-        venue:
-          $ref: '#/components/schemas/FixtureRefdataVenue'
-        competition:
-          $ref: '#/components/schemas/FixtureRefdataCompetition'
-    FixtureRefdataSeason:
-      type: object
-      properties:
-        id:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        name:
-          type: string
-    CreateFixtureOfficial:
-      type: object
-      properties:
-        personId:
-          type: integer
-          format: int64
-          description: Id of the person which will be added as fixture official
-          minimum: 1.0
-        person:
-          description: Person information if not been created early, if the person already exists - leave empty.
-          $ref: '#/components/schemas/CreatePersonViewModel'
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/fixtureperson/metadata
-          title: metadataProperties
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-    FixtureRefdataLineupPlayer:
-      type: object
-      properties:
-        id:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        order:
-          type: integer
-          format: int32
-        isStarter:
-          type: boolean
-        name:
-          type: string
-        shirtNumber:
-          type: string
-        position:
-          type: string
-        formationPosition:
-          type: string
-        formationPositionName:
-          type: string
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    FixtureLineupsResponseModel:
-      type: object
-      required:
-      - confirmed
-      - createdOn
-      - id
-      - lineupPlayers
-      - updatesCount
-      properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
         fixture:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        confirmed:
-          type: boolean
-        homeTeam:
-          $ref: '#/components/schemas/LineupTeamResponseModel'
-        awayTeam:
-          $ref: '#/components/schemas/LineupTeamResponseModel'
-        lineupPlayers:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineupPlayerResponseModel'
-    PersonGenderType:
-      type: integer
-      title: Gender Type
-      format: int32
-      description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
-      enum:
-      - '0'
-      - '1'
-      - '2'
-    CompetitorHALEmbededResponse:
-      type: object
-      required:
-      - competitorType
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        competitorType:
-          type: string
-          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
-        ref:
-          type: string
-    LineupTeamResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/CompetitorHALEmbededResponse'
-      - properties:
-          formation:
-            type: string
-            description: The team formation for the current lineup
-            title: Team formation in the lineup, e.g. 4-4-2
-    FixtureOfficialResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FixtureOfficialResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
+          $ref: '#/components/schemas/FixtureRefdataFixture'
     FixtureRefdataCompetition:
       type: object
       properties:
@@ -1906,217 +2055,6 @@ components:
           $ref: '#/components/schemas/ExternalIdsViewModel'
         name:
           type: string
-    JsonbModelViewModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the property.
-          title: Property name
-        value:
-          type: string
-          description: Value of the property.
-          title: Property value
-      title: Create/Update Property Model
-      description: This model should be used to create or update single property value for specific property name for specific model.
-    PersonHALEmbededResponse:
-      type: object
-      required:
-      - firstName
-      - fullName
-      - genderType
-      - id
-      - lastName
-      - locality
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        dateOfBirth:
-          type: string
-          format: date-time
-        firstName:
-          type: string
-        lastName:
-          type: string
-        fullName:
-          type: string
-        nickName:
-          type: string
-        genderType:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        ref:
-          type: string
-    AcceptedModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    FixtureResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FixtureResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    CreatePersonViewModel:
-      type: object
-      required:
-      - firstName
-      - genderType
-      - lastName
-      - localityId
-      - useNickname
-      properties:
-        firstName:
-          type: string
-          description: The first name of the person
-          title: First Name
-          maxLength: 256
-        lastName:
-          type: string
-          description: The last name of the person
-          title: Last Name
-          maxLength: 256
-        nickName:
-          type: string
-          description: The nickname of the person
-          title: Nickname
-          maxLength: 128
-        useNickname:
-          type: boolean
-          description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
-          title: Is active
-        localityId:
-          type: integer
-          format: int64
-          description: Id of the country,virtual place, etc. of the person!
-          title: Locality Id
-        dateOfBirth:
-          type: string
-          format: date-time
-          description: The date of birth of the person
-          title: Date of birth
-        genderType:
-          $ref: '#/components/schemas/PersonGenderType'
-        sports:
-          type: array
-          description: Array of sport Ids to be added to the person.
-          title: Sports
-          items:
-            type: integer
-            description: Sports to which the person belongs to.
-            title: Sports
-    FixtureCompetitorHALEmbededResponse:
-      type: object
-      required:
-      - competitorType
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        competitorType:
-          type: string
-          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        metadataProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        ref:
-          type: string
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
-    FixtureRefdataResponse:
-      type: object
-      properties:
-        fixture:
-          $ref: '#/components/schemas/FixtureRefdataFixture'
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    FixtureOfficialResponseModel:
-      type: object
-      required:
-      - createdOn
-      - id
-      - person
-      - sport
-      - updatesCount
-      properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        person:
-          $ref: '#/components/schemas/PersonHALEmbededResponse'
-        sport:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        metadataProperties:
-          type: array
-          items:
-            $ref: '#/components/schemas/JsonbModel'
     FixtureRefdataResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -2143,14 +2081,76 @@ components:
           type: string
         last:
           type: string
-    FixtureRefdataVenue:
+    PatchFixture:
       type: object
+      required:
+      - id
       properties:
         id:
+          type: integer
+          format: int64
+          description: The ID of the fixture.
+          title: Id
+        startDate:
           type: string
+          format: date-time
+          description: The start date of the fixture in UTC ISO-8601 format
+          title: Start Date
+        venueId:
+          type: integer
+          format: int64
+          description: The ID of the venue the fixture is played at.
+          title: Venue ID
+        roundId:
+          type: integer
+          format: int64
+          description: The ID of the round the fixture is for.
+          title: Round ID
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/competition/metadata
+          title: metadataProperties
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
-        name:
+      title: Patch Fixture Model
+      description: This model should be used to propose a partial update/patch to a fixture.
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    FixtureOfficialResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/FixtureOfficialResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
           type: string
   securitySchemes:
     Auth0:

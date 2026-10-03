@@ -120,24 +120,6 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   parameters:
-    CompetitionId:
-      name: competitionId
-      in: path
-      required: true
-      schema:
-        type: string
-    LeagueId:
-      name: leagueId
-      in: path
-      required: true
-      schema:
-        type: string
-    Fields:
-      name: fields
-      in: query
-      description: Comma-separated list of fields to return
-      schema:
-        type: string
     Offset:
       name: offset
       in: query
@@ -145,8 +127,24 @@ components:
       schema:
         type: integer
         default: 0
-    TeamId:
-      name: teamId
+    Format:
+      name: format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to return
+      schema:
+        type: string
+    LeagueId:
+      name: leagueId
       in: path
       required: true
       schema:
@@ -159,17 +157,30 @@ components:
         type: integer
         default: 10
         maximum: 500
-    Format:
-      name: format
-      in: query
-      description: Response format
+    CompetitionId:
+      name: competitionId
+      in: path
+      required: true
       schema:
         type: string
-        enum:
-        - json
-        - xml
-        default: json
+    TeamId:
+      name: teamId
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
     ResponseMeta:
       type: object
       properties:
@@ -190,17 +201,6 @@ components:
           type: integer
         limit:
           type: integer
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
   securitySchemes:
     apiKey:
       type: apiKey

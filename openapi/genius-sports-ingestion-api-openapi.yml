@@ -1507,36 +1507,32 @@ components:
   schemas:
     Empty:
       type: object
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    firstLastNameModel:
+    organizationReadonlyResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/baseResponseMatchModel'
+      - properties:
+          code:
+            type: string
+    coverageData:
       type: object
       properties:
-        firstName:
+        type:
           type: string
-          description: The first name of the competitor
-        lastName:
-          type: string
-          description: The last name of the competitor
-    coverage:
+          description: The coverage source.
+        liveData:
+          type: boolean
+          description: Whether the entity has live data coverage.
+        liveVideo:
+          type: boolean
+          description: Whether the entity has live video coverage.
+    ArrayOfproposalSquad:
       type: array
       items:
-        $ref: '#/components/schemas/coverageData'
+        $ref: '#/components/schemas/proposalSquad'
+    officialsReadonlyResponseModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/officialReadonlyResponseModel'
     fixtureIngestion:
       type: object
       required:
@@ -1567,32 +1563,78 @@ components:
           $ref: '#/components/schemas/sourceCoverage'
         coverage:
           $ref: '#/components/schemas/coverage'
-    proposalOrganizationData:
+    trackingRequestModel:
+      type: object
+      required:
+      - trackingRequestId
+      properties:
+        trackingRequestId:
+          type: string
+          description: Tracking Id of the progress of the asynchronous execution.
+          title: GUID value
+      title: GUID value
+      description: Tracking Id of the progress of the asynchronous execution.
+    competitorType:
+      type: string
+      title: 'One of: Team, Player, DoublePartnership'
+      description: Defines the type of the competitor to increase chances of correct matching
+    proposalCompetitionIngestionData:
+      type: object
+      properties:
+        sport:
+          $ref: '#/components/schemas/proposalSportData'
+        organization:
+          $ref: '#/components/schemas/proposalOrganizationData'
+        season:
+          $ref: '#/components/schemas/proposalSeasonData'
+        competition:
+          $ref: '#/components/schemas/proposalCompetitionData'
+        competitionPhases:
+          type: array
+          items:
+            $ref: '#/components/schemas/proposalCompetitionPhaseData'
+    official:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          firstName:
+            type: string
+          lastName:
+            type: string
+          role:
+            type: string
+            description: The role of the official
+          birthDate:
+            type: string
+            format: date-time
+            description: Official birthdate in format - full-date notation, for example, 2017-07-21
+            title: Birth Date
+          locality:
+            $ref: '#/components/schemas/locality'
+    proposalCompetitionPhaseData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
       - type: object
         properties:
-          code:
+          startDate:
             type: string
-    competitorMatchModel:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          competitorType:
-            $ref: '#/components/schemas/competitorType'
-          locality:
-            $ref: '#/components/schemas/locality'
-          playerPropertiesModel:
-            $ref: '#/components/schemas/playerPropertiesModel'
-          doublesPropertiesModel:
-            $ref: '#/components/schemas/doublesPropertiesModel'
-          teamPropertiesModel:
-            $ref: '#/components/schemas/teamPropertiesModel'
-          gender:
-            $ref: '#/components/schemas/gender'
-          isHome:
-            type: boolean
-            description: Is this competitor the home competitor for the fixture
+            format: date-time
+          endDate:
+            type: string
+            format: date-time
+    competitionTrackingStatusResponse:
+      type: object
+      properties:
+        requestCuratedValue:
+          $ref: '#/components/schemas/competitionResponseMatchModel'
+        status:
+          $ref: '#/components/schemas/SimplifiedTrackingStatus'
+        trackingRequestId:
+          type: string
+          description: Tracking Id of the progress of the asynchronous execution.
+          title: GUID value
     proposalSquadPlayerData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
@@ -1619,28 +1661,205 @@ components:
             type: string
           isPartOfTeam:
             type: boolean
-    proposalCompetitorData:
+    baseMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/baseDbModel'
+      - properties:
+          sourceEntityId:
+            type: string
+            description: Source entity unique Id
+            title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
+          sourceMetadata:
+            type: object
+            description: Source metadata
+            title: An additional collection of metadata supplied by the source.
+            additionalProperties:
+              type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    competitionPhaseReadonlyResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/baseResponseMatchModel'
+      - properties:
+          startDate:
+            type: string
+            format: date-time
+          endDate:
+            type: string
+            format: date-time
+    officialReadonlyResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/baseResponseMatchModel'
+      - properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+          Role:
+            type: string
+          person:
+            $ref: '#/components/schemas/baseResponseMatchModel'
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    ArrayOfproposalFixture:
+      type: array
+      items:
+        $ref: '#/components/schemas/proposalFixture'
+    competitionType:
+      type: string
+      title: 'One of: TeamsCompetition, PlayersCompetition, DoublePartnershipsCompetition'
+      description: Defines the type of the competition to increase chances of correct matching
+    firstLastNameModel:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: The first name of the competitor
+        lastName:
+          type: string
+          description: The last name of the competitor
+    proposalCompetitionData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
       - type: object
         properties:
           gender:
             type: string
+          competitionType:
+            type: string
+          startDate:
+            type: string
+          endDate:
+            type: string
           locality:
             $ref: '#/components/schemas/proposalLocalityData'
-          competitorType:
+    proposalFixtureData:
+      allOf:
+      - $ref: '#/components/schemas/proposalDataBase'
+      - type: object
+        properties:
+          startDate:
             type: string
-          isHome:
+          locality:
+            $ref: '#/components/schemas/proposalLocalityData'
+          eventStatus:
+            type: string
+            description: Notstarted, Inprogress, Finished, Cancelled, Postponed.
+          matchNumber:
+            type: string
+          atNeutralVenue:
             type: boolean
-          competitorTypeSpecificData:
-            type: object
-            properties: {}
-          lineup:
-            $ref: '#/components/schemas/proposalLineupData'
-    ArrayOfproposalSquad:
+    playerPropertiesModel:
+      allOf:
+      - $ref: '#/components/schemas/basePlayerPropertiesModel'
+      - properties:
+          sourceEntityId:
+            type: string
+            description: Source entity unique Id
+            title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
+          id:
+            type: string
+            description: Genius Sport Id
+            title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
+    sourceCoverage:
+      type: object
+      properties:
+        liveData:
+          type: boolean
+          description: Whether the entity has live data coverage.
+        liveVideo:
+          type: boolean
+          description: Whether the entity has live video coverage.
+    locality:
+      type: string
+      title: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
+      description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
+    proposalPersonData:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    proposalCompetition:
+      type: object
+      properties:
+        id:
+          type: string
+        sourceEntityId:
+          type: string
+        sourceName:
+          type: string
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/proposalCompetitionIngestionData'
+    proposalSportData:
+      allOf:
+      - $ref: '#/components/schemas/proposalDataBase'
+      - type: object
+    sportSpecificRules:
       type: array
       items:
-        $ref: '#/components/schemas/proposalSquad'
+        $ref: '#/components/schemas/sportSpecificRule'
+    teamMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
+          ageCategory:
+            $ref: '#/components/schemas/ageCategory'
+          locality:
+            $ref: '#/components/schemas/locality'
+          teamPropertiesModel:
+            $ref: '#/components/schemas/teamPropertiesModel'
+    fixtureIngestionPatch:
+      type: object
+      required:
+      - competitors
+      - fixture
+      properties:
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/fixtureCompetitorMatchModel'
+        fixture:
+          type: object
+          properties:
+            sourceEntityId:
+              type: string
+              description: Source entity unique Id
+              title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
+          required:
+          - sourceEntityId
+    proposalOrganizationData:
+      allOf:
+      - $ref: '#/components/schemas/proposalDataBase'
+      - type: object
+        properties:
+          code:
+            type: string
+    doublesPropertiesModel:
+      type: object
+      properties:
+        firstCompetitor:
+          $ref: '#/components/schemas/playerPropertiesModel'
+        secondCompetitor:
+          $ref: '#/components/schemas/playerPropertiesModel'
     baseResponseMatchModel:
       allOf:
       - $ref: '#/components/schemas/baseMatchModel'
@@ -1655,6 +1874,131 @@ components:
             type: string
             description: Tracking Id of the matching request that was made for the entity
             title: Tracking Id of the matching request.
+    fixtureCompetitorMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/competitorMatchModel'
+      - properties:
+          lineup:
+            $ref: '#/components/schemas/lineup'
+          preserveLineup:
+            type: boolean
+            description: Default value false, if set to true, it prevent accidental clearing of previously ingested lineups when subsequent proposals deliberately or incidentally omit the lineups field.
+            title: Preserve Lineup
+    teamPropertiesModel:
+      type: object
+      properties:
+        isNationalTeam:
+          type: boolean
+          description: Is it a national team
+        isYouth:
+          type: boolean
+          description: Is it a youth team
+        abbreviation:
+          type: string
+          description: An abbreviation of the team name
+        shortName:
+          type: string
+          description: Short name of the team
+    competitionIngestion:
+      type: object
+      required:
+      - competition
+      - sport
+      properties:
+        organization:
+          $ref: '#/components/schemas/organizationMatchModel'
+        competition:
+          $ref: '#/components/schemas/competitionMatchModel'
+        sport:
+          $ref: '#/components/schemas/baseMatchModel'
+        competitionPhases:
+          type: array
+          items:
+            $ref: '#/components/schemas/competitionPhaseMatchModel'
+    gender:
+      type: string
+      title: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
+      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
+    baseDbModel:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
+        id:
+          type: string
+          description: Genius Sport Id
+          title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
+    squadTrackingStatusResponse:
+      type: object
+      properties:
+        requestCuratedValue:
+          $ref: '#/components/schemas/squadResponseMatchModel'
+        status:
+          $ref: '#/components/schemas/SimplifiedTrackingStatus'
+        trackingRequestId:
+          type: string
+          description: Tracking Id of the progress of the asynchronous execution.
+          title: GUID value
+    proposalSquad:
+      type: object
+      properties:
+        id:
+          type: string
+        sourceEntityId:
+          type: string
+        sourceName:
+          type: string
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/proposalSquadIngestionData'
+    proposalLocalityData:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    squadResponseMatchModel:
+      type: object
+      required:
+      - players
+      - sport
+      - team
+      properties:
+        team:
+          $ref: '#/components/schemas/baseResponseMatchModel'
+        sport:
+          $ref: '#/components/schemas/baseResponseMatchModel'
+        organization:
+          $ref: '#/components/schemas/organizationReadonlyResponseModel'
+        players:
+          type: array
+          description: The result of the squad ingestion.
+          items:
+            $ref: '#/components/schemas/baseResponseMatchModel'
+        officials:
+          $ref: '#/components/schemas/officialsReadonlyResponseModel'
+    fixtureReadonlyResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/baseResponseMatchModel'
+      - properties:
+          matchNumber:
+            type: string
+          atNeutralVenue:
+            type: boolean
+          sportSpecificRules:
+            $ref: '#/components/schemas/sportSpecificRules'
+    organizationMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          code:
+            type: string
+            description: The code of the organization
     fixtureResponseMatchModel:
       type: object
       required:
@@ -1685,21 +2029,90 @@ components:
           $ref: '#/components/schemas/sourceCoverage'
         coverage:
           $ref: '#/components/schemas/coverage'
-    proposalCompetitionData:
+    fixtureTrackingStatusResponse:
+      type: object
+      properties:
+        requestCuratedValue:
+          $ref: '#/components/schemas/fixtureResponseMatchModel'
+        status:
+          $ref: '#/components/schemas/SimplifiedTrackingStatus'
+        trackingRequestId:
+          type: string
+          description: Tracking Id of the progress of the asynchronous execution.
+          title: GUID value
+    proposalDataBase:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sourceEntityId:
+          type: string
+        sourceMetadata:
+          type: object
+          description: Source metadata
+          title: An additional collection of metadata supplied by the source.
+          additionalProperties:
+            type: string
+    competitorMatchModel:
       allOf:
-      - $ref: '#/components/schemas/proposalDataBase'
-      - type: object
-        properties:
-          gender:
-            type: string
-          competitionType:
-            type: string
-          startDate:
-            type: string
-          endDate:
-            type: string
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          competitorType:
+            $ref: '#/components/schemas/competitorType'
           locality:
-            $ref: '#/components/schemas/proposalLocalityData'
+            $ref: '#/components/schemas/locality'
+          playerPropertiesModel:
+            $ref: '#/components/schemas/playerPropertiesModel'
+          doublesPropertiesModel:
+            $ref: '#/components/schemas/doublesPropertiesModel'
+          teamPropertiesModel:
+            $ref: '#/components/schemas/teamPropertiesModel'
+          gender:
+            $ref: '#/components/schemas/gender'
+          isHome:
+            type: boolean
+            description: Is this competitor the home competitor for the fixture
+    ageCategory:
+      type: string
+      title: Age Category
+      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
+    proposalSquadIngestionData:
+      type: object
+      properties:
+        sport:
+          $ref: '#/components/schemas/proposalSportData'
+        organization:
+          $ref: '#/components/schemas/proposalOrganizationData'
+        team:
+          $ref: '#/components/schemas/proposalSquadTeamData'
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/proposalSquadPlayerData'
+        officials:
+          type: array
+          items:
+            $ref: '#/components/schemas/proposalOfficialData'
+    competitionResponseMatchModel:
+      type: object
+      required:
+      - competition
+      - sport
+      properties:
+        sport:
+          $ref: '#/components/schemas/baseResponseMatchModel'
+        organization:
+          $ref: '#/components/schemas/organizationReadonlyResponseModel'
+        competition:
+          $ref: '#/components/schemas/competitionReadonlyResponseModel'
+        season:
+          $ref: '#/components/schemas/baseResponseMatchModel'
+        competitionPhases:
+          type: array
+          items:
+            $ref: '#/components/schemas/competitionPhaseReadonlyResponseModel'
     proposalFixture:
       type: object
       properties:
@@ -1713,116 +2126,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/proposalFixtureIngestionData'
-    lineup:
-      properties:
-        formation:
-          type: string
-          description: The formation code of the team for the given lineup. E.g. 442
-        players:
-          type: array
-          description: List of players in the lineup.
-          items:
-            $ref: '#/components/schemas/lineupPlayer'
-    officials:
-      type: array
-      items:
-        $ref: '#/components/schemas/official'
-    sportSpecificRules:
-      type: array
-      items:
-        $ref: '#/components/schemas/sportSpecificRule'
-    officialsReadonlyResponseModel:
-      type: array
-      items:
-        $ref: '#/components/schemas/officialReadonlyResponseModel'
-    competitionIngestion:
-      type: object
-      required:
-      - competition
-      - sport
-      properties:
-        organization:
-          $ref: '#/components/schemas/organizationMatchModel'
-        competition:
-          $ref: '#/components/schemas/competitionMatchModel'
-        sport:
-          $ref: '#/components/schemas/baseMatchModel'
-        competitionPhases:
-          type: array
-          items:
-            $ref: '#/components/schemas/competitionPhaseMatchModel'
-    trackingRequestModel:
-      type: object
-      required:
-      - trackingRequestId
-      properties:
-        trackingRequestId:
-          type: string
-          description: Tracking Id of the progress of the asynchronous execution.
-          title: GUID value
-      title: GUID value
-      description: Tracking Id of the progress of the asynchronous execution.
-    gender:
-      type: string
-      title: 'One of: Male, Female, Mixed. If the entity is neither Male, nor Female use Mixed.'
-      description: If sent an EXACT match is made on the enum, excluding all non-matching entities.
-    ageCategory:
-      type: string
-      title: Age Category
-      description: 'Default is Senior.  One of: U5, U6, U7, U8, U9, U10, U11, U12, U13, U14, U15, U16, U17, U18, U19, U20, U21, U22, U23, Senior'
-    fixtureTrackingStatusResponse:
-      type: object
-      properties:
-        requestCuratedValue:
-          $ref: '#/components/schemas/fixtureResponseMatchModel'
-        status:
-          $ref: '#/components/schemas/SimplifiedTrackingStatus'
-        trackingRequestId:
-          type: string
-          description: Tracking Id of the progress of the asynchronous execution.
-          title: GUID value
-    proposalCompetitionPhaseData:
-      allOf:
-      - $ref: '#/components/schemas/proposalDataBase'
-      - type: object
-        properties:
-          startDate:
-            type: string
-            format: date-time
-          endDate:
-            type: string
-            format: date-time
-    squadTrackingStatusResponse:
-      type: object
-      properties:
-        requestCuratedValue:
-          $ref: '#/components/schemas/squadResponseMatchModel'
-        status:
-          $ref: '#/components/schemas/SimplifiedTrackingStatus'
-        trackingRequestId:
-          type: string
-          description: Tracking Id of the progress of the asynchronous execution.
-          title: GUID value
-    squadResponseMatchModel:
-      type: object
-      required:
-      - players
-      - sport
-      - team
-      properties:
-        team:
-          $ref: '#/components/schemas/baseResponseMatchModel'
-        sport:
-          $ref: '#/components/schemas/baseResponseMatchModel'
-        organization:
-          $ref: '#/components/schemas/organizationReadonlyResponseModel'
-        players:
-          type: array
-          description: The result of the squad ingestion.
-          items:
-            $ref: '#/components/schemas/baseResponseMatchModel'
-        officials:
-          $ref: '#/components/schemas/officialsReadonlyResponseModel'
     competitionMatchModel:
       allOf:
       - $ref: '#/components/schemas/baseMatchModel'
@@ -1859,59 +2162,16 @@ components:
             $ref: '#/components/schemas/competitionType'
           sportSpecificRules:
             $ref: '#/components/schemas/sportSpecificRules'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    playerPropertiesModel:
+    competitorReadonlyResponseModel:
       allOf:
-      - $ref: '#/components/schemas/basePlayerPropertiesModel'
+      - $ref: '#/components/schemas/baseResponseMatchModel'
       - properties:
-          sourceEntityId:
-            type: string
-            description: Source entity unique Id
-            title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
-          id:
-            type: string
-            description: Genius Sport Id
-            title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
-    teamMatchModel:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          ageCategory:
-            $ref: '#/components/schemas/ageCategory'
-          locality:
-            $ref: '#/components/schemas/locality'
-          teamPropertiesModel:
-            $ref: '#/components/schemas/teamPropertiesModel'
-    doublesPropertiesModel:
-      type: object
-      properties:
-        firstCompetitor:
-          $ref: '#/components/schemas/playerPropertiesModel'
-        secondCompetitor:
-          $ref: '#/components/schemas/playerPropertiesModel'
-    proposalCompetitionIngestionData:
-      type: object
-      properties:
-        sport:
-          $ref: '#/components/schemas/proposalSportData'
-        organization:
-          $ref: '#/components/schemas/proposalOrganizationData'
-        season:
-          $ref: '#/components/schemas/proposalSeasonData'
-        competition:
-          $ref: '#/components/schemas/proposalCompetitionData'
-        competitionPhases:
-          type: array
-          items:
-            $ref: '#/components/schemas/proposalCompetitionPhaseData'
+          lineup:
+            $ref: '#/components/schemas/lineupReadonlyResponseModel'
+    coverage:
+      type: array
+      items:
+        $ref: '#/components/schemas/coverageData'
     proposalOfficialData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
@@ -1923,171 +2183,84 @@ components:
             type: string
           role:
             type: string
-    officialReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          firstName:
-            type: string
-          lastName:
-            type: string
-          Role:
-            type: string
-          person:
-            $ref: '#/components/schemas/baseResponseMatchModel'
-    sourceCoverage:
-      type: object
-      properties:
-        liveData:
-          type: boolean
-          description: Whether the entity has live data coverage.
-        liveVideo:
-          type: boolean
-          description: Whether the entity has live video coverage.
-    proposalSportData:
+    proposalVenueData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
       - type: object
-    competitorType:
-      type: string
-      title: 'One of: Team, Player, DoublePartnership'
-      description: Defines the type of the competitor to increase chances of correct matching
-    baseMatchModel:
-      allOf:
-      - $ref: '#/components/schemas/baseDbModel'
-      - properties:
-          sourceEntityId:
-            type: string
-            description: Source entity unique Id
-            title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
-          sourceMetadata:
-            type: object
-            description: Source metadata
-            title: An additional collection of metadata supplied by the source.
-            additionalProperties:
-              type: string
-    ArrayOfproposalCompetition:
-      type: array
-      items:
-        $ref: '#/components/schemas/proposalCompetition'
-    lineupPlayer:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
+        properties:
           locality:
-            $ref: '#/components/schemas/locality'
-          playerPropertiesModel:
-            $ref: '#/components/schemas/basePlayerPropertiesModel'
-          isStarter:
-            type: boolean
-            description: Indicates if the player is a starter in the lineup.
-          order:
-            type: integer
-            description: The order of the player in the lineup, starting from 0.
-          position:
             type: string
-            description: The position of the player in the lineup, e.g., 'Forward', 'Keeper'.
-          shirtNumber:
-            type: string
-            description: The shirt number of the player in the lineup.
-    proposalPersonData:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    teamPropertiesModel:
-      type: object
-      properties:
-        isNationalTeam:
-          type: boolean
-          description: Is it a national team
-        isYouth:
-          type: boolean
-          description: Is it a youth team
-        abbreviation:
-          type: string
-          description: An abbreviation of the team name
-        shortName:
-          type: string
-          description: Short name of the team
-    competitionPhaseReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          startDate:
-            type: string
-            format: date-time
-          endDate:
-            type: string
-            format: date-time
-    baseDbModel:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: The name of the entity to be matched to Genius Sports name. Fuzzy matching is executed upon the official Genius Sports name. If this does not return result exact match is attempted on the aliases.
-        id:
-          type: string
-          description: Genius Sport Id
-          title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
-    venueMatchModel:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          locality:
-            $ref: '#/components/schemas/locality'
           city:
             type: string
-            description: The city of the venue
-          parentVenue:
-            $ref: '#/components/schemas/baseMatchModel'
-    proposalCompetition:
+    proposalFixtureIngestionData:
       type: object
       properties:
-        id:
-          type: string
-        sourceEntityId:
-          type: string
-        sourceName:
-          type: string
-        status:
-          type: string
-        data:
-          $ref: '#/components/schemas/proposalCompetitionIngestionData'
-    locality:
-      type: string
-      title: 'Accepts either the 3 letter country code (ISO 3166-1 alpha-3 codes), the country name or the name of Continets, Administrive region, etc.. If a code is sent an EXACT match is made on the enum, excluding all non-matching entities. If the country is sent as string name a FUZZY match is made on the value and the similarity score is contributing to the end match score. The name of the country in free text form or one of: AFG, ALB, ALG, AND, ANG, ANT, ARG, ARM, ARU, ASA, AUS, AUT, AZE, BAH, BAN, BAR, BDI, BEL, BEN, BER, BHU, BIH, BIZ, BLR, BOL, BOT, BRA, BRN, BUL, BUR, CAF, CAM, CAN, CAY, CGO, CHA, CHI, CHN, CIV, CMR, COD, COK, COL, COM, CPV, CRC, CRO, CUB, CYP, CZE, DEN, DJI, DMA, DOM, ECU, EGY, ERI, ESA, ESP, EST, ETH, FIJ, FIN, FRA, FSM, GAB, GAM, GBR, GBS, GEO, GEQ, GER, GHA, GRE, GRN, GUA, GUI, GUM, GUY, HAI, HKG, HON, HUN, INA, IND, IRI, IRL, IRQ, ISL, ISR, ITA, IVB, JAM, JOR, JPN, KAZ, KEN, KGZ, KIR, KOR, KOS, KSA, KUW, LAO, LAT, LBA, LBN, LBR, LCA, LES, LIE, LTU, LUX, MAD, MAR, MAS, MAW, MDA, MDV, MEX, MGL, MHL, MKD, MLI, MLT, MNE, MON, MOZ, MRI, MTN, MYA, NAM, NCA, NED, NEP, NGR, NIG, NOR, NRU, NZL, OMA, PAK, PAN, PAR, PER, PHI, PLE, PLW, PNG, POL, POR, PUR, QAT, ROU, RSA, RUS, RWA, SAM, SEN, SEY, SGP, SKN, SLE, SLO, SMR, SOL, SOM, SRB, SRI, SSD, STP, SUD, SUI, SUR, SVK, SWE, SYR, TAN, TGA, THA, TJK, TKM, TOG, TTO, TUN, TUR, TUV, UAE, UGA, UKR, URU, USA, UZB, VAN, VEN, VIE, VIN, YEM, ZAM, ZIM'
-      description: If sent а FUZZY match is made on the value and the similarity score is contributing to the end match score.
-    ErrorModel:
+        sport:
+          $ref: '#/components/schemas/proposalSportData'
+        venue:
+          $ref: '#/components/schemas/proposalVenueData'
+        organization:
+          $ref: '#/components/schemas/proposalOrganizationData'
+        season:
+          $ref: '#/components/schemas/proposalSeasonData'
+        fixture:
+          $ref: '#/components/schemas/proposalFixtureData'
+        competition:
+          $ref: '#/components/schemas/proposalCompetitionData'
+        competitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/proposalCompetitorData'
+        competitionPhase:
+          $ref: '#/components/schemas/proposalCompetitionPhaseData'
+        officials:
+          type: array
+          items:
+            $ref: '#/components/schemas/proposalOfficialData'
+        sourceCoverage:
+          $ref: '#/components/schemas/sourceCoverage'
+        coverage:
+          type: array
+          items:
+            $ref: '#/components/schemas/coverageData'
+    squadIngestion:
       type: object
+      required:
+      - players
+      - sport
+      - team
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    competitionPhaseMatchModel:
+        organization:
+          $ref: '#/components/schemas/organizationMatchModel'
+        team:
+          $ref: '#/components/schemas/teamMatchModel'
+        sport:
+          $ref: '#/components/schemas/baseMatchModel'
+        players:
+          type: array
+          description: Client might send competitors separately to try to improve matching capabilities.
+          items:
+            $ref: '#/components/schemas/playerMatchModel'
+        officials:
+          $ref: '#/components/schemas/officials'
+        skipContractDeactivation:
+          type: boolean
+          description: This flag indicates whether to skip deactivation of player contracts that are not present in the current squad ingestion. If set to true, existing contracts will remain active even if the players are not included in the current ingestion.
+    proposalSquadTeamData:
       allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          startDate:
+      - $ref: '#/components/schemas/proposalDataBase'
+      - type: object
+        properties:
+          gender:
             type: string
-            format: date-time
-            description: The start date of the competition phase in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
-            title: Start Date
-          endDate:
+          abbreviation:
             type: string
-            format: date-time
-            description: The end date of the competition phase in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
-            title: End Date
+          isNationalTeam:
+            type: boolean
+          isYouth:
+            type: boolean
+          locality:
+            $ref: '#/components/schemas/proposalLocalityData'
     fixtureMatchModel:
       allOf:
       - $ref: '#/components/schemas/baseMatchModel'
@@ -2112,301 +2285,6 @@ components:
             type: string
           atNeutralVenue:
             type: boolean
-    SimplifiedTrackingStatus:
-      type: integer
-      format: int32
-      description: 'Status of the proposal request: Accepted = 0, AwaitingMatching = 1, MatchedAndProposed = 3, ProposedAndApproved = 5, InvalidProposal = 7, Matched = 8, FailedToProcess = 9, ProposedAndWaitingCuration = 10, EnrichingProposal = 12, Suspended = 14, Ignored = 15, Inconsistent = 16'
-      enum:
-      - '0'
-      - '1'
-      - '3'
-      - '5'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      - '12'
-      - '14'
-      - '15'
-      - '16'
-    organizationReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          code:
-            type: string
-    competitorReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          lineup:
-            $ref: '#/components/schemas/lineupReadonlyResponseModel'
-    competitionTrackingStatusResponse:
-      type: object
-      properties:
-        requestCuratedValue:
-          $ref: '#/components/schemas/competitionResponseMatchModel'
-        status:
-          $ref: '#/components/schemas/SimplifiedTrackingStatus'
-        trackingRequestId:
-          type: string
-          description: Tracking Id of the progress of the asynchronous execution.
-          title: GUID value
-    ArrayOfproposalFixture:
-      type: array
-      items:
-        $ref: '#/components/schemas/proposalFixture'
-    proposalSquadIngestionData:
-      type: object
-      properties:
-        sport:
-          $ref: '#/components/schemas/proposalSportData'
-        organization:
-          $ref: '#/components/schemas/proposalOrganizationData'
-        team:
-          $ref: '#/components/schemas/proposalSquadTeamData'
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/proposalSquadPlayerData'
-        officials:
-          type: array
-          items:
-            $ref: '#/components/schemas/proposalOfficialData'
-    proposalSquadTeamData:
-      allOf:
-      - $ref: '#/components/schemas/proposalDataBase'
-      - type: object
-        properties:
-          gender:
-            type: string
-          abbreviation:
-            type: string
-          isNationalTeam:
-            type: boolean
-          isYouth:
-            type: boolean
-          locality:
-            $ref: '#/components/schemas/proposalLocalityData'
-    coverageData:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The coverage source.
-        liveData:
-          type: boolean
-          description: Whether the entity has live data coverage.
-        liveVideo:
-          type: boolean
-          description: Whether the entity has live video coverage.
-    basePlayerPropertiesModel:
-      allOf:
-      - $ref: '#/components/schemas/firstLastNameModel'
-      - properties:
-          birthDate:
-            type: string
-            format: date-time
-            description: Player birthdate in format - full-date notation, for example, 2017-07-21
-            title: Birth Date
-    fixtureCompetitorMatchModel:
-      allOf:
-      - $ref: '#/components/schemas/competitorMatchModel'
-      - properties:
-          lineup:
-            $ref: '#/components/schemas/lineup'
-          preserveLineup:
-            type: boolean
-            description: Default value false, if set to true, it prevent accidental clearing of previously ingested lineups when subsequent proposals deliberately or incidentally omit the lineups field.
-            title: Preserve Lineup
-    fixtureReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          matchNumber:
-            type: string
-          atNeutralVenue:
-            type: boolean
-          sportSpecificRules:
-            $ref: '#/components/schemas/sportSpecificRules'
-    proposalDataBase:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        sourceEntityId:
-          type: string
-        sourceMetadata:
-          type: object
-          description: Source metadata
-          title: An additional collection of metadata supplied by the source.
-          additionalProperties:
-            type: string
-    fixtureIngestionPatch:
-      type: object
-      required:
-      - competitors
-      - fixture
-      properties:
-        competitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/fixtureCompetitorMatchModel'
-        fixture:
-          type: object
-          properties:
-            sourceEntityId:
-              type: string
-              description: Source entity unique Id
-              title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
-          required:
-          - sourceEntityId
-    proposalLocalityData:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    sportSpecificRule:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    lineupReadonlyResponseModel:
-      type: object
-      required:
-      - status
-      properties:
-        id:
-          type: string
-          description: Genius Sport Id
-          title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
-        status:
-          $ref: '#/components/schemas/SimplifiedTrackingStatus'
-        message:
-          type: string
-          description: Addional message regarding the status of the proposal
-          title: Meaningful message for potential problems with the request.
-        matchingId:
-          type: string
-          description: Tracking Id of the matching request that was made for the entity
-          title: Tracking Id of the matching request.
-        sourceEntityId:
-          type: string
-          description: Source entity unique Id
-          title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
-        sourceMetadata:
-          type: object
-          description: Source metadata
-          title: An additional collection of metadata supplied by the source.
-          additionalProperties:
-            type: string
-        players:
-          type: array
-          description: List of players in the lineup.
-          items:
-            $ref: '#/components/schemas/baseResponseMatchModel'
-    squadIngestion:
-      type: object
-      required:
-      - players
-      - sport
-      - team
-      properties:
-        organization:
-          $ref: '#/components/schemas/organizationMatchModel'
-        team:
-          $ref: '#/components/schemas/teamMatchModel'
-        sport:
-          $ref: '#/components/schemas/baseMatchModel'
-        players:
-          type: array
-          description: Client might send competitors separately to try to improve matching capabilities.
-          items:
-            $ref: '#/components/schemas/playerMatchModel'
-        officials:
-          $ref: '#/components/schemas/officials'
-        skipContractDeactivation:
-          type: boolean
-          description: This flag indicates whether to skip deactivation of player contracts that are not present in the current squad ingestion. If set to true, existing contracts will remain active even if the players are not included in the current ingestion.
-    proposalFixtureData:
-      allOf:
-      - $ref: '#/components/schemas/proposalDataBase'
-      - type: object
-        properties:
-          startDate:
-            type: string
-          locality:
-            $ref: '#/components/schemas/proposalLocalityData'
-          eventStatus:
-            type: string
-            description: Notstarted, Inprogress, Finished, Cancelled, Postponed.
-          matchNumber:
-            type: string
-          atNeutralVenue:
-            type: boolean
-    proposalLineupData:
-      allOf:
-      - $ref: '#/components/schemas/proposalDataBase'
-      - type: object
-        properties:
-          players:
-            type: array
-            items:
-              $ref: '#/components/schemas/proposalDataBase'
-    competitionType:
-      type: string
-      title: 'One of: TeamsCompetition, PlayersCompetition, DoublePartnershipsCompetition'
-      description: Defines the type of the competition to increase chances of correct matching
-    official:
-      allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          gender:
-            $ref: '#/components/schemas/gender'
-          firstName:
-            type: string
-          lastName:
-            type: string
-          role:
-            type: string
-            description: The role of the official
-          birthDate:
-            type: string
-            format: date-time
-            description: Official birthdate in format - full-date notation, for example, 2017-07-21
-            title: Birth Date
-          locality:
-            $ref: '#/components/schemas/locality'
-    competitionResponseMatchModel:
-      type: object
-      required:
-      - competition
-      - sport
-      properties:
-        sport:
-          $ref: '#/components/schemas/baseResponseMatchModel'
-        organization:
-          $ref: '#/components/schemas/organizationReadonlyResponseModel'
-        competition:
-          $ref: '#/components/schemas/competitionReadonlyResponseModel'
-        season:
-          $ref: '#/components/schemas/baseResponseMatchModel'
-        competitionPhases:
-          type: array
-          items:
-            $ref: '#/components/schemas/competitionPhaseReadonlyResponseModel'
-    competitionReadonlyResponseModel:
-      allOf:
-      - $ref: '#/components/schemas/baseResponseMatchModel'
-      - properties:
-          sportSpecificRules:
-            $ref: '#/components/schemas/sportSpecificRules'
     playerMatchModel:
       type: object
       properties:
@@ -2444,15 +2322,166 @@ components:
           type: string
           description: Genius Sport Id
           title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
-    proposalVenueData:
+    sportSpecificRule:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    lineup:
+      properties:
+        formation:
+          type: string
+          description: The formation code of the team for the given lineup. E.g. 442
+        players:
+          type: array
+          description: List of players in the lineup.
+          items:
+            $ref: '#/components/schemas/lineupPlayer'
+    venueMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          locality:
+            $ref: '#/components/schemas/locality'
+          city:
+            type: string
+            description: The city of the venue
+          parentVenue:
+            $ref: '#/components/schemas/baseMatchModel'
+    competitionReadonlyResponseModel:
+      allOf:
+      - $ref: '#/components/schemas/baseResponseMatchModel'
+      - properties:
+          sportSpecificRules:
+            $ref: '#/components/schemas/sportSpecificRules'
+    lineupReadonlyResponseModel:
+      type: object
+      required:
+      - status
+      properties:
+        id:
+          type: string
+          description: Genius Sport Id
+          title: If client has the Genius Sport Id it can be sent to improve overall matching capabilities and certainty or the results.
+        status:
+          $ref: '#/components/schemas/SimplifiedTrackingStatus'
+        message:
+          type: string
+          description: Addional message regarding the status of the proposal
+          title: Meaningful message for potential problems with the request.
+        matchingId:
+          type: string
+          description: Tracking Id of the matching request that was made for the entity
+          title: Tracking Id of the matching request.
+        sourceEntityId:
+          type: string
+          description: Source entity unique Id
+          title: The external id from Genius Sports perspective and the internal for the source. By sending this param the backtracking capabilities improved, via push & pull.
+        sourceMetadata:
+          type: object
+          description: Source metadata
+          title: An additional collection of metadata supplied by the source.
+          additionalProperties:
+            type: string
+        players:
+          type: array
+          description: List of players in the lineup.
+          items:
+            $ref: '#/components/schemas/baseResponseMatchModel'
+    proposalLineupData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
       - type: object
         properties:
+          players:
+            type: array
+            items:
+              $ref: '#/components/schemas/proposalDataBase'
+    lineupPlayer:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          gender:
+            $ref: '#/components/schemas/gender'
           locality:
+            $ref: '#/components/schemas/locality'
+          playerPropertiesModel:
+            $ref: '#/components/schemas/basePlayerPropertiesModel'
+          isStarter:
+            type: boolean
+            description: Indicates if the player is a starter in the lineup.
+          order:
+            type: integer
+            description: The order of the player in the lineup, starting from 0.
+          position:
             type: string
-          city:
+            description: The position of the player in the lineup, e.g., 'Forward', 'Keeper'.
+          shirtNumber:
             type: string
+            description: The shirt number of the player in the lineup.
+    competitionPhaseMatchModel:
+      allOf:
+      - $ref: '#/components/schemas/baseMatchModel'
+      - properties:
+          startDate:
+            type: string
+            format: date-time
+            description: The start date of the competition phase in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
+            title: Start Date
+          endDate:
+            type: string
+            format: date-time
+            description: The end date of the competition phase in UTC ISO-8601 format. (yyyy-MM-ddTHH:mmZ)
+            title: End Date
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    basePlayerPropertiesModel:
+      allOf:
+      - $ref: '#/components/schemas/firstLastNameModel'
+      - properties:
+          birthDate:
+            type: string
+            format: date-time
+            description: Player birthdate in format - full-date notation, for example, 2017-07-21
+            title: Birth Date
+    ArrayOfproposalCompetition:
+      type: array
+      items:
+        $ref: '#/components/schemas/proposalCompetition'
+    SimplifiedTrackingStatus:
+      type: integer
+      format: int32
+      description: 'Status of the proposal request: Accepted = 0, AwaitingMatching = 1, MatchedAndProposed = 3, ProposedAndApproved = 5, InvalidProposal = 7, Matched = 8, FailedToProcess = 9, ProposedAndWaitingCuration = 10, EnrichingProposal = 12, Suspended = 14, Ignored = 15, Inconsistent = 16'
+      enum:
+      - '0'
+      - '1'
+      - '3'
+      - '5'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '12'
+      - '14'
+      - '15'
+      - '16'
     proposalSeasonData:
       allOf:
       - $ref: '#/components/schemas/proposalDataBase'
@@ -2464,57 +2493,28 @@ components:
           endDate:
             type: string
             format: date-time
-    proposalFixtureIngestionData:
-      type: object
-      properties:
-        sport:
-          $ref: '#/components/schemas/proposalSportData'
-        venue:
-          $ref: '#/components/schemas/proposalVenueData'
-        organization:
-          $ref: '#/components/schemas/proposalOrganizationData'
-        season:
-          $ref: '#/components/schemas/proposalSeasonData'
-        fixture:
-          $ref: '#/components/schemas/proposalFixtureData'
-        competition:
-          $ref: '#/components/schemas/proposalCompetitionData'
-        competitors:
-          type: array
-          items:
-            $ref: '#/components/schemas/proposalCompetitorData'
-        competitionPhase:
-          $ref: '#/components/schemas/proposalCompetitionPhaseData'
-        officials:
-          type: array
-          items:
-            $ref: '#/components/schemas/proposalOfficialData'
-        sourceCoverage:
-          $ref: '#/components/schemas/sourceCoverage'
-        coverage:
-          type: array
-          items:
-            $ref: '#/components/schemas/coverageData'
-    proposalSquad:
-      type: object
-      properties:
-        id:
-          type: string
-        sourceEntityId:
-          type: string
-        sourceName:
-          type: string
-        status:
-          type: string
-        data:
-          $ref: '#/components/schemas/proposalSquadIngestionData'
-    organizationMatchModel:
+    proposalCompetitorData:
       allOf:
-      - $ref: '#/components/schemas/baseMatchModel'
-      - properties:
-          code:
+      - $ref: '#/components/schemas/proposalDataBase'
+      - type: object
+        properties:
+          gender:
             type: string
-            description: The code of the organization
+          locality:
+            $ref: '#/components/schemas/proposalLocalityData'
+          competitorType:
+            type: string
+          isHome:
+            type: boolean
+          competitorTypeSpecificData:
+            type: object
+            properties: {}
+          lineup:
+            $ref: '#/components/schemas/proposalLineupData'
+    officials:
+      type: array
+      items:
+        $ref: '#/components/schemas/official'
   securitySchemes:
     Auth0:
       type: apiKey
