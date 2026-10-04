@@ -289,14 +289,40 @@ components:
   schemas:
     Empty:
       type: object
-    AcceptedModel:
+    LocalityResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalityResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+    BadRequestModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    BadRequestModel:
+    AcceptedModel:
       type: object
       properties:
         messages:
@@ -330,32 +356,6 @@ components:
           type: string
           description: ConstituentCountry, Continent, Country, FirstOrderAdministrativeRegion, NonGeographic, World, Game.
         code:
-          type: string
-    LocalityResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocalityResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
           type: string
     Error:
       type: object

@@ -288,16 +288,6 @@ components:
   schemas:
     Empty:
       type: object
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
     BadRequestModel:
       type: object
       properties:
@@ -305,49 +295,32 @@ components:
           type: array
           items:
             type: string
-    Error:
+    SportResponseModelHATEOASReponseModel:
       type: object
-      required:
-      - domain
-      - message
-      - reason
       properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    MetadataPropertyTypesResponseModel:
-      type: object
-      required:
-      - allowNonPredefinedValues
-      - id
-      - isRequired
-      - name
-      properties:
-        id:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
           type: integer
           format: int64
-          title: Id of the property type
-        name:
-          type: string
-          title: Name of the property type
-        allowNonPredefinedValues:
-          type: boolean
-          title: True or false value. Defines whether you can use any value or you should use value from the list below.
-        isRequired:
-          type: boolean
-          description: Is property required for the specific entity for the specific sport
-          title: Is property required for the specific entity for the specific sport
-        values:
+        items:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/SportResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
     SportResponseModel:
       type: object
       required:
@@ -390,36 +363,63 @@ components:
           type: integer
           format: int32
           title: The number of updates made to the sport
+    MetadataPropertyTypesResponseModel:
+      type: object
+      required:
+      - allowNonPredefinedValues
+      - id
+      - isRequired
+      - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id of the property type
+        name:
+          type: string
+          title: Name of the property type
+        allowNonPredefinedValues:
+          type: boolean
+          title: True or false value. Defines whether you can use any value or you should use value from the list below.
+        isRequired:
+          type: boolean
+          description: Is property required for the specific entity for the specific sport
+          title: Is property required for the specific entity for the specific sport
+        values:
+          type: array
+          items:
+            type: string
     ArrayOfMetadataPropertyTypesResponseModel:
       type: array
       items:
         $ref: '#/components/schemas/MetadataPropertyTypesResponseModel'
-    SportResponseModelHATEOASReponseModel:
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorModel:
       type: object
       properties:
-        page:
+        code:
           type: integer
           format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/SportResponseModel'
-        self:
+        message:
           type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

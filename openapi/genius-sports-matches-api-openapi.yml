@@ -73,19 +73,6 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   parameters:
-    Offset:
-      name: offset
-      in: query
-      description: Skip the first N records
-      schema:
-        type: integer
-        default: 0
-    Fields:
-      name: fields
-      in: query
-      description: Comma-separated list of fields to return
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -94,18 +81,20 @@ components:
         type: integer
         default: 10
         maximum: 500
+    Fields:
+      name: fields
+      in: query
+      description: Comma-separated list of fields to return
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Skip the first N records
+      schema:
+        type: integer
+        default: 0
   schemas:
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
     ResponseMeta:
       type: object
       properties:
@@ -126,6 +115,17 @@ components:
           type: integer
         limit:
           type: integer
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
   securitySchemes:
     apiKey:
       type: apiKey

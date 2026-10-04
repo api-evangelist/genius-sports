@@ -465,54 +465,55 @@ components:
           type: string
         isDeleted:
           type: boolean
-    AcceptedModel:
+    BadRequestModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    GroupResponseModelHATEOASReponseModel:
+    CreateGroup:
       type: object
+      required:
+      - name
+      - seasonId
+      - type
       properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
+        name:
+          type: string
+          description: Name of the group.
+          title: Group name
+        competitors:
+          type: array
+          description: Array of competitors to be added to the group.
+          title: Competitors
+          items:
+            type: integer
+            description: Competitors which are associated with the group.
+            title: Competitors
+        type:
+          type: string
+          description: "The type of group. 0 = Conference \n1 = Division"
+          title: Type
+        seasonId:
           type: integer
           format: int64
-        items:
+          description: The ID of the season the group belongs to.
+          title: Season Id
+        parentGroupId:
+          type: integer
+          format: int64
+          description: The ID of the parent group to which posted group belongs.
+          title: Parent Group Id
+        metadataProperties:
           type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/group/metadata
+          title: metadataProperties
           items:
-            $ref: '#/components/schemas/GroupResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    BadRequestModel:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+      title: Create Group Model
+      description: This model should be used to create a group object.
+    AcceptedModel:
       type: object
       properties:
         messages:
@@ -557,6 +558,32 @@ components:
           $ref: '#/components/schemas/HALEmbededResponse'
         parentGroup:
           $ref: '#/components/schemas/HALEmbededResponse'
+    GroupResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
     Error:
       type: object
       required:
@@ -574,57 +601,6 @@ components:
           type: string
         message:
           type: string
-    CreateGroup:
-      type: object
-      required:
-      - name
-      - seasonId
-      - type
-      properties:
-        name:
-          type: string
-          description: Name of the group.
-          title: Group name
-        competitors:
-          type: array
-          description: Array of competitors to be added to the group.
-          title: Competitors
-          items:
-            type: integer
-            description: Competitors which are associated with the group.
-            title: Competitors
-        type:
-          type: string
-          description: "The type of group. 0 = Conference \n1 = Division"
-          title: Type
-        seasonId:
-          type: integer
-          format: int64
-          description: The ID of the season the group belongs to.
-          title: Season Id
-        parentGroupId:
-          type: integer
-          format: int64
-          description: The ID of the parent group to which posted group belongs.
-          title: Parent Group Id
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/group/metadata
-          title: metadataProperties
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-      title: Create Group Model
-      description: This model should be used to create a group object.
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
     ErrorDuplicateModel:
       type: object
       properties:
@@ -651,6 +627,30 @@ components:
           $ref: '#/components/schemas/ExternalIdsViewModel'
         ref:
           type: string
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
     UpdateGroup:
       type: object
       required:

@@ -120,13 +120,26 @@ paths:
                 $ref: '#/components/schemas/ResponseEnvelope'
 components:
   parameters:
-    Offset:
-      name: offset
+    Limit:
+      name: limit
       in: query
-      description: Skip the first N records
+      description: Record limit (default 10, maximum 500)
       schema:
         type: integer
-        default: 0
+        default: 10
+        maximum: 500
+    LeagueId:
+      name: leagueId
+      in: path
+      required: true
+      schema:
+        type: string
+    TeamId:
+      name: teamId
+      in: path
+      required: true
+      schema:
+        type: string
     Format:
       name: format
       in: query
@@ -143,44 +156,20 @@ components:
       description: Comma-separated list of fields to return
       schema:
         type: string
-    LeagueId:
-      name: leagueId
-      in: path
-      required: true
-      schema:
-        type: string
-    Limit:
-      name: limit
+    Offset:
+      name: offset
       in: query
-      description: Record limit (default 10, maximum 500)
+      description: Skip the first N records
       schema:
         type: integer
-        default: 10
-        maximum: 500
+        default: 0
     CompetitionId:
       name: competitionId
       in: path
       required: true
       schema:
         type: string
-    TeamId:
-      name: teamId
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    ResponseEnvelope:
-      type: object
-      properties:
-        meta:
-          $ref: '#/components/schemas/ResponseMeta'
-        data:
-          oneOf:
-          - type: object
-          - type: array
-            items:
-              type: object
     ResponseMeta:
       type: object
       properties:
@@ -201,6 +190,17 @@ components:
           type: integer
         limit:
           type: integer
+    ResponseEnvelope:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/ResponseMeta'
+        data:
+          oneOf:
+          - type: object
+          - type: array
+            items:
+              type: object
   securitySchemes:
     apiKey:
       type: apiKey

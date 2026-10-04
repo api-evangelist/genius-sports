@@ -506,16 +506,6 @@ components:
   schemas:
     Empty:
       type: object
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
     OrganizationResponseModel:
       type: object
       required:
@@ -547,14 +537,33 @@ components:
         code:
           type: string
           description: Unique code of the organization
-    AcceptedModel:
+    CreateOrganization:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the organization
+        code:
+          type: string
+          description: Unique code of the organization
+    BadRequestModel:
       type: object
       properties:
         messages:
           type: array
           items:
             type: string
-    BadRequestModel:
+    UpdateOrganization:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id of the organization
+        name:
+          type: string
+          description: Unique name of the organization
+    AcceptedModel:
       type: object
       properties:
         messages:
@@ -587,15 +596,6 @@ components:
           type: string
         last:
           type: string
-    CreateOrganization:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Unique name of the organization
-        code:
-          type: string
-          description: Unique code of the organization
     Error:
       type: object
       required:
@@ -613,16 +613,6 @@ components:
           type: string
         message:
           type: string
-    UpdateOrganization:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          title: Id of the organization
-        name:
-          type: string
-          description: Unique name of the organization
     ErrorDuplicateModel:
       type: object
       properties:
@@ -633,6 +623,16 @@ components:
         geniusSportsConflictId:
           type: string
           description: This is the official genius sports ID, which you have conflict with.
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey
