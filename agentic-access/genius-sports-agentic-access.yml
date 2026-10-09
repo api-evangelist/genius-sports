@@ -1,23 +1,45 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/genius-sports-fixtures-v2-openapi.yml, openapi/genius-sports-matching-v2-openapi.yml,
-  openapi/genius-sports-openapi.yml
+source: openapi/genius-sports-competitions-api-openapi.yml, openapi/genius-sports-competitors-api-openapi.yml,
+  openapi/genius-sports-competitors-doubles-api-openapi.yml, openapi/genius-sports-competitors-horses-api-openapi.yml,
+  openapi/genius-sports-competitors-players-api-openapi.yml, openapi/genius-sports-competitors-tbds-api-openapi.yml,
+  openapi/genius-sports-competitors-teams-api-openapi.yml, openapi/genius-sports-contracts-api-openapi.yml,
+  openapi/genius-sports-fixtures-api-openapi.yml, openapi/genius-sports-groups-api-openapi.yml,
+  openapi/genius-sports-ingestion-api-openapi.yml, openapi/genius-sports-localities-api-openapi.yml,
+  openapi/genius-sports-matches-api-openapi.yml, openapi/genius-sports-organization-api-openapi.yml,
+  openapi/genius-sports-organizations-api-openapi.yml, openapi/genius-sports-pending-requests-api-openapi.yml,
+  openapi/genius-sports-people-api-openapi.yml, openapi/genius-sports-persons-api-openapi.yml,
+  openapi/genius-sports-probabilistic-matching-api-openapi.yml, openapi/genius-sports-rounds-api-openapi.yml,
+  openapi/genius-sports-seasons-api-openapi.yml, openapi/genius-sports-sourcerequests-api-openapi.yml,
+  openapi/genius-sports-sports-api-openapi.yml, openapi/genius-sports-standings-api-openapi.yml,
+  openapi/genius-sports-statistics-api-openapi.yml, openapi/genius-sports-venues-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 227
   by_action_class:
-    connected: 161
-    acting: 66
+    connected: 165
+    acting: 62
   by_consequence:
-    read: 161
-    write: 63
-    physical: 3
+    read: 165
+    write: 60
+    physical: 2
   human_in_the_loop_required: 0
 operations:
 - path: /competitions
+  method: options
+  operationId: optionsCompetitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitions
   method: get
+  operationId: getCompetitions
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -27,6 +49,7 @@ operations:
     audit: none
 - path: /competitions
   method: post
+  operationId: postCompetitions
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -42,6 +65,7 @@ operations:
     audit: required
 - path: /competitions
   method: put
+  operationId: putCompetitions
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -55,17 +79,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /competitions
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /competitions
   method: patch
+  operationId: patchCompetitions
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -80,7 +96,18 @@ operations:
       - high-value
     audit: required
 - path: /competitions/{id}
+  method: options
+  operationId: optionsCompetitionsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitions/{id}
   method: get
+  operationId: getCompetitionsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -90,6 +117,7 @@ operations:
     audit: none
 - path: /competitions/{id}
   method: delete
+  operationId: deleteCompetitionsById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -103,8 +131,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /competitions/{id}
+- path: /competitors
   method: options
+  operationId: optionsCompetitors
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -114,6 +143,7 @@ operations:
     audit: none
 - path: /competitors
   method: get
+  operationId: getCompetitors
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -121,69 +151,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /competitors
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/doubles
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /competitors/doubles
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles/{id}
-  method: get
+  operationId: optionsCompetitorsDoubles
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -193,15 +163,7 @@ operations:
     audit: none
 - path: /competitors/doubles/{id}
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles/{id}/contracts
-  method: get
+  operationId: optionsCompetitorsDoublesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -211,15 +173,7 @@ operations:
     audit: none
 - path: /competitors/doubles/{id}/contracts
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles/{id}/rounds
-  method: get
+  operationId: optionsCompetitorsDoublesByIdContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -229,15 +183,7 @@ operations:
     audit: none
 - path: /competitors/doubles/{id}/rounds
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles/{id}/seasons
-  method: get
+  operationId: optionsCompetitorsDoublesByIdRounds
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -247,15 +193,7 @@ operations:
     audit: none
 - path: /competitors/doubles/{id}/seasons
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/horses
-  method: get
+  operationId: optionsCompetitorsDoublesByIdSeasons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -265,15 +203,7 @@ operations:
     audit: none
 - path: /competitors/horses
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/horses/{id}
-  method: get
+  operationId: optionsCompetitorsHorses
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -283,6 +213,7 @@ operations:
     audit: none
 - path: /competitors/horses/{id}
   method: options
+  operationId: optionsCompetitorsHorsesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -290,56 +221,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /competitors/players
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/players
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/players
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /competitors/players
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/players/{id}
-  method: get
+  operationId: optionsCompetitorsPlayers
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -349,15 +233,7 @@ operations:
     audit: none
 - path: /competitors/players/{id}
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/players/{id}/contracts
-  method: get
+  operationId: optionsCompetitorsPlayersById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -367,15 +243,7 @@ operations:
     audit: none
 - path: /competitors/players/{id}/contracts
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/players/{id}/rounds
-  method: get
+  operationId: optionsCompetitorsPlayersByIdContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -385,15 +253,7 @@ operations:
     audit: none
 - path: /competitors/players/{id}/rounds
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/players/{id}/seasons
-  method: get
+  operationId: optionsCompetitorsPlayersByIdRounds
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -403,6 +263,7 @@ operations:
     audit: none
 - path: /competitors/players/{id}/seasons
   method: options
+  operationId: optionsCompetitorsPlayersByIdSeasons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -410,56 +271,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /competitors/tbds
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/tbds
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/tbds
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /competitors/tbds
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/tbds/{id}
-  method: get
+  operationId: optionsCompetitorsTbds
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -469,6 +283,7 @@ operations:
     audit: none
 - path: /competitors/tbds/{id}
   method: options
+  operationId: optionsCompetitorsTbdsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -476,56 +291,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /competitors/teams
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/teams
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/teams
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /competitors/teams
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/teams/{id}
-  method: get
+  operationId: optionsCompetitorsTeams
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -535,15 +303,7 @@ operations:
     audit: none
 - path: /competitors/teams/{id}
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/teams/{id}/contracts
-  method: get
+  operationId: optionsCompetitorsTeamsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -553,15 +313,7 @@ operations:
     audit: none
 - path: /competitors/teams/{id}/contracts
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/teams/{id}/rounds
-  method: get
+  operationId: optionsCompetitorsTeamsByIdContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -571,15 +323,7 @@ operations:
     audit: none
 - path: /competitors/teams/{id}/rounds
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/teams/{id}/seasons
-  method: get
+  operationId: optionsCompetitorsTeamsByIdRounds
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -589,6 +333,17 @@ operations:
     audit: none
 - path: /competitors/teams/{id}/seasons
   method: options
+  operationId: optionsCompetitorsTeamsByIdSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/{id}
+  method: options
+  operationId: optionsCompetitorsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -598,6 +353,7 @@ operations:
     audit: none
 - path: /competitors/{id}
   method: get
+  operationId: getCompetitorsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -607,6 +363,33 @@ operations:
     audit: none
 - path: /competitors/{id}
   method: delete
+  operationId: deleteCompetitorsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/doubles
+  method: get
+  operationId: getCompetitorsDoubles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/doubles
+  method: post
+  operationId: postCompetitorsDoubles
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -622,8 +405,273 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /competitors/{id}
+- path: /competitors/doubles
+  method: put
+  operationId: putCompetitorsDoubles
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/doubles/{id}
+  method: get
+  operationId: getCompetitorsDoublesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/doubles/{id}/rounds
+  method: get
+  operationId: getCompetitorsDoublesByIdRounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/doubles/{id}/seasons
+  method: get
+  operationId: getCompetitorsDoublesByIdSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/horses
+  method: get
+  operationId: getCompetitorsHorses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/horses/{id}
+  method: get
+  operationId: getCompetitorsHorsesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/players
+  method: get
+  operationId: getCompetitorsPlayers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/players
+  method: post
+  operationId: postCompetitorsPlayers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/players
+  method: put
+  operationId: putCompetitorsPlayers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/players/{id}
+  method: get
+  operationId: getCompetitorsPlayersById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/players/{id}/rounds
+  method: get
+  operationId: getCompetitorsPlayersByIdRounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/players/{id}/seasons
+  method: get
+  operationId: getCompetitorsPlayersByIdSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/tbds
+  method: get
+  operationId: getCompetitorsTbds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/tbds
+  method: post
+  operationId: postCompetitorsTbds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/tbds
+  method: put
+  operationId: putCompetitorsTbds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/tbds/{id}
+  method: get
+  operationId: getCompetitorsTbdsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/teams
+  method: get
+  operationId: getCompetitorsTeams
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/teams
+  method: post
+  operationId: postCompetitorsTeams
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/teams
+  method: put
+  operationId: putCompetitorsTeams
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/teams/{id}
+  method: get
+  operationId: getCompetitorsTeamsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/teams/{id}/rounds
+  method: get
+  operationId: getCompetitorsTeamsByIdRounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/teams/{id}/seasons
+  method: get
+  operationId: getCompetitorsTeamsByIdSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /contracts
   method: options
+  operationId: optionsContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -633,6 +681,7 @@ operations:
     audit: none
 - path: /contracts
   method: get
+  operationId: getContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -642,6 +691,7 @@ operations:
     audit: none
 - path: /contracts
   method: post
+  operationId: postContracts
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -657,6 +707,7 @@ operations:
     audit: required
 - path: /contracts
   method: put
+  operationId: putContracts
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -670,8 +721,29 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /contracts
-  method: options
+- path: /competitors/doubles/{id}/contracts
+  method: get
+  operationId: getCompetitorsDoublesByIdContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/players/{id}/contracts
+  method: get
+  operationId: getCompetitorsPlayersByIdContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/teams/{id}/contracts
+  method: get
+  operationId: getCompetitorsTeamsByIdContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -681,6 +753,7 @@ operations:
     audit: none
 - path: /contracts/officials
   method: post
+  operationId: postContractsOfficials
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -696,6 +769,7 @@ operations:
     audit: required
 - path: /contracts/team/{teamId}/person/{personId}
   method: delete
+  operationId: deleteContractsTeamByTeamIdPersonByPersonId
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -711,6 +785,7 @@ operations:
     audit: required
 - path: /contracts/team/{teamId}/player/{playerId}
   method: delete
+  operationId: deleteContractsTeamByTeamIdPlayerByPlayerId
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -726,6 +801,7 @@ operations:
     audit: required
 - path: /contracts/{id}
   method: delete
+  operationId: deleteContractsById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -739,8 +815,39 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /fixtures/{id}/contracts
+  method: get
+  operationId: getFixturesByIdContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}/contracts
+  method: get
+  operationId: getPersonsByIdContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixtures
+  method: options
+  operationId: optionsFixtures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /fixtures
   method: get
+  operationId: getFixtures
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -750,6 +857,7 @@ operations:
     audit: none
 - path: /fixtures
   method: post
+  operationId: postFixtures
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -765,6 +873,7 @@ operations:
     audit: required
 - path: /fixtures
   method: put
+  operationId: putFixtures
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -778,17 +887,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fixtures
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /fixtures
   method: patch
+  operationId: patchFixtures
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -803,7 +904,8 @@ operations:
       - high-value
     audit: required
 - path: /fixtures/refdata
-  method: get
+  method: options
+  operationId: optionsFixturesRefdata
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -812,7 +914,18 @@ operations:
       max-ttl: 3600
     audit: none
 - path: /fixtures/refdata
+  method: get
+  operationId: getFixturesRefdata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixtures/{id}
   method: options
+  operationId: optionsFixturesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -822,6 +935,7 @@ operations:
     audit: none
 - path: /fixtures/{id}
   method: get
+  operationId: getFixturesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -831,6 +945,7 @@ operations:
     audit: none
 - path: /fixtures/{id}
   method: delete
+  operationId: deleteFixturesById
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -844,35 +959,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fixtures/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fixtures/{id}/contracts
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /fixtures/{id}/contracts
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fixtures/{id}/lineups
-  method: get
+  operationId: optionsFixturesByIdContracts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -882,6 +971,27 @@ operations:
     audit: none
 - path: /fixtures/{id}/lineups
   method: options
+  operationId: optionsFixturesByIdLineups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixtures/{id}/lineups
+  method: get
+  operationId: getFixturesByIdLineups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixtures/{id}/officials
+  method: options
+  operationId: optionsFixturesByIdOfficials
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -891,6 +1001,7 @@ operations:
     audit: none
 - path: /fixtures/{id}/officials
   method: get
+  operationId: getFixturesByIdOfficials
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -900,6 +1011,7 @@ operations:
     audit: none
 - path: /fixtures/{id}/officials
   method: post
+  operationId: postFixturesByIdOfficials
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -915,6 +1027,7 @@ operations:
     audit: required
 - path: /fixtures/{id}/officials
   method: put
+  operationId: putFixturesByIdOfficials
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -928,8 +1041,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fixtures/{id}/officials
+- path: /fixtures/{id}/officials/{personId}
   method: options
+  operationId: optionsFixturesByIdOfficialsByPersonId
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -939,6 +1053,7 @@ operations:
     audit: none
 - path: /fixtures/{id}/officials/{personId}
   method: delete
+  operationId: deleteFixturesByIdOfficialsByPersonId
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -952,8 +1067,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fixtures/{id}/officials/{personId}
+- path: /groups
   method: options
+  operationId: optionsGroups
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -963,6 +1079,7 @@ operations:
     audit: none
 - path: /groups
   method: get
+  operationId: getGroups
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -972,6 +1089,7 @@ operations:
     audit: none
 - path: /groups
   method: post
+  operationId: postGroups
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -987,6 +1105,7 @@ operations:
     audit: required
 - path: /groups
   method: put
+  operationId: putGroups
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1000,8 +1119,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /groups
+- path: /groups/{id}
   method: options
+  operationId: optionsGroupsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1011,6 +1131,7 @@ operations:
     audit: none
 - path: /groups/{id}
   method: get
+  operationId: getGroupsById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1018,23 +1139,179 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /groups/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /groups/{id}
+- path: /ingestion/competitions/searchById
   method: options
+  operationId: optionsIngestionCompetitionsSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/competitions/searchById
+  method: get
+  operationId: getIngestionCompetitionsSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/competitions/searchBySourceEntityId
+  method: options
+  operationId: optionsIngestionCompetitionsSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/competitions/searchBySourceEntityId
+  method: get
+  operationId: getIngestionCompetitionsSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/competitions/{trackingRequestId}/status
+  method: options
+  operationId: optionsIngestionCompetitionsByTrackingRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/competitions/{trackingRequestId}/status
+  method: get
+  operationId: getIngestionCompetitionsByTrackingRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/searchById
+  method: options
+  operationId: optionsIngestionFixturesSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/searchById
+  method: get
+  operationId: getIngestionFixturesSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/searchBySourceEntityId
+  method: options
+  operationId: optionsIngestionFixturesSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/searchBySourceEntityId
+  method: get
+  operationId: getIngestionFixturesSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/{trackingRequestId}/status
+  method: options
+  operationId: optionsIngestionFixturesByTrackingRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/fixtures/{trackingRequestId}/status
+  method: get
+  operationId: getIngestionFixturesByTrackingRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/searchById
+  method: options
+  operationId: optionsIngestionSquadsSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/searchById
+  method: get
+  operationId: getIngestionSquadsSearchById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/searchBySourceEntityId
+  method: options
+  operationId: optionsIngestionSquadsSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/searchBySourceEntityId
+  method: get
+  operationId: getIngestionSquadsSearchBySourceEntityId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/{trackingRequestId}/status
+  method: options
+  operationId: optionsIngestionSquadsByTrackingRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ingestion/squads/{trackingRequestId}/status
+  method: get
+  operationId: getIngestionSquadsByTrackingRequestIdStatus
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1044,6 +1321,7 @@ operations:
     audit: none
 - path: /ingestion/competitions
   method: post
+  operationId: postIngestionCompetitions
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1057,62 +1335,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /ingestion/competitions/searchById
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/competitions/searchById
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/competitions/searchBySourceEntityId
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/competitions/searchBySourceEntityId
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/competitions/{trackingRequestId}/status
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/competitions/{trackingRequestId}/status
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /ingestion/fixtures
   method: post
+  operationId: postIngestionFixtures
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1128,6 +1353,7 @@ operations:
     audit: required
 - path: /ingestion/fixtures
   method: patch
+  operationId: patchIngestionFixtures
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1141,62 +1367,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /ingestion/fixtures/searchById
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/fixtures/searchById
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/fixtures/searchBySourceEntityId
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/fixtures/searchBySourceEntityId
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/fixtures/{trackingRequestId}/status
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/fixtures/{trackingRequestId}/status
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /ingestion/squads
   method: post
+  operationId: postIngestionSquads
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1210,53 +1383,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /ingestion/squads/searchById
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/squads/searchById
+- path: /localities
   method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/squads/searchBySourceEntityId
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/squads/searchBySourceEntityId
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/squads/{trackingRequestId}/status
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ingestion/squads/{trackingRequestId}/status
-  method: options
+  operationId: optionsLocalities
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1266,24 +1395,7 @@ operations:
     audit: none
 - path: /localities
   method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /localities
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /localities/{id}
-  method: get
+  operationId: getLocalities
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1293,6 +1405,7 @@ operations:
     audit: none
 - path: /localities/{id}
   method: options
+  operationId: optionsLocalitiesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1300,8 +1413,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /organizations
+- path: /localities/{id}
   method: get
+  operationId: getLocalitiesById
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1309,47 +1423,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /organizations
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organizations
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organizations
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organizations/{id}
+- path: /v1/matches
   method: get
+  operationId: listMatches
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1357,986 +1433,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /organizations/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organizations/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons
+- path: /v1/matches/{matchId}
   method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /persons
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /persons
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/coaches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/coaches
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /persons/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}/contracts
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}/contracts
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}/officials
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /persons/{id}/officials
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rounds
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rounds
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds
-  method: patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rounds/{id}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rounds/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds/{id}/competitors
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds/{id}/competitors
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rounds/{id}/competitors
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rounds/{id}/competitors/{competitorId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons
-  method: patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons/{id}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons/{id}/competitors
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons/{id}/competitors
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /seasons/{id}/competitors
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /seasons/{id}/competitors/{competitorId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /sourcerequests/{requestId}/status
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sourcerequests/{requestId}/status
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sports
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sports
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sports/{id}/{entityType}/metadata
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sports/{id}/{entityType}/metadata
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venues
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venues
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /venues
-  method: put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /venues
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venues/{id}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venues/{id}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /venues/{id}
-  method: options
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competition-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competition-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competition-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/doubles-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/doubles-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/player-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/player-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/player-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/team-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /competitors/team-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /competitors/team-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fixture-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fixture-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /fixture-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /locality-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /locality-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /locality-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /matchrequests/status/{id}
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organization-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /organization-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organization-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /person-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /person-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /person-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /round-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /round-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /round-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /season-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /season-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /season-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sport-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /sport-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /sport-matches/maps
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venue-matches
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /venue-matches
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /venue-matches/maps
-  method: get
+  operationId: getMatch
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2404,6 +1503,104 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /organizations
+  method: options
+  operationId: optionsOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations
+  method: get
+  operationId: getOrganizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations
+  method: post
+  operationId: postOrganizations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations
+  method: put
+  operationId: putOrganizations
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organizations/{id}
+  method: options
+  operationId: optionsOrganizationsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}
+  method: get
+  operationId: getOrganizationsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organizations/{id}
+  method: delete
+  operationId: deleteOrganizationsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /matchrequests/status/{id}
+  method: get
+  operationId: getMatchrequestsStatusById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/persons
   method: get
   operationId: listPersons
@@ -2424,9 +1621,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/matches
-  method: get
-  operationId: listMatches
+- path: /persons
+  method: options
+  operationId: optionsPersons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2434,9 +1631,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/matches/{matchId}
+- path: /persons
   method: get
-  operationId: getMatch
+  operationId: getPersons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2444,9 +1641,913 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/matches/{matchId}/statistics
+- path: /persons
+  method: post
+  operationId: postPersons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /persons
+  method: put
+  operationId: putPersons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /persons/coaches
+  method: options
+  operationId: optionsPersonsCoaches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/coaches
   method: get
-  operationId: getMatchStatistics
+  operationId: getPersonsCoaches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}
+  method: options
+  operationId: optionsPersonsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}
+  method: get
+  operationId: getPersonsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}
+  method: delete
+  operationId: deletePersonsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /persons/{id}/contracts
+  method: options
+  operationId: optionsPersonsByIdContracts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}/officials
+  method: options
+  operationId: optionsPersonsByIdOfficials
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /persons/{id}/officials
+  method: get
+  operationId: getPersonsByIdOfficials
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competition-matches
+  method: get
+  operationId: getCompetitionMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competition-matches
+  method: post
+  operationId: postCompetitionMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competition-matches/maps
+  method: get
+  operationId: getCompetitionMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/doubles-matches
+  method: get
+  operationId: getCompetitorsDoublesMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/doubles-matches
+  method: post
+  operationId: postCompetitorsDoublesMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/doubles-matches/maps
+  method: get
+  operationId: getCompetitorsDoublesMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/player-matches
+  method: get
+  operationId: getCompetitorsPlayerMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/player-matches
+  method: post
+  operationId: postCompetitorsPlayerMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/player-matches/maps
+  method: get
+  operationId: getCompetitorsPlayerMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/team-matches
+  method: get
+  operationId: getCompetitorsTeamMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /competitors/team-matches
+  method: post
+  operationId: postCompetitorsTeamMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /competitors/team-matches/maps
+  method: get
+  operationId: getCompetitorsTeamMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixture-matches
+  method: get
+  operationId: getFixtureMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixture-matches
+  method: post
+  operationId: postFixtureMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fixture-matches/maps
+  method: get
+  operationId: getFixtureMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /locality-matches
+  method: get
+  operationId: getLocalityMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /locality-matches
+  method: post
+  operationId: postLocalityMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /locality-matches/maps
+  method: get
+  operationId: getLocalityMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organization-matches
+  method: get
+  operationId: getOrganizationMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organization-matches
+  method: post
+  operationId: postOrganizationMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organization-matches/maps
+  method: get
+  operationId: getOrganizationMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /person-matches
+  method: get
+  operationId: getPersonMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /person-matches
+  method: post
+  operationId: postPersonMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /person-matches/maps
+  method: get
+  operationId: getPersonMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /round-matches
+  method: get
+  operationId: getRoundMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /round-matches
+  method: post
+  operationId: postRoundMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /round-matches/maps
+  method: get
+  operationId: getRoundMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /season-matches
+  method: get
+  operationId: getSeasonMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /season-matches
+  method: post
+  operationId: postSeasonMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /season-matches/maps
+  method: get
+  operationId: getSeasonMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sport-matches
+  method: get
+  operationId: getSportMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sport-matches
+  method: post
+  operationId: postSportMatches
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sport-matches/maps
+  method: get
+  operationId: getSportMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venue-matches
+  method: get
+  operationId: getVenueMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venue-matches
+  method: post
+  operationId: postVenueMatches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venue-matches/maps
+  method: get
+  operationId: getVenueMatchesMaps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds
+  method: options
+  operationId: optionsRounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds
+  method: get
+  operationId: getRounds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds
+  method: post
+  operationId: postRounds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rounds
+  method: put
+  operationId: putRounds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rounds
+  method: patch
+  operationId: patchRounds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rounds/{id}
+  method: options
+  operationId: optionsRoundsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds/{id}
+  method: get
+  operationId: getRoundsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds/{id}
+  method: delete
+  operationId: deleteRoundsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rounds/{id}/competitors
+  method: options
+  operationId: optionsRoundsByIdCompetitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds/{id}/competitors
+  method: get
+  operationId: getRoundsByIdCompetitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rounds/{id}/competitors
+  method: post
+  operationId: postRoundsByIdCompetitors
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /groups/{id}
+  method: delete
+  operationId: deleteGroupsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rounds/{id}/competitors/{competitorId}
+  method: delete
+  operationId: deleteRoundsByIdCompetitorsByCompetitorId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons
+  method: options
+  operationId: optionsSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons
+  method: get
+  operationId: getSeasons
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons
+  method: post
+  operationId: postSeasons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons
+  method: put
+  operationId: putSeasons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons
+  method: patch
+  operationId: patchSeasons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons/{id}
+  method: options
+  operationId: optionsSeasonsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons/{id}
+  method: get
+  operationId: getSeasonsById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons/{id}
+  method: delete
+  operationId: deleteSeasonsById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons/{id}/competitors
+  method: options
+  operationId: optionsSeasonsByIdCompetitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons/{id}/competitors
+  method: get
+  operationId: getSeasonsByIdCompetitors
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /seasons/{id}/competitors
+  method: post
+  operationId: postSeasonsByIdCompetitors
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /seasons/{id}/competitors/{competitorId}
+  method: delete
+  operationId: deleteSeasonsByIdCompetitorsByCompetitorId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sourcerequests/{requestId}/status
+  method: options
+  operationId: optionsSourcerequestsByRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sourcerequests/{requestId}/status
+  method: get
+  operationId: getSourcerequestsByRequestIdStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sports
+  method: options
+  operationId: optionsSports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sports
+  method: get
+  operationId: getSports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sports/{id}/{entityType}/metadata
+  method: options
+  operationId: optionsSportsByIdByEntityTypeMetadata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sports/{id}/{entityType}/metadata
+  method: get
+  operationId: getSportsByIdByEntityTypeMetadata
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -2464,6 +2565,104 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v1/matches/{matchId}/statistics
+  method: get
+  operationId: getMatchStatistics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venues
+  method: options
+  operationId: optionsVenues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venues
+  method: get
+  operationId: getVenues
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venues
+  method: post
+  operationId: postVenues
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /venues
+  method: put
+  operationId: putVenues
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /venues/{id}
+  method: options
+  operationId: optionsVenuesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venues/{id}
+  method: get
+  operationId: getVenuesById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /venues/{id}
+  method: delete
+  operationId: deleteVenuesById
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/venues
   method: get
   operationId: listVenues

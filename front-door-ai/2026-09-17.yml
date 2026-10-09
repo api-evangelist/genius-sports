@@ -7,14 +7,17 @@ front_door_ai:
   probed_at: '2026-09-17'
   host: geniussports.com
   final_host: www.geniussports.com
-  ownership: inherited
+  ownership: own
   owner: genius-sports
   shares_host_with: null
-  inherited_from: www.geniussports.com
+  inherited_from: null
+  alias_of: www.geniussports.com
   verdict: scored
-  score: null
+  score: 6
+  band: 4
+  band_label: moderate
   host_score: 6
-  density: null
+  density: 9.09
   words: 660
   tiers:
     agentic: 0
