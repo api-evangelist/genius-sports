@@ -289,6 +289,47 @@ components:
   schemas:
     Empty:
       type: object
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
     LocalityResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -315,20 +356,6 @@ components:
           type: string
         last:
           type: string
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    AcceptedModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     LocalityResponseModel:
       type: object
       required:
@@ -357,33 +384,6 @@ components:
           description: ConstituentCountry, Continent, Country, FirstOrderAdministrativeRegion, NonGeographic, World, Game.
         code:
           type: string
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
   securitySchemes:
     Auth0:
       type: apiKey

@@ -836,32 +836,6 @@ components:
           type: string
         isDeleted:
           type: boolean
-    PersonOfficialResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PersonOfficialResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
     BadRequestModel:
       type: object
       properties:
@@ -869,13 +843,122 @@ components:
           type: array
           items:
             type: string
-    AcceptedModel:
+    CreatePersonViewModel:
       type: object
+      required:
+      - firstName
+      - genderType
+      - lastName
+      - localityId
+      - useNickname
       properties:
-        messages:
+        firstName:
+          type: string
+          description: The first name of the person
+          title: First Name
+          maxLength: 256
+        lastName:
+          type: string
+          description: The last name of the person
+          title: Last Name
+          maxLength: 256
+        nickName:
+          type: string
+          description: The nickname of the person
+          title: Nickname
+          maxLength: 128
+        useNickname:
+          type: boolean
+          description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
+          title: Is active
+        localityId:
+          type: integer
+          format: int64
+          description: Id of the country,virtual place, etc. of the person!
+          title: Locality Id
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: The date of birth of the person
+          title: Date of birth
+        genderType:
+          $ref: '#/components/schemas/PersonGenderType'
+        sports:
+          type: array
+          description: Array of sport Ids to be added to the person.
+          title: Sports
+          items:
+            type: integer
+            description: Sports to which the person belongs to.
+            title: Sports
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
+    PersonResponseModel:
+      type: object
+      required:
+      - createdOn
+      - firstName
+      - fullName
+      - genderType
+      - id
+      - isActive
+      - lastName
+      - locality
+      - updatesCount
+      - useNickname
+      properties:
+        id:
+          type: integer
+          format: int64
+        fullName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        genderType:
+          type: string
+          description: Undefined, Male, Female, Mixed.
+        dateOfBirth:
+          type: string
+          format: date-time
+        isActive:
+          type: boolean
+        nickName:
+          type: string
+        useNickname:
+          type: boolean
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        sports:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/HALEmbededResponse'
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
     PersonGenderType:
       type: integer
       title: Gender Type
@@ -885,6 +968,57 @@ components:
       - '0'
       - '1'
       - '2'
+    ExternalIdsViewModel:
+      type: object
+      properties:
+        optaId:
+          type: string
+        optaLegacyId:
+          type: string
+        fibaId:
+          type: string
+        vesselId:
+          type: string
+        statsEngineId:
+          type: string
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        locationType:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorDuplicateModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
     UpdatePersonViewModel:
       type: object
       required:
@@ -945,99 +1079,6 @@ components:
             type: integer
             description: Sports to which the person belongs to.
             title: Sports
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
-    ExternalIdsViewModel:
-      type: object
-      properties:
-        optaId:
-          type: string
-        optaLegacyId:
-          type: string
-        fibaId:
-          type: string
-        vesselId:
-          type: string
-        statsEngineId:
-          type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
-    PersonResponseModel:
-      type: object
-      required:
-      - createdOn
-      - firstName
-      - fullName
-      - genderType
-      - id
-      - isActive
-      - lastName
-      - locality
-      - updatesCount
-      - useNickname
-      properties:
-        id:
-          type: integer
-          format: int64
-        fullName:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        genderType:
-          type: string
-          description: Undefined, Male, Female, Mixed.
-        dateOfBirth:
-          type: string
-          format: date-time
-        isActive:
-          type: boolean
-        nickName:
-          type: string
-        useNickname:
-          type: boolean
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        sports:
-          type: array
-          items:
-            $ref: '#/components/schemas/HALEmbededResponse'
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
     PersonsListResponseModelHATEOASReponseModel:
       type: object
       properties:
@@ -1064,64 +1105,13 @@ components:
           type: string
         last:
           type: string
-    CreatePersonViewModel:
+    AcceptedModel:
       type: object
-      required:
-      - firstName
-      - genderType
-      - lastName
-      - localityId
-      - useNickname
       properties:
-        firstName:
-          type: string
-          description: The first name of the person
-          title: First Name
-          maxLength: 256
-        lastName:
-          type: string
-          description: The last name of the person
-          title: Last Name
-          maxLength: 256
-        nickName:
-          type: string
-          description: The nickname of the person
-          title: Nickname
-          maxLength: 128
-        useNickname:
-          type: boolean
-          description: Whether the nickname should be used instead of the name of the person when displaying the person. If the useNickname property is set to true nickname is required!
-          title: Is active
-        localityId:
-          type: integer
-          format: int64
-          description: Id of the country,virtual place, etc. of the person!
-          title: Locality Id
-        dateOfBirth:
-          type: string
-          format: date-time
-          description: The date of birth of the person
-          title: Date of birth
-        genderType:
-          $ref: '#/components/schemas/PersonGenderType'
-        sports:
+        messages:
           type: array
-          description: Array of sport Ids to be added to the person.
-          title: Sports
           items:
-            type: integer
-            description: Sports to which the person belongs to.
-            title: Sports
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
+            type: string
     PersonOfficialResponseModel:
       type: object
       required:
@@ -1151,21 +1141,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/JsonbModel'
-    HALEmbededResponse:
+    PersonOfficialResponseModelHATEOASReponseModel:
       type: object
-      required:
-      - id
-      - name
-      - ref
       properties:
-        id:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
           type: integer
           format: int64
-        name:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonOfficialResponseModel'
+        self:
           type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        ref:
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
           type: string
   securitySchemes:
     Auth0:

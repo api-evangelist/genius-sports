@@ -1203,6 +1203,65 @@ components:
   schemas:
     Empty:
       type: object
+    CompetitorPersonRoleType:
+      type: integer
+      format: int32
+      description: 0 - Owned By (e.g. Competitor Horse owned by Person, Competitor Team owned by Person); 1 - PlaysFor (e.g. Person plays for Competitor Team); 3 - Trained By (e.g. Competitor is trained by Person); 5 - RiddenBy (e.g. Competitor Horse is ridden by Person (the person is the jockey); 6 - BredBy (e.g. Competitor Horse is bred by Person))
+      enum:
+      - '0'
+      - '1'
+      - '3'
+      - '5'
+      - '6'
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    HALEmbededResponse:
+      type: object
+      required:
+      - id
+      - name
+      - ref
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        ref:
+          type: string
+    CompetitorContractResponseModelHATEOASReponseModel:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalItems:
+          type: integer
+          format: int64
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompetitorContractResponseModel'
+        self:
+          type: string
+        previous:
+          type: string
+        next:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
     JsonbModelViewModel:
       type: object
       required:
@@ -1218,78 +1277,32 @@ components:
           title: Property value
       title: Create/Update Property Model
       description: This model should be used to create or update single property value for specific property name for specific model.
-    PersonContractResponseModelHATEOASReponseModel:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalItems:
-          type: integer
-          format: int64
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PersonContractResponseModel'
-        self:
-          type: string
-        previous:
-          type: string
-        next:
-          type: string
-        first:
-          type: string
-        last:
-          type: string
-    PersonContractResponseModel:
+    Error:
       type: object
       required:
-      - competitor
-      - createdOn
-      - id
-      - isActive
-      - personRole
-      - sport
-      - updatesCount
+      - domain
+      - message
+      - reason
       properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
+        reason:
           type: string
-          format: date-time
-        modifiedOn:
+        domain:
           type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        competitor:
-          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
-        sport:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        personRole:
+        locationType:
           type: string
-        isActive:
-          type: boolean
-          description: Whether the relation between the person and the competitor is active
-          title: Is Active
-        startDate:
+        location:
           type: string
-          format: date-time
-        endDate:
+        message:
           type: string
-          format: date-time
-    AcceptedModel:
+    JsonbModel:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            type: string
+        name:
+          type: string
+        value:
+          type: string
+        isDeleted:
+          type: boolean
     CreatePersonViewModel:
       type: object
       required:
@@ -1338,164 +1351,21 @@ components:
             type: integer
             description: Sports to which the person belongs to.
             title: Sports
-    ErrorModel:
+    ExternalIdsViewModel:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        optaId:
           type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    CompetitorHALEmbededResponse:
-      type: object
-      required:
-      - competitorType
-      - id
-      - name
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
+        optaLegacyId:
           type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        competitorType:
+        fibaId:
           type: string
-          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
-        ref:
+        vesselId:
           type: string
-    PersonHALEmbededResponse:
-      type: object
-      required:
-      - firstName
-      - fullName
-      - genderType
-      - id
-      - lastName
-      - locality
-      - ref
-      properties:
-        id:
-          type: integer
-          format: int64
-        dateOfBirth:
+        statsEngineId:
           type: string
-          format: date-time
-        firstName:
-          type: string
-        lastName:
-          type: string
-        fullName:
-          type: string
-        nickName:
-          type: string
-        genderType:
-          type: string
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-        locality:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        ref:
-          type: string
-    CompetitorContractResponseModel:
-      type: object
-      required:
-      - createdOn
-      - id
-      - isActive
-      - person
-      - personRole
-      - sport
-      - updatesCount
-      properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        person:
-          $ref: '#/components/schemas/PersonHALEmbededResponse'
-        sport:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        player:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        personRole:
-          type: string
-        isActive:
-          type: boolean
-          description: Whether the relation between the person and the competitor is active
-          title: Is Active
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
-          items:
-            $ref: '#/components/schemas/JsonbModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-    CreateCompetitorOfficialContract:
-      type: object
-      required:
-      - competitorId
-      - personRole
-      properties:
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
-          items:
-            $ref: '#/components/schemas/JsonbModelViewModel'
-        personId:
-          type: integer
-          format: int64
-          minimum: 1.0
-        person:
-          description: Person information if not been created early, if the person already exists - leave empty.
-          $ref: '#/components/schemas/CreatePersonViewModel'
-        isActive:
-          type: boolean
-          description: Whether the contract is active or not. When lineups are added this will define whether the person can be part of the lineup.
-          title: Is Active
-        competitorId:
-          type: integer
-          format: int64
-          minimum: 1.0
-        personRole:
-          $ref: '#/components/schemas/CompetitorPersonRoleType'
-        startDate:
-          type: string
-          format: date-time
-          description: When the contract was activated.
-        endDate:
-          type: string
-          format: date-time
-          description: When the contract was deactivated.
-    ErrorDuplicateModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-        geniusSportsConflictId:
-          type: string
-          description: This is the official genius sports ID, which you have conflict with.
-    CompetitorContractResponseModelHATEOASReponseModel:
+      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+    PersonContractResponseModelHATEOASReponseModel:
       type: object
       properties:
         page:
@@ -1510,7 +1380,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/CompetitorContractResponseModel'
+            $ref: '#/components/schemas/PersonContractResponseModel'
         self:
           type: string
         previous:
@@ -1521,74 +1391,6 @@ components:
           type: string
         last:
           type: string
-    PersonGenderType:
-      type: integer
-      title: Gender Type
-      format: int32
-      description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
-      enum:
-      - '0'
-      - '1'
-      - '2'
-    ContractResponseModel:
-      type: object
-      required:
-      - competitor
-      - createdOn
-      - id
-      - isActive
-      - person
-      - personRole
-      - player
-      - sport
-      - updatesCount
-      properties:
-        id:
-          type: integer
-          format: int64
-        createdOn:
-          type: string
-          format: date-time
-        modifiedOn:
-          type: string
-          format: date-time
-        updatesCount:
-          type: integer
-          format: int32
-        person:
-          $ref: '#/components/schemas/PersonHALEmbededResponse'
-        sport:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        player:
-          $ref: '#/components/schemas/HALEmbededResponse'
-        competitor:
-          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
-        personRole:
-          type: string
-        isActive:
-          type: boolean
-          description: Whether the relation between the person and the competitor is active
-          title: Is Active
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        metadataProperties:
-          type: array
-          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
-          items:
-            $ref: '#/components/schemas/JsonbModel'
-        externalIds:
-          $ref: '#/components/schemas/ExternalIdsViewModel'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
     CreateContract:
       type: object
       required:
@@ -1649,9 +1451,97 @@ components:
           type: string
         last:
           type: string
-    HALEmbededResponse:
+    CompetitorContractResponseModel:
       type: object
       required:
+      - createdOn
+      - id
+      - isActive
+      - person
+      - personRole
+      - sport
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/PersonHALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        player:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        personRole:
+          type: string
+        isActive:
+          type: boolean
+          description: Whether the relation between the person and the competitor is active
+          title: Is Active
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+    PersonContractResponseModel:
+      type: object
+      required:
+      - competitor
+      - createdOn
+      - id
+      - isActive
+      - personRole
+      - sport
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        competitor:
+          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        personRole:
+          type: string
+        isActive:
+          type: boolean
+          description: Whether the relation between the person and the competitor is active
+          title: Is Active
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    CompetitorHALEmbededResponse:
+      type: object
+      required:
+      - competitorType
       - id
       - name
       - ref
@@ -1663,58 +1553,63 @@ components:
           type: string
         externalIds:
           $ref: '#/components/schemas/ExternalIdsViewModel'
+        competitorType:
+          type: string
+          description: Team, Player, Horse, Jockey, HorseOwner, Dog, Breeder, DoublesPartnership, Other, TBD
         ref:
           type: string
-    JsonbModel:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        isDeleted:
-          type: boolean
-    CompetitorPersonRoleType:
+    PersonGenderType:
       type: integer
+      title: Gender Type
       format: int32
-      description: 0 - Owned By (e.g. Competitor Horse owned by Person, Competitor Team owned by Person); 1 - PlaysFor (e.g. Person plays for Competitor Team); 3 - Trained By (e.g. Competitor is trained by Person); 5 - RiddenBy (e.g. Competitor Horse is ridden by Person (the person is the jockey); 6 - BredBy (e.g. Competitor Horse is bred by Person))
+      description: 'This property defines the possible person gender types which can be set as integer values. Each integer value is associated with relevant gender type as follows: 0 - Undefined; 1 - Male; 2 - Female;'
       enum:
       - '0'
       - '1'
-      - '3'
-      - '5'
-      - '6'
-    Error:
+      - '2'
+    ErrorModel:
       type: object
-      required:
-      - domain
-      - message
-      - reason
       properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        locationType:
-          type: string
-        location:
-          type: string
+        code:
+          type: integer
+          format: int32
         message:
           type: string
-    ExternalIdsViewModel:
+        error:
+          $ref: '#/components/schemas/Error'
+    PersonHALEmbededResponse:
       type: object
+      required:
+      - firstName
+      - fullName
+      - genderType
+      - id
+      - lastName
+      - locality
+      - ref
       properties:
-        optaId:
+        id:
+          type: integer
+          format: int64
+        dateOfBirth:
           type: string
-        optaLegacyId:
+          format: date-time
+        firstName:
           type: string
-        fibaId:
+        lastName:
           type: string
-        vesselId:
+        fullName:
           type: string
-        statsEngineId:
+        nickName:
           type: string
-      description: External system identifiers. Key represents the external system name (e.g., 'optaId', 'optaLegacyId', 'fibaId', 'vesselId','statsEngineId'), value represents the identifier. The property also allows filtering by specific external system identifiers. For example '?filter=externalIds.optaId[equals]:12345' to filter entities with a specific Opta ID.
+        genderType:
+          type: string
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+        locality:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        ref:
+          type: string
     UpdateContract:
       type: object
       required:
@@ -1743,6 +1638,111 @@ components:
           description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
           items:
             $ref: '#/components/schemas/JsonbModelViewModel'
+    ErrorDuplicateModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+        geniusSportsConflictId:
+          type: string
+          description: This is the official genius sports ID, which you have conflict with.
+    ContractResponseModel:
+      type: object
+      required:
+      - competitor
+      - createdOn
+      - id
+      - isActive
+      - person
+      - personRole
+      - player
+      - sport
+      - updatesCount
+      properties:
+        id:
+          type: integer
+          format: int64
+        createdOn:
+          type: string
+          format: date-time
+        modifiedOn:
+          type: string
+          format: date-time
+        updatesCount:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/PersonHALEmbededResponse'
+        sport:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        player:
+          $ref: '#/components/schemas/HALEmbededResponse'
+        competitor:
+          $ref: '#/components/schemas/CompetitorHALEmbededResponse'
+        personRole:
+          type: string
+        isActive:
+          type: boolean
+          description: Whether the relation between the person and the competitor is active
+          title: Is Active
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModel'
+        externalIds:
+          $ref: '#/components/schemas/ExternalIdsViewModel'
+    AcceptedModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    CreateCompetitorOfficialContract:
+      type: object
+      required:
+      - competitorId
+      - personRole
+      properties:
+        metadataProperties:
+          type: array
+          description: In order to retrieve allowed metadata properties with their values execute get request on this path - /sports/{id}/contract/metadata
+          items:
+            $ref: '#/components/schemas/JsonbModelViewModel'
+        personId:
+          type: integer
+          format: int64
+          minimum: 1.0
+        person:
+          description: Person information if not been created early, if the person already exists - leave empty.
+          $ref: '#/components/schemas/CreatePersonViewModel'
+        isActive:
+          type: boolean
+          description: Whether the contract is active or not. When lineups are added this will define whether the person can be part of the lineup.
+          title: Is Active
+        competitorId:
+          type: integer
+          format: int64
+          minimum: 1.0
+        personRole:
+          $ref: '#/components/schemas/CompetitorPersonRoleType'
+        startDate:
+          type: string
+          format: date-time
+          description: When the contract was activated.
+        endDate:
+          type: string
+          format: date-time
+          description: When the contract was deactivated.
   securitySchemes:
     Auth0:
       type: apiKey

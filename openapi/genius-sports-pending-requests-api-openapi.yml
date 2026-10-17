@@ -108,38 +108,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorModel:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        error:
-          $ref: '#/components/schemas/Error'
-    BadRequestModel:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - domain
-      - message
-      - reason
-      properties:
-        reason:
-          type: string
-        domain:
-          type: string
-        location:
-          type: string
-        message:
-          type: string
     pendingMatchRequestStatusResponseModel:
       type: object
       properties:
@@ -167,6 +135,38 @@ components:
         reason:
           type: string
           description: The reason for NotMatched status. Free text. Should not be used to build logical flows on top of it! Only available when status is NotMatched!
+    BadRequestModel:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      required:
+      - domain
+      - message
+      - reason
+      properties:
+        reason:
+          type: string
+        domain:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/Error'
     sourceHALEmbededResponse:
       type: object
       properties:
