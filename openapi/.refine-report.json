@@ -3,6 +3,7 @@
   "sources": [
     "_original/genius-sports-fixtures-v2-openapi.yml",
     "_original/genius-sports-matching-v2-openapi.yml",
+    "_original/genius-sports-openapi.json",
     "_original/genius-sports-openapi.yml"
   ],
   "outputs": [
@@ -27,6 +28,9 @@
     "genius-sports-competitors-teams-api-openapi.yml",
     "genius-sports-pending-requests-api-openapi.yml",
     "genius-sports-probabilistic-matching-api-openapi.yml",
+    "genius-sports-pet-api-openapi.yml",
+    "genius-sports-store-api-openapi.yml",
+    "genius-sports-user-api-openapi.yml",
     "genius-sports-matches-api-openapi.yml",
     "genius-sports-organization-api-openapi.yml",
     "genius-sports-people-api-openapi.yml",
@@ -37,7 +41,7 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "genius-sports-fixtures-v2-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "genius-sports-fixtures-v2-openapi.yml: tagged paths OPTIONS /competitions -> Competitions",
     "genius-sports-fixtures-v2-openapi.yml: tagged paths OPTIONS /competitions/{id} -> Competitions",
@@ -117,9 +121,10 @@
     "genius-sports-fixtures-v2-openapi.yml: declared missing tag: Venues",
     "genius-sports-matching-v2-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "genius-sports-matching-v2-openapi.yml: declared missing tag: Pending requests",
+    "genius-sports-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "genius-sports-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Venues' spans 2 source specs (genius-sports-fixtures-v2-openapi.yml, genius-sports-openapi.yml): per-path servers applied",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+3 apis, 34 total)"
   ],
   "skipped": [
     "genius-sports-competitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
