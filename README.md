@@ -1,4 +1,4 @@
-# Genius Sports (genius-sports)
+# Genius Sports
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,184 +66,170 @@
 
 Genius Sports provides APIs to query information regarding matches, players, statistics etc. both past and future across multiple sports including basketball, football (soccer), volleyball, American football, and ice hockey.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/genius-sports/refs/heads/main/apis.yml)
+**Areas:** Sports · Statistics · Live Data · Fixtures
 
-## Scope
+## Genius Sports on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Genius Sports is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/genius-sports/](https://apis.io/providers/genius-sports/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (31)
 
-- Sports
-- Statistics
-- Live Data
-- Fixtures
+- [Genius Sports REST API](https://apis.io/apis/genius-sports/rest-api/) — Query information regarding matches, players, statistics etc. both past and future. Covers basketball, 3x3, football (soccer), volleyball, American…
+- [Genius Sports Streaming API](https://apis.io/apis/genius-sports/streaming-api/) — Delivers event-by-event data and aggregated statistics for matches in progress, supporting live consumption of sporting event data.
+- [Genius Sports Publish API](https://apis.io/apis/genius-sports/publish-api/) — Enables publishing of real-time event data from sporting events into the Genius Sports warehouse and statistics engine.
+- [Genius Sports LiveStats In-Arena Feed](https://apis.io/apis/genius-sports/livestats-in-arena-feed/) — Live venue data delivered for TV production and consumers covering basketball, football (soccer), and volleyball.
+- [Genius Sports Licensing API](https://apis.io/apis/genius-sports/licensing-api/) — Retrieves matches and options from the Genius Sports licensing server.
+- [Genius Sports Competitions API](https://apis.io/apis/genius-sports/genius-sports-competitions-api/) — The Competitions API from Genius Sports — 2 operation(s) for competitions.
+- [Genius Sports Competitors API](https://apis.io/apis/genius-sports/genius-sports-competitors-api/) — The Competitors API from Genius Sports — 21 operation(s) for competitors.
+- [Genius Sports competitors/doubles API](https://apis.io/apis/genius-sports/genius-sports-competitors-doubles-api/) — Groups the operations related to competitors of type Double partnership. When creating a double partnership the competitors must be of the same sport, and…
+- [Genius Sports competitors/horses API](https://apis.io/apis/genius-sports/genius-sports-competitors-horses-api/) — Groups the operations related to competitors of type Horse
+- [Genius Sports Competitors/players API](https://apis.io/apis/genius-sports/genius-sports-competitors-players-api/) — Groups the operations related to competitors of type Player
+- [Genius Sports Competitors/tbds API](https://apis.io/apis/genius-sports/genius-sports-competitors-tbds-api/) — Groups the operations related to to-be-determined competitors.
+- [Genius Sports Competitors/teams API](https://apis.io/apis/genius-sports/genius-sports-competitors-teams-api/) — Groups the operations related to competitors of type Team
+- [Genius Sports Contracts API](https://apis.io/apis/genius-sports/genius-sports-contracts-api/) — The Contracts API from Genius Sports — 10 operation(s) for contracts.
+- [Genius Sports Fixtures API](https://apis.io/apis/genius-sports/genius-sports-fixtures-api/) — The Fixtures API from Genius Sports — 7 operation(s) for fixtures.
+- [Genius Sports Groups API](https://apis.io/apis/genius-sports/genius-sports-groups-api/) — The Groups API from Genius Sports — 2 operation(s) for groups.
+- [Genius Sports Ingestion API](https://apis.io/apis/genius-sports/genius-sports-ingestion-api/) — The Ingestion API from Genius Sports — 12 operation(s) for ingestion.
+- [Genius Sports Localities API](https://apis.io/apis/genius-sports/genius-sports-localities-api/) — The Localities API from Genius Sports — 2 operation(s) for localities.
+- [Genius Sports Matches API](https://apis.io/apis/genius-sports/genius-sports-matches-api/) — Match data and broadcasts
+- [Genius Sports Organization API](https://apis.io/apis/genius-sports/genius-sports-organization-api/) — Leagues, competitions, clubs, teams
+- [Genius Sports Organizations API](https://apis.io/apis/genius-sports/genius-sports-organizations-api/) — The Organizations API from Genius Sports — 2 operation(s) for organizations.
+- [Genius Sports Pending requests API](https://apis.io/apis/genius-sports/genius-sports-pending-requests-api/) — The Pending requests API from Genius Sports — 1 operation(s) for pending requests.
+- [Genius Sports People API](https://apis.io/apis/genius-sports/genius-sports-people-api/) — Players, officials, staff
+- [Genius Sports Persons API](https://apis.io/apis/genius-sports/genius-sports-persons-api/) — The Persons API from Genius Sports — 5 operation(s) for persons.
+- [Genius Sports Probabilistic matching API](https://apis.io/apis/genius-sports/genius-sports-probabilistic-matching-api/) — The results from the this kind of matching are always probabilistic. However we consider matches that have above 90% match score as viable results.
+- [Genius Sports Rounds API](https://apis.io/apis/genius-sports/genius-sports-rounds-api/) — The Rounds API from Genius Sports — 5 operation(s) for rounds.
+- [Genius Sports Seasons API](https://apis.io/apis/genius-sports/genius-sports-seasons-api/) — The Seasons API from Genius Sports — 4 operation(s) for seasons.
+- [Genius Sports Sourcerequests API](https://apis.io/apis/genius-sports/genius-sports-sourcerequests-api/) — The Sourcerequests API from Genius Sports — 1 operation(s) for sourcerequests.
+- [Genius Sports API](https://apis.io/apis/genius-sports/genius-sports-sports-api/) — The Sports API from Genius Sports — 2 operation(s) for sports.
+- [Genius Sports Standings API](https://apis.io/apis/genius-sports/genius-sports-standings-api/) — Competition standings
+- [Genius Sports Statistics API](https://apis.io/apis/genius-sports/genius-sports-statistics-api/) — Team and player statistics
+- [Genius Sports Venues API](https://apis.io/apis/genius-sports/genius-sports-venues-api/) — The Venues API from Genius Sports — 3 operation(s) for venues.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-01
-- **Modified:** 2026-05-30
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Genius Sports REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Query information regarding matches, players, statistics etc. both past and future. Covers basketball, 3x3, football (soccer), volleyball, American football, and ice hockey.
+- [Genius Sports Agentic Access](https://apis.io/agentic-access/genius-sports/genius-sports-agentic-access/)
 
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
+#### Collections (29)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Sports
-- Statistics
+- [Genius Sports Data Warehouse REST API](https://apis.io/collections/genius-sports/open-genius-sports/)
+- [Fixtures-v2 Competitions API](https://apis.io/collections/genius-sports/open-genius-sports-competitions-api/)
+- [Fixtures-v2 Competitions Competitors API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-api/)
+- [Fixtures-v2 Competitions competitors/doubles API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-doubles-api/)
+- [Fixtures-v2 Competitions competitors/horses API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-horses-api/)
+- [Fixtures-v2 Competitions competitors/players API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-players-api/)
+- [Fixtures-v2 Competitions competitors/tbds API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-tbds-api/)
+- [Fixtures-v2 Competitions competitors/teams API](https://apis.io/collections/genius-sports/open-genius-sports-competitors-teams-api/)
+- [Fixtures-v2 Competitions Contracts API](https://apis.io/collections/genius-sports/open-genius-sports-contracts-api/)
+- [v2 Competitions Fixtures API](https://apis.io/collections/genius-sports/open-genius-sports-fixtures-api/)
+- [Fixtures-v2](https://apis.io/collections/genius-sports/open-genius-sports-fixtures-v2/)
+- [Fixtures-v2 Competitions Groups API](https://apis.io/collections/genius-sports/open-genius-sports-groups-api/)
+- [Fixtures-v2 Competitions Ingestion API](https://apis.io/collections/genius-sports/open-genius-sports-ingestion-api/)
+- [Fixtures-v2 Competitions Localities API](https://apis.io/collections/genius-sports/open-genius-sports-localities-api/)
+- [Fixtures-v2 Competitions Matches API](https://apis.io/collections/genius-sports/open-genius-sports-matches-api/)
+- [fixtures-matching-v2](https://apis.io/collections/genius-sports/open-genius-sports-matching-v2/)
+- [Fixtures-v2 Competitions Organization API](https://apis.io/collections/genius-sports/open-genius-sports-organization-api/)
+- [Fixtures-v2 Competitions Organizations API](https://apis.io/collections/genius-sports/open-genius-sports-organizations-api/)
+- [Fixtures-v2 Competitions Pending requests API](https://apis.io/collections/genius-sports/open-genius-sports-pending-requests-api/)
+- [Fixtures-v2 Competitions People API](https://apis.io/collections/genius-sports/open-genius-sports-people-api/)
+- [Fixtures-v2 Competitions Persons API](https://apis.io/collections/genius-sports/open-genius-sports-persons-api/)
+- [Fixtures-v2 Competitions Probabilistic matching API](https://apis.io/collections/genius-sports/open-genius-sports-probabilistic-matching-api/)
+- [Fixtures-v2 Competitions Rounds API](https://apis.io/collections/genius-sports/open-genius-sports-rounds-api/)
+- [Fixtures-v2 Competitions Seasons API](https://apis.io/collections/genius-sports/open-genius-sports-seasons-api/)
+- [Fixtures-v2 Competitions Sourcerequests API](https://apis.io/collections/genius-sports/open-genius-sports-sourcerequests-api/)
+- …and 4 more published on APIs.io
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://developer.geniussports.com/)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Genius Sports Streaming API
+- [Genius Sports Authentication](https://apis.io/security/genius-sports/genius-sports-authentication/)
+- [Genius Sports Domain Security](https://apis.io/security/genius-sports/genius-sports-domain-security/)
 
-Delivers event-by-event data and aggregated statistics for matches in progress, supporting live consumption of sporting event data.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
+Published plans, tiers and prices.
 
-#### Tags
+- [Genius Sports Plans Pricing](https://apis.io/plans/genius-sports/genius-sports-plans-pricing/)
 
-- Sports
-- Statistics
-- Live Data
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://developer.geniussports.com/)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Genius Sports Rate Limits](https://apis.io/rate-limits/genius-sports/genius-sports-rate-limits/)
 
-### Genius Sports Publish API
+#### FinOps (1)
 
-Enables publishing of real-time event data from sporting events into the Genius Sports warehouse and statistics engine.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
+- [Genius Sports Finops](https://apis.io/finops/genius-sports/genius-sports-finops/)
 
-#### Tags
+## Where to find this API
 
-- Sports
-- Live Data
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [Documentation](https://developer.geniussports.com/)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Genius Sports LiveStats In-Arena Feed
-
-Live venue data delivered for TV production and consumers covering basketball, football (soccer), and volleyball.
-
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
-
-#### Tags
-
-- Sports
-- Live Data
-
-#### Properties
-
-- [Documentation](https://developer.geniussports.com/)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Genius Sports Licensing API
-
-Retrieves matches and options from the Genius Sports licensing server.
-
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
-
-#### Tags
-
-- Sports
-- Licensing
-
-#### Properties
-
-- [Documentation](https://developer.geniussports.com/)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/genius-sports.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Genius Sports Fixtures API v2
-
-The authoritative data source for pre-match fixtures data. Swagger specifications are available for CI, UAT, and Production environments.
-
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
-- **Base URL:** `https://fixtures.api.geniussports.com/v2`
-
-#### Tags
-
-- Sports
-- Fixtures
-
-#### Properties
-
-- [Documentation](https://developer.geniussports.com/)
-- [OpenAPI](https://explorer.api.geniussports.com/Fixtures/v2/Production/swagger-latest.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/genius-sports-fixtures-v2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/genius-sports-fixtures-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-fixtures-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Swagger U I](https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/Fixtures%2Fv2%2FProduction%2Fswagger-latest.json)
-
-### Genius Sports Matching API v2
-
-Enables clients to match their internal data to the existing data in the Genius Sports platform. Swagger specifications are available for CI, UAT, and Production environments.
-
-- **Human URL:** [https://developer.geniussports.com/](https://developer.geniussports.com/)
-- **Base URL:** `https://matching.api.geniussports.com/v2`
-
-#### Tags
-
-- Sports
-- Data Matching
-
-#### Properties
-
-- [Documentation](https://developer.geniussports.com/)
-- [OpenAPI](https://explorer.api.geniussports.com/fixtures-matching/v2/Production/swagger-latest.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/genius-sports-matching-v2-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/genius-sports-matching-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/genius-sports-matching-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Swagger U I](https://swaggerui.api.geniussports.com/?url=https://explorer.api.geniussports.com/fixtures-matching%2Fv2%2FProduction%2Fswagger-latest.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/geniussportsgroup)
-- [LinkedIn](https://www.linkedin.com/company/geniussports)
 - [Website](https://geniussports.com/)
 - [Documentation](https://developer.geniussports.com/)
+- [Blog](https://www.geniussports.com/newsroom/)
+- [GitHub](https://github.com/geniussportsgroup)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 53.6 |
+| Contract quality | 50.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/genius-sports/](https://apis.io/providers/genius-sports/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Genius Sports: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/genius-sports/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
